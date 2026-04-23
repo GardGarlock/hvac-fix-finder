@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>HVAC Fix Finder — Platform Prepared</title>
+  <meta name="description" content="Free HVAC troubleshooting tool for field technicians. Describe symptoms, get likely causes and next checks instantly." />
+  <meta name="robots" content="noindex, follow" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:   '#0D1B2A',
+            forest: '#1A5C3A',
+            mint:   '#6DC99A',
+            gold:   '#D4AF37',
+          },
+          fontFamily: {
+            serif: ['Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .fade-in { animation: fadeIn 0.3s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .chip-selected { background-color: #1A5C3A !important; color: white !important; border-color: #1A5C3A !important; }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #6DC99A; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+/* ============================================================
+   ── SECTION: types.ts ──────────────────────────────────────
+   ============================================================ */
+
+// Confidence: 'High' | 'Medium' | 'Low'
+// UnitType: 'split system' | 'furnace' | 'condenser' | 'heat pump' | 'mini split' | 'package unit'
+// SafetyFlag: 'electrical' | 'high-voltage' | 'refrigerant-handling' | 'combustion' | 'carbon-monoxide' | 'water-damage' | 'fire-risk'
+
+/* ============================================================
+   ── SECTION: hvacCases.ts ──────────────────────────────────
+   ============================================================ */
+
+const HVAC_CASES = [
+  {
+    id: 'ac-not-cooling',
+    title: 'AC Not Cooling',
+    unitTypes: ['split system', 'heat pump', 'package unit', 'mini split'],
+    symptomKeywords: ['not cooling','no cool','warm air','hot air','no cold','blowing hot','blowing warm','won\'t cool','not cold','barely cooling','no ac'],
+    symptomTags: ['no cool'],
+    safetyFlags: ['refrigerant-handling', 'electrical'],
+    followUpQuestions: [
+      'Is the outdoor unit running? If the fan is spinning but still no cooling, or if it\'s completely silent — that changes the diagnosis.',
+      'How long has this been happening, and was there a recent power outage, storm, or electrical event before it started?'
+    ],
+    suggestedParts: ['Air filter (correct size)', 'Dual run capacitor', 'Coil cleaner', 'Refrigerant — licensed tech required'],
+    likelyCauses: [
+      {
+        name: 'Dirty or Clogged Air Filter',
+        confidence: 'High',
+        explanation: 'A severely clogged filter restricts airflow over the evaporator coil, preventing proper heat exchange. Often causes the coil to freeze and dramatically cuts cooling output.',
+        nextChecks: [
+          'Remove filter — hold to light. If you can\'t see through it clearly, replace it now.',
+          'Check filter slot edges for air bypass (gaps, missing clips, cardboard patches).',
+          'Inspect all return air grilles for furniture or debris blocking them.',
+          'After replacing, run system 30 min and re-measure supply air temp at nearest register.',
+          'Establish filter change schedule — MERV 8-11 every 60-90 days for most systems.'
+        ],
+        suggestedParts: ['Air filter (correct size and MERV rating)', 'Filter door gasket if damaged']
+      },
+      {
+        name: 'Low Refrigerant / Refrigerant Leak',
+        confidence: 'High',
+        explanation: 'Low refrigerant reduces the system\'s heat absorption capacity. Signs include ice on the suction line, hissing sounds, oil staining near fittings, or longer-than-normal run times.',
+        nextChecks: [
+          'Check suction line temp — should be 40–55°F on a properly charged system.',
+          'Look for oil staining around service ports, evaporator fittings, and lineset joints.',
+          'Connect manifold gauges — check suction and discharge pressures against manufacturer specs.',
+          'Use electronic leak detector around Schrader valves, flare fittings, and coil.',
+          'Do NOT add refrigerant without finding and repairing the leak first.'
+        ],
+        suggestedParts: ['Refrigerant (EPA 608 license required)', 'Schrader valve cores', 'Flare fittings', 'UV dye leak detection kit']
+      },
+      {
+        name: 'Failed Run Capacitor',
+        confidence: 'Medium',
+        explanation: 'The run capacitor assists compressor and condenser fan startup. A weak or failed capacitor causes the compressor to draw excessive amps, run hot, and deliver reduced cooling.',
+        nextChecks: [
+          'Turn off power at disconnect. Safely discharge capacitor before touching.',
+          'Test capacitor µF with multimeter in capacitance mode.',
+          'Compare to label rating — within ±6% is acceptable. Outside that range: replace.',
+          'Listen for humming/buzzing at outdoor unit that doesn\'t develop into a full start.',
+          'With power OFF, spin condenser fan by hand — should spin freely with no drag.'
+        ],
+        suggestedParts: ['Dual run capacitor (correct µF ratings)', 'Single run capacitor', 'Hard start kit if compressor is hard-starting']
+      }
+    ]
+  },
+  {
+    id: 'outdoor-not-starting',
+    title: 'Outdoor Unit Not Starting',
+    unitTypes: ['split system', 'heat pump', 'condenser', 'package unit'],
+    symptomKeywords: ['outdoor unit','condenser','won\'t start','not starting','not turning on','outside unit','compressor','fan not spinning','not running','unit won\'t run'],
+    symptomTags: ['won\'t start'],
+    safetyFlags: ['electrical', 'high-voltage'],
+    followUpQuestions: [
+      'Is the indoor air handler / blower running normally, or is nothing running at all?',
+      'Do you hear any sound from the outdoor unit — humming, a click, or completely silent?'
+    ],
+    suggestedParts: ['Dual run capacitor', '2-pole contactor', 'Fuses (correct amperage)', 'Disconnect block'],
+    likelyCauses: [
+      {
+        name: 'Failed Run or Start Capacitor',
+        confidence: 'High',
+        explanation: 'Capacitor failure is the most common cause of an outdoor unit that won\'t start. Without proper capacitance, the compressor and fan motors can\'t develop starting torque.',
+        nextChecks: [
+          'Disconnect power at the outdoor disconnect box before testing.',
+          'Discharge capacitor safely — use insulated screwdriver across terminals.',
+          'Test capacitor µF on multimeter — compare to label value. More than 6% low = replace.',
+          'Check both compressor and fan capacitor sections if it\'s a dual round cap.',
+          'Inspect capacitor body for bulging top or oil leaks — visual failure sign.'
+        ],
+        suggestedParts: ['Dual run capacitor', 'Start capacitor', 'Potential relay']
+      },
+      {
+        name: 'Failed or Pitted Contactor',
+        confidence: 'High',
+        explanation: 'The contactor delivers high-voltage power to the compressor. Burned or pitted contacts prevent current flow. Often accompanied by a clicking sound without a start.',
+        nextChecks: [
+          'With power OFF — inspect contacts for pitting, carbon, or burning.',
+          'With power ON (extreme caution) — check 24V at contactor coil. Is thermostat calling?',
+          'Verify 240V on line side. With contactor engaged — check 240V on load side.',
+          'With insulated tool, manually depress contactor while power is ON to test compressor.',
+          'Listen for the thermostat call — a click at the contactor that doesn\'t start the unit = contacts failed.'
+        ],
+        suggestedParts: ['2-pole contactor', 'Contactor coil', 'Low-voltage thermostat wire']
+      },
+      {
+        name: 'Tripped Breaker or Open Disconnect',
+        confidence: 'Medium',
+        explanation: 'Always verify power before diagnosing components. A tripped breaker or unseated disconnect fuse block cuts all power to the outdoor unit.',
+        nextChecks: [
+          'Check main electrical panel — is the condenser breaker tripped? (Middle position = tripped.)',
+          'Reset once only — if it immediately trips again, stop. There is a downstream fault.',
+          'Check the outdoor disconnect — is the pull-out block fully seated? Inspect fuses with multimeter for continuity.',
+          'Look for corrosion, melted insulation, or loose connections at the disconnect.',
+          'Verify correct breaker amperage matches equipment nameplate MOCP rating.'
+        ],
+        suggestedParts: ['Replacement fuses (correct amperage)', 'Disconnect block', 'Correct-amperage breaker']
+      },
+      {
+        name: 'High or Low Pressure Lockout',
+        confidence: 'Medium',
+        explanation: 'Safety pressure switches lock out the compressor when refrigerant pressure leaves safe limits — caused by refrigerant issues, blocked condenser, or seized fan motor.',
+        nextChecks: [
+          'Check for error codes on thermostat or air handler control board.',
+          'Inspect condenser coil for debris, grass, or bent fins blocking airflow — clean if needed.',
+          'Verify condenser fan spins freely and runs when contactor is energized.',
+          'Connect manifold gauges and check static and operating pressures.',
+          'Let system rest 30 min — some pressure switches auto-reset when pressure normalizes.'
+        ],
+        suggestedParts: ['High pressure switch', 'Low pressure switch', 'Condenser coil cleaner']
+      }
+    ]
+  },
+  {
+    id: 'furnace-short-cycle',
+    title: 'Furnace Ignites Then Shuts Off',
+    unitTypes: ['furnace', 'package unit'],
+    symptomKeywords: ['shuts off','short cycle','ignites then','turns off','keeps shutting','cycles off','flame goes out','lights then','won\'t stay','short cycling','furnace off','no heat','furnace starts'],
+    symptomTags: ['short cycling', 'no heat'],
+    safetyFlags: ['combustion', 'carbon-monoxide'],
+    followUpQuestions: [
+      'How many seconds after ignition does the flame go out — immediately (2–5 sec), or does it run a minute then shut off?',
+      'Are there any error codes flashing on the furnace control board? (Count the blink pattern — usually 2-5 blinks = specific fault code.)'
+    ],
+    suggestedParts: ['Flame sensor', 'High limit switch', 'Pressure switch', 'Hot surface igniter'],
+    likelyCauses: [
+      {
+        name: 'Dirty or Failed Flame Sensor',
+        confidence: 'High',
+        explanation: 'The flame sensor verifies burner ignition by measuring microamp current through the flame. A dirty sensor coated in oxidation can\'t read the signal and shuts the furnace off within 2–5 seconds as a safety measure.',
+        nextChecks: [
+          'Locate the flame sensor — single metal rod with porcelain insulator, positioned in the burner flame.',
+          'Remove and inspect — look for white oxidation, carbon coating, or discoloration.',
+          'Clean with fine emery cloth or steel wool — restore metallic shine to the sensing rod.',
+          'Reinstall and measure microamp reading in flame — should read 2.5+ µA. Below 1 µA = replace.',
+          'Check sensor wiring and plug connector for corrosion or looseness.'
+        ],
+        suggestedParts: ['OEM or universal flame sensor', 'Flame sensor wire harness', 'Fine emery cloth for cleaning']
+      },
+      {
+        name: 'Tripping High Limit Switch',
+        confidence: 'High',
+        explanation: 'The high-limit switch is a safety device that kills the burner when heat exchanger temperature exceeds safe levels — almost always caused by restricted airflow.',
+        nextChecks: [
+          'Check air filter immediately — a clogged filter is the #1 cause of limit trips.',
+          'Inspect all supply and return vents throughout the home — any closed or blocked?',
+          'Check blower motor operation — does it run at proper speed? Is capacitor weak?',
+          'Measure supply air temperature — should not exceed 140–160°F for most residential systems.',
+          'If limit trips repeatedly with good airflow, heat exchanger cracks may be causing recirculation — carbon monoxide risk.'
+        ],
+        suggestedParts: ['High limit switch (correct temp rating)', 'Blower motor capacitor', 'Air filter']
+      },
+      {
+        name: 'Faulty Pressure Switch',
+        confidence: 'Medium',
+        explanation: 'Pressure switches confirm the inducer motor is running and the flue path is clear. A failed switch, cracked hose, or restricted flue will prevent the system from proceeding past ignition.',
+        nextChecks: [
+          'Confirm inducer motor starts and runs before the ignition sequence begins.',
+          'Inspect pressure switch hose for cracks, kinks, or moisture inside the line.',
+          'Blow through hose to verify it\'s clear — suction/blow test while watching switch.',
+          'Test switch with manometer — compare rated cracking pressure vs actual reading.',
+          'On 90%+ AFUE furnaces — inspect condensate drain for blockage causing pressure backup.'
+        ],
+        suggestedParts: ['Pressure switch (correct rating)', 'Pressure switch hose', 'Inducer motor assembly']
+      },
+      {
+        name: 'Blocked or Restricted Flue Venting',
+        confidence: 'Medium',
+        explanation: 'A blocked or cracked flue prevents proper combustion gas exhaust. The pressure switch detects the restriction and shuts down the system as a safety measure.',
+        nextChecks: [
+          'Inspect flue termination outside — blocked by debris, ice, bird nest, or overgrown shrubs?',
+          'On PVC flue (90%+ furnace) — check slope of horizontal runs. Condensate must drain back toward unit.',
+          'Inspect all PVC joints for cracks or separation that allow pressure loss.',
+          'Check for sagging sections that trap condensate and block flow.',
+          'On 80% metal flue — check for rust, perforation, or disconnected sections in attic or crawlspace.'
+        ],
+        suggestedParts: ['PVC vent fittings', 'Condensate drain trap kit', 'Vent termination cap']
+      }
+    ]
+  },
+  {
+    id: 'weak-airflow',
+    title: 'Weak or Low Airflow',
+    unitTypes: ['split system', 'furnace', 'heat pump', 'package unit', 'mini split'],
+    symptomKeywords: ['weak airflow','low airflow','poor airflow','barely blowing','not much air','weak air','low air','blower','no air coming','not blowing','air pressure','airflow'],
+    symptomTags: ['weak airflow'],
+    safetyFlags: ['electrical'],
+    followUpQuestions: [
+      'Is the weak airflow throughout the whole house, or only in certain rooms or zones?',
+      'Does the blower sound labored, quieter than normal, or is it running at its usual volume?'
+    ],
+    suggestedParts: ['Air filter (correct size)', 'Blower motor capacitor', 'Blower motor', 'Coil cleaner'],
+    likelyCauses: [
+      {
+        name: 'Clogged Air Filter',
+        confidence: 'High',
+        explanation: 'A severely restricted filter is the most common cause of low airflow. It forces the blower to work harder while moving far less air, causing coil freezing and reduced system performance.',
+        nextChecks: [
+          'Remove filter — if it\'s dark gray or you can\'t see light through it, replace immediately.',
+          'Check filter slot for improper fit or bypass gaps where dirty air routes around the filter.',
+          'After replacing, feel the velocity improvement at supply registers — should be noticeable.',
+          'Establish change interval — MERV 8-11 filter every 60-90 days is standard.'
+        ],
+        suggestedParts: ['Air filter (correct size and MERV rating)', 'Filter frame/rack if damaged']
+      },
+      {
+        name: 'Weak Blower Motor Capacitor',
+        confidence: 'High',
+        explanation: 'The blower capacitor provides starting and running torque. A weak capacitor causes the motor to run at reduced speed, cutting airflow significantly even when the blower appears to be running.',
+        nextChecks: [
+          'Test blower capacitor µF reading vs nameplate specification — replace if >6% low.',
+          'Check blower motor amp draw with clamp meter against nameplate FLA rating.',
+          'Listen for motor hum, sluggish startup, or labored running sound.',
+          'With power OFF — spin blower wheel by hand. Should turn freely with no binding.',
+          'On ECM (variable speed) motors — check for fault codes on the motor module.'
+        ],
+        suggestedParts: ['Blower motor capacitor (correct µF)', 'Blower motor (if failed)', 'Blower wheel if clogged with debris']
+      },
+      {
+        name: 'Frozen Evaporator Coil',
+        confidence: 'Medium',
+        explanation: 'A frozen evaporator coil acts as a physical airflow blockage. Caused by low refrigerant, dirty coil, or the low airflow itself — a self-reinforcing failure mode.',
+        nextChecks: [
+          'Open air handler access — look for visible ice on coil or suction line.',
+          'Switch system to FAN ONLY mode — let coil thaw completely (2–4 hours minimum).',
+          'Place towels and a drain pan to catch meltwater.',
+          'After thaw — identify root cause: dirty filter? Low refrigerant? Dirty coil?',
+          'Measure Delta T across coil once thawed — should be 15–22°F in cooling mode.'
+        ],
+        suggestedParts: ['Air filter', 'Coil cleaner (no-rinse evaporator)', 'Condensate drain pan tablets']
+      },
+      {
+        name: 'Duct Restriction or Disconnection',
+        confidence: 'Low',
+        explanation: 'Collapsed flex duct, a disconnected trunk section, or closed zone dampers will dramatically reduce airflow to affected areas while the blower runs normally.',
+        nextChecks: [
+          'Compare supply airflow room by room — is it isolated to specific zones or everywhere?',
+          'Inspect accessible ductwork in attic, crawl, and basement for disconnected joints.',
+          'Feel along duct runs for air leakage — warm air escaping in unconditioned space.',
+          'Check that all zone dampers are open (if system has zoning).',
+          'Inspect flex duct for 90-degree kinks or collapse — especially at takeoffs.'
+        ],
+        suggestedParts: ['Flex duct replacement section', 'Duct mastic or foil tape', 'Zone damper (if applicable)']
+      }
+    ]
+  },
+  {
+    id: 'water-leak',
+    title: 'Water Leak Around Unit',
+    unitTypes: ['split system', 'furnace', 'heat pump', 'mini split', 'package unit'],
+    symptomKeywords: ['water','leak','dripping','puddle','condensate','wet','moisture','flooding','water damage','pooling','drains','overflow'],
+    symptomTags: ['water leak'],
+    safetyFlags: ['water-damage', 'electrical'],
+    followUpQuestions: [
+      'Is the water coming from below the indoor air handler, or is it dripping from the refrigerant lines outside?',
+      'Did this start suddenly or gradually? And has the system been running extra long in very humid conditions?'
+    ],
+    suggestedParts: ['Condensate drain pan tablets', 'Condensate pump (if gravity drain inadequate)', 'PVC fittings', 'Float overflow safety switch'],
+    likelyCauses: [
+      {
+        name: 'Clogged Condensate Drain Line',
+        confidence: 'High',
+        explanation: 'Algae, mold, and sludge accumulate in condensate drain lines over time. A blocked drain causes the pan to fill and overflow — the most common source of water damage from HVAC systems.',
+        nextChecks: [
+          'Locate condensate drain line — typically 3/4" PVC exiting near the air handler.',
+          'Find the cleanout port — pour water in. If it doesn\'t drain freely, line is blocked.',
+          'Use wet/dry vac to suction from the outdoor end of the drain line.',
+          'Flush with diluted bleach solution (1 cup bleach to 1 gallon water) to kill algae.',
+          'Check if float safety switch tripped and cut the system off — reset after drain clears.'
+        ],
+        suggestedParts: ['Condensate drain pan tablets (preventive)', 'Wet/dry vac', 'PVC cleanout fittings']
+      },
+      {
+        name: 'Frozen Coil Thawing',
+        confidence: 'High',
+        explanation: 'A previously frozen evaporator coil melts and overwhelms the drain pan capacity — water appears suddenly or after the system runs in low-airflow or low-refrigerant conditions.',
+        nextChecks: [
+          'Check if the system recently ran with restricted airflow or in low-refrigerant condition.',
+          'Inspect evaporator coil access — look for ice or heavy frost, even if currently melted.',
+          'Switch to fan-only mode and monitor drainage during thaw.',
+          'After full thaw — identify root cause before restarting cooling mode.',
+          'Measure suction line temperature — should feel cold but not frosted at the air handler.'
+        ],
+        suggestedParts: ['Air filter', 'Secondary drain pan', 'Overflow safety switch (if not already installed)']
+      },
+      {
+        name: 'Cracked Drain Pan or Pan Overflow',
+        confidence: 'Medium',
+        explanation: 'Plastic primary drain pans crack and warp over time. The secondary/overflow pan is the last line of defense — if it\'s wet, either the primary is cracked or the drain is blocked.',
+        nextChecks: [
+          'Inspect primary pan under coil for cracks, rust holes, or warping.',
+          'Check secondary overflow pan — any standing water means primary failed or drain is blocked.',
+          'Verify primary pan slopes toward drain outlet — shouldn\'t pool at corners.',
+          'Look for rust stains or calcium deposits indicating chronic slow overflow.',
+          'Check pan gaskets and foam seals around air handler cabinet.'
+        ],
+        suggestedParts: ['Replacement drain pan', 'Drain pan liner kit', 'Overflow float switch']
+      },
+      {
+        name: 'Condensate Pump Failure',
+        confidence: 'Medium',
+        explanation: 'Systems that can\'t gravity-drain condensate use a condensate pump. A failed pump motor, stuck float, or clogged impeller causes the pan to fill and overflow.',
+        nextChecks: [
+          'Locate pump — small white or gray plastic unit near the air handler.',
+          'Is the pump reservoir full? If yes, pump isn\'t running or isn\'t moving water.',
+          'Pour water into the reservoir — does the float trigger and pump run?',
+          'Listen for pump running but not moving water — clogged impeller or outlet line.',
+          'Check outlet tubing for kinks, clogs, or incorrect routing.'
+        ],
+        suggestedParts: ['Condensate pump (correct GPH rating)', 'Pump outlet tubing', 'Float switch assembly']
+      }
+    ]
+  },
+  {
+    id: 'breaker-tripping',
+    title: 'Circuit Breaker Tripping',
+    unitTypes: ['split system', 'heat pump', 'furnace', 'condenser', 'package unit'],
+    symptomKeywords: ['breaker','trips','tripping','circuit','keeps tripping','electrical','shuts off','power','trips breaker','nuisance trip'],
+    symptomTags: ['trips breaker'],
+    safetyFlags: ['electrical', 'high-voltage', 'fire-risk'],
+    followUpQuestions: [
+      'Does the breaker trip immediately when the system tries to start, or does it run for a few minutes first?',
+      'Has anything changed recently — new equipment installed, recent storm, power surge, or flooding?'
+    ],
+    suggestedParts: ['Hard start kit', 'Run capacitor', '2-pole contactor', 'Clamp ammeter for diagnosis'],
+    likelyCauses: [
+      {
+        name: 'Weak or Failing Compressor Drawing High Amps',
+        confidence: 'High',
+        explanation: 'A hard-starting or failing compressor draws LRA (locked rotor amps) far exceeding the breaker rating at startup. Often accompanied by a humming sound or repeated short cycles before tripping.',
+        nextChecks: [
+          'Use clamp ammeter — measure compressor amps at startup vs nameplate RLA/LRA.',
+          'Test run capacitor first — weak capacitor is a common cause of high startup amps.',
+          'Check compressor winding resistance: C-R, C-S, R-S with ohmmeter (power off, caps discharged).',
+          'Try adding a hard start assist kit — often solves startup amp spike problems.',
+          'Check contactor contacts — pitted contacts increase resistance and heat.'
+        ],
+        suggestedParts: ['Hard start kit (correct voltage/HP)', 'Dual run capacitor', '2-pole contactor']
+      },
+      {
+        name: 'Shorted Blower or Condenser Fan Motor',
+        confidence: 'High',
+        explanation: 'A motor with shorted windings or a grounded frame draws far more current than rated and will trip the circuit breaker — sometimes immediately, sometimes after running a few minutes.',
+        nextChecks: [
+          'Power OFF and caps discharged — use ohmmeter between motor windings and motor frame/ground.',
+          'Any reading below 1 megohm to ground indicates insulation breakdown — replace the motor.',
+          'Check motor for burning smell, discolored windings, or melted insulation.',
+          'Measure motor amp draw against nameplate FLA with clamp ammeter.',
+          'Verify motor capacitor is the correct µF rating — oversized cap increases motor current.'
+        ],
+        suggestedParts: ['Blower motor (OEM or universal)', 'Condenser fan motor', 'Motor capacitor (correct rating)']
+      },
+      {
+        name: 'Loose Wiring or Arcing Connection',
+        confidence: 'Medium',
+        explanation: 'Loose or corroded terminal connections create resistance that generates heat and causes arcing — leading to intermittent or repeated trips that get worse over time.',
+        nextChecks: [
+          'Inspect all high-voltage terminations at disconnect, contactor, capacitor, and motor leads.',
+          'Look for discoloration, melting insulation, or burn marks at any terminal.',
+          'Verify wire gauge matches equipment nameplate MCA (minimum circuit ampacity).',
+          'Torque all lug connections to specification — loose lugs are extremely common.',
+          'Inspect conduit and wire insulation for abrasion, rodent damage, or UV degradation.'
+        ],
+        suggestedParts: ['Wire connectors (correct gauge)', 'Disconnect block', 'Replacement wire (correct AWG)', 'New breaker if old']
+      },
+      {
+        name: 'Undersized or Fatigued Breaker',
+        confidence: 'Low',
+        explanation: 'An aging breaker may trip at loads well below its rating. Circuit breakers are rated for ~20 years — old breakers in older panels are frequently the culprit for nuisance trips.',
+        nextChecks: [
+          'Compare breaker amperage to equipment nameplate MCA and MOCP values.',
+          'Check breaker age — panels older than 20–25 years often have unreliable breakers.',
+          'Test with known load — does it trip at a load clearly within rating?',
+          'Look for double-tapped breakers or shared circuits that increase total load.',
+          'Confirm breaker is the correct type and amperage for that panel brand.'
+        ],
+        suggestedParts: ['Replacement circuit breaker (correct brand, amperage, and type)']
+      }
+    ]
+  },
+  {
+    id: 'ice-buildup',
+    title: 'Ice Buildup on Unit',
+    unitTypes: ['split system', 'heat pump', 'mini split', 'condenser'],
+    symptomKeywords: ['ice','frozen','frost','ice buildup','freezing up','icing','coil frozen','line frozen','iced over'],
+    symptomTags: ['ice buildup'],
+    safetyFlags: ['refrigerant-handling', 'water-damage'],
+    followUpQuestions: [
+      'Is the ice forming on the indoor coil and suction line, or on the outdoor unit?',
+      'Does the system still blow air (even warm) when iced, or does airflow stop completely?'
+    ],
+    suggestedParts: ['Air filter', 'Refrigerant (licensed tech)', 'Coil cleaner', 'Blower capacitor'],
+    likelyCauses: [
+      {
+        name: 'Restricted Airflow Over Evaporator Coil',
+        confidence: 'High',
+        explanation: 'When airflow over the evaporator coil drops below the design threshold, coil surface temperature falls below freezing and moisture in the air freezes onto the coil. This is a self-worsening cycle.',
+        nextChecks: [
+          'Check air filter immediately — replace if any restriction present.',
+          'Inspect all supply and return vents — any closed or blocked by furniture?',
+          'Switch to FAN ONLY and let coil thaw fully (2–4 hours) before restarting.',
+          'After thaw — measure Delta T across coil. Should be 15–22°F in cooling mode.',
+          'Check blower motor speed — weak capacitor or slow ECM causes low airflow.'
+        ],
+        suggestedParts: ['Air filter', 'Blower capacitor', 'No-rinse evaporator coil cleaner']
+      },
+      {
+        name: 'Low Refrigerant Charge',
+        confidence: 'High',
+        explanation: 'Low refrigerant causes the evaporator coil to run at abnormally low pressure and temperature, freezing moisture from the air onto the coil surface. Ice starts at the coil and extends up the suction line.',
+        nextChecks: [
+          'Check suction line — frost extending past the coil up toward the air handler confirms low charge.',
+          'Connect manifold gauges — suction pressure below design range for ambient temp = low charge.',
+          'Look for oil staining at flare fittings, service ports, and evaporator connections.',
+          'Do NOT operate in cooling mode while frozen — thaw completely first, then check charge.',
+          'Find and repair leak before adding refrigerant.'
+        ],
+        suggestedParts: ['Refrigerant (EPA 608 license required)', 'Leak detection dye kit', 'Schrader valve cores']
+      },
+      {
+        name: 'Dirty Evaporator Coil',
+        confidence: 'Medium',
+        explanation: 'A dirty coil reduces heat transfer, causing abnormally low coil temperatures that lead to freezing. Also restricts airflow, compounding the problem.',
+        nextChecks: [
+          'Inspect coil face — visible dust, debris, or biological growth acts as insulation.',
+          'Thaw coil fully before attempting to clean.',
+          'Apply no-rinse evaporator coil cleaner — allow to foam and drain.',
+          'Use a fin comb to straighten any bent fins that restrict airflow.',
+          'After cleaning, check Delta T across coil to confirm heat transfer improvement.'
+        ],
+        suggestedParts: ['No-rinse evaporator coil cleaner', 'Coil fin comb', 'HEPA shop vacuum for debris removal']
+      }
+    ]
+  },
+  {
+    id: 'strange-noise',
+    title: 'Strange or Unusual Noise',
+    unitTypes: ['split system', 'furnace', 'heat pump', 'mini split', 'condenser', 'package unit'],
+    symptomKeywords: ['noise','noisy','loud','banging','rattling','squealing','grinding','humming','clicking','vibrating','screeching','knocking'],
+    symptomTags: ['strange noise'],
+    safetyFlags: ['electrical', 'combustion'],
+    followUpQuestions: [
+      'Where is the noise coming from — indoor unit, outdoor unit, or the ductwork? And when exactly does it happen (startup, during operation, or shutdown)?',
+      'How would you describe the sound — rattling, squealing, banging, clicking, humming, or grinding?'
+    ],
+    suggestedParts: ['Blower wheel', 'Fan motor bearings', 'Contactor', 'Capacitor', 'Blower motor'],
+    likelyCauses: [
+      {
+        name: 'Debris in Blower Wheel or Fan',
+        confidence: 'High',
+        explanation: 'Leaves, sticks, or debris caught in the condenser fan or blower wheel cause rattling, banging, or scraping sounds. Common after storms or when systems sit unused.',
+        nextChecks: [
+          'Turn power OFF completely at disconnect before inspecting.',
+          'Open condenser top or indoor air handler access panel.',
+          'Visually inspect fan blades and blower wheel for debris, damage, or imbalance.',
+          'Spin blower wheel by hand — check for wobble, scraping, or uneven resistance.',
+          'Look for separated rubber isolators or loose fan blade fasteners.'
+        ],
+        suggestedParts: ['Condenser fan blade replacement', 'Blower wheel (if bent or debris-damaged)', 'Fan blade set screws']
+      },
+      {
+        name: 'Failing Motor Bearings',
+        confidence: 'High',
+        explanation: 'Worn motor bearings produce squealing, grinding, or screeching sounds that worsen over time. Left unaddressed, bearing failure leads to motor seizure and system lockout.',
+        nextChecks: [
+          'Isolate which motor the sound comes from — blower, condenser fan, or inducer.',
+          'With power OFF — spin the motor shaft by hand. Rough resistance or grinding = bearings.',
+          'Listen with the unit running — does the sound track with motor RPM?',
+          'Check for wobble in fan blade that indicates shaft or bearing wear.',
+          'Confirm motor temperature — overheating suggests bearing failure is already advanced.'
+        ],
+        suggestedParts: ['Replacement motor (blower, condenser fan, or inducer)', 'Motor mount vibration isolators']
+      },
+      {
+        name: 'Loose Panels or Vibrating Components',
+        confidence: 'Medium',
+        explanation: 'Access panels, screws, refrigerant lines, or ductwork connections can loosen and create rattling or buzzing sounds during operation — often intermittent.',
+        nextChecks: [
+          'With unit running — press gently on access panels to see if rattling changes.',
+          'Check all panel screws, top grille bolts, and compressor mounting bolts.',
+          'Inspect refrigerant line insulation — foam rub against sheet metal vibrates.',
+          'Check duct connections at air handler — sheet metal screws work loose over time.',
+          'Tighten any loose components and retest.'
+        ],
+        suggestedParts: ['Sheet metal screws', 'Foam pipe insulation', 'Anti-vibration pads']
+      }
+    ]
+  },
+  {
+    id: 'thermostat-issue',
+    title: 'Thermostat Issue / Not Responding',
+    unitTypes: ['split system', 'furnace', 'heat pump', 'mini split', 'package unit', 'condenser'],
+    symptomKeywords: ['thermostat','not responding','display','screen','blank','control','won\'t turn on','settings','schedule','not calling','no call'],
+    symptomTags: ['thermostat issue'],
+    safetyFlags: [],
+    followUpQuestions: [
+      'Is the thermostat display blank/off, showing an error code, or does it display normally but the system still won\'t respond?',
+      'Is this a new thermostat installation, or has it been working and recently stopped?'
+    ],
+    suggestedParts: ['Replacement thermostat', 'Low-voltage thermostat wire (18/5 or 18/8)', 'C-wire adapter kit'],
+    likelyCauses: [
+      {
+        name: 'Dead Batteries or Power Issue',
+        confidence: 'High',
+        explanation: 'Battery-powered thermostats lose their low-battery indicator over time, then suddenly go blank. Hardwired thermostats may lose power from a blown low-voltage fuse at the furnace.',
+        nextChecks: [
+          'Check if the thermostat runs on batteries — replace with fresh AA or AAA.',
+          'If hardwired — go to the furnace/air handler and check the 3-5 amp low-voltage fuse on the control board.',
+          'Check for 24V between R and C terminals at the thermostat wiring.',
+          'Verify C-wire (common) is connected — smart thermostats won\'t power without it.',
+          'Check transformer at air handler — should output 24–28V AC between R and C.'
+        ],
+        suggestedParts: ['Batteries (AA or AAA)', 'Low-voltage fuse (3A, 5A)', 'C-wire adapter if no C-wire present']
+      },
+      {
+        name: 'Incorrect Wiring or Loose Connection',
+        confidence: 'High',
+        explanation: 'A loose wire, wrong terminal assignment, or missing C-wire is the most common cause of thermostat problems after replacement or after a technician has been in the system.',
+        nextChecks: [
+          'Remove thermostat from wall — check that all wires are firmly seated in terminals.',
+          'Photograph wiring before touching anything.',
+          'Common terminal assignments: R=24V power, C=common, Y=cooling, G=fan, W=heating, O/B=heat pump reversing valve.',
+          'Test each wire for 24V using multimeter with system calling.',
+          'Check for shorted wires that may have blown the control board fuse.'
+        ],
+        suggestedParts: ['18/5 or 18/8 thermostat wire', 'Wire staples or fish tape for runs', 'Replacement terminal block']
+      },
+      {
+        name: 'Failed Thermostat or Incompatibility',
+        confidence: 'Medium',
+        explanation: 'Smart or programmable thermostats may be incompatible with certain heat pump systems, two-stage equipment, or systems without a C-wire. Older mechanical thermostats simply fail over time.',
+        nextChecks: [
+          'Check thermostat compatibility tool (manufacturer website) against equipment model.',
+          'Heat pump systems require a thermostat with O/B reversing valve control.',
+          'Two-stage systems need thermostats with Y1/Y2 and W1/W2 terminals.',
+          'Test by temporarily wiring a known-good thermostat as a substitute.',
+          'Check for firmware updates on smart thermostats that may resolve control issues.'
+        ],
+        suggestedParts: ['Compatible replacement thermostat', 'C-wire power adapter kit', 'Thermostat wire (if new run needed)']
+      }
+    ]
+  }
+];
+
+/* ============================================================
+   ── SECTION: diagnosticEngine.ts ──────────────────────────
+   ============================================================ */
+
+function matchCases(symptomText, selectedTags, unitType) {
+  const text = (symptomText || '').toLowerCase();
+  const scores = HVAC_CASES.map(c => {
+    let score = 0;
+    // Keyword match in symptom text
+    c.symptomKeywords.forEach(kw => {
+      if (text.includes(kw.toLowerCase())) score += 3;
+    });
+    // Tag match
+    c.symptomTags.forEach(tag => {
+      if (selectedTags.includes(tag)) score += 5;
+    });
+    // Unit type match
+    if (unitType && c.unitTypes.includes(unitType)) score += 2;
+    return { case: c, score };
+  });
+
+  scores.sort((a, b) => b.score - a.score);
+  const best = scores[0];
+  if (!best || best.score === 0) return null;
+  return best.case;
+}
+
+function runDiagnostic(unitType, brand, model, symptomText, selectedTags) {
+  const matched = matchCases(symptomText, selectedTags, unitType);
+  if (!matched) return null;
+
+  const causes = matched.likelyCauses.slice(0, 3);
+  const summary = buildSummary(unitType, brand, model, symptomText, selectedTags, matched);
+
+  return {
+    caseTitle: matched.title,
+    summary,
+    causes,
+    safetyFlags: matched.safetyFlags,
+    followUpQuestions: matched.followUpQuestions,
+    suggestedParts: matched.suggestedParts
+  };
+}
+
+function buildSummary(unitType, brand, model, symptomText, tags, matched) {
+  const unitLabel = unitType ? unitType.charAt(0).toUpperCase() + unitType.slice(1) : 'Unit';
+  const brandModel = [brand, model].filter(Boolean).join(' ');
+  const tagLabel = tags.length > 0 ? tags.join(', ') : '';
+  let desc = `Diagnosed: ${matched.title}`;
+  if (brandModel) desc += ` on ${brandModel}`;
+  if (unitType) desc += ` (${unitLabel})`;
+  if (tagLabel) desc += `. Reported symptoms: ${tagLabel}.`;
+  return desc;
+}
+
+/* ============================================================
+   ── SECTION: Components ─────────────────────────────────────
+   ============================================================ */
+
+// ── SafetyAlert ──────────────────────────────────────────────
+const SAFETY_INFO = {
+  'electrical':          { label: '⚡ Electrical Hazard',    msg: 'This job involves line-voltage electrical work. Disconnect and lock out power before opening any panels or touching components.' },
+  'high-voltage':        { label: '⚡ High Voltage',         msg: 'Capacitors store lethal voltage even with power off. Safely discharge capacitors before handling.' },
+  'refrigerant-handling':{ label: '❄️ Refrigerant',          msg: 'Refrigerant handling requires EPA 608 certification. Do not vent refrigerant — it is illegal and harmful.' },
+  'combustion':          { label: '🔥 Combustion System',    msg: 'This job involves a gas-fired system. Verify gas is off before servicing burners, heat exchangers, or gas valves.' },
+  'carbon-monoxide':     { label: '☠️ CO Risk',              msg: 'Furnace issues can cause carbon monoxide leaks. If CO detector alarms or occupants report symptoms, evacuate and call emergency services.' },
+  'water-damage':        { label: '💧 Water & Electrical',   msg: 'Water near electrical components is a shock and short-circuit hazard. Verify power is off before working in wet areas.' },
+  'fire-risk':           { label: '🔥 Fire Risk',            msg: 'Arcing connections, shorted wiring, or overloaded circuits can cause fire. Do not reset a breaker more than once without identifying the root cause.' }
+};
+
+function SafetyAlert({ flags }) {
+  if (!flags || flags.length === 0) return null;
+  return (
+    <div className="bg-amber-50 border-l-4 border-amber-400 rounded-lg p-4 mb-4 fade-in">
+      <div className="font-bold text-amber-800 text-sm mb-2 uppercase tracking-wide">⚠️ Safety Notes</div>
+      <div className="space-y-2">
+        {flags.map(f => {
+          const info = SAFETY_INFO[f];
+          if (!info) return null;
+          return (
+            <div key={f} className="text-sm">
+              <span className="font-semibold text-amber-900">{info.label}: </span>
+              <span className="text-amber-800">{info.msg}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── CauseCard ─────────────────────────────────────────────────
+const CONFIDENCE_STYLE = {
+  'High':   'bg-red-100 text-red-700 border-red-200',
+  'Medium': 'bg-yellow-100 text-yellow-700 border-yellow-200',
+  'Low':    'bg-gray-100 text-gray-600 border-gray-200'
+};
+const CONFIDENCE_BAR = {
+  'High': 'w-full bg-red-400',
+  'Medium': 'w-2/3 bg-yellow-400',
+  'Low': 'w-1/3 bg-gray-400'
+};
+
+function CauseCard({ cause, rank }) {
+  const [open, setOpen] = useState(rank === 0);
+  return (
+    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-3 fade-in">
+      <button
+        className="w-full flex items-start gap-3 p-4 text-left focus:outline-none active:bg-gray-50"
+        onClick={() => setOpen(o => !o)}
+      >
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#0D1B2A] text-white flex items-center justify-center font-bold text-sm">
+          {rank + 1}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="font-semibold text-gray-900 text-[15px] leading-tight">{cause.name}</span>
+            <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${CONFIDENCE_STYLE[cause.confidence]}`}>
+              {cause.confidence} Confidence
+            </span>
+          </div>
+          <div className="h-1 bg-gray-100 rounded-full w-24 mt-1">
+            <div className={`h-1 rounded-full ${CONFIDENCE_BAR[cause.confidence]}`}></div>
+          </div>
+        </div>
+        <span className="text-gray-400 text-lg flex-shrink-0 mt-1">{open ? '▲' : '▼'}</span>
+      </button>
+
+      {open && (
+        <div className="px-4 pb-4 border-t border-gray-100 fade-in">
+          <p className="text-gray-700 text-sm leading-relaxed mt-3 mb-3">{cause.explanation}</p>
+
+          <div className="text-xs font-bold text-[#1A5C3A] uppercase tracking-wider mb-2">Next Checks to Run</div>
+          <ol className="space-y-2">
+            {cause.nextChecks.map((check, i) => (
+              <li key={i} className="flex gap-3 text-sm text-gray-700">
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#6DC99A] text-white text-xs flex items-center justify-center font-bold mt-0.5">{i + 1}</span>
+                <span className="leading-relaxed">{check}</span>
+              </li>
+            ))}
+          </ol>
+
+          {cause.suggestedParts && cause.suggestedParts.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-gray-100">
+              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Parts That May Be Needed</div>
+              <div className="flex flex-wrap gap-2">
+                {cause.suggestedParts.map((p, i) => (
+                  <span key={i} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-md border border-gray-200">{p}</span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── SymptomChips ──────────────────────────────────────────────
+const SYMPTOM_CHIPS = [
+  'no cool','no heat','short cycling','won\'t start','weak airflow',
+  'strange noise','water leak','ice buildup','trips breaker','thermostat issue'
+];
+
+function SymptomChips({ selected, onToggle }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {SYMPTOM_CHIPS.map(chip => {
+        const isSelected = selected.includes(chip);
+        return (
+          <button
+            key={chip}
+            onClick={() => onToggle(chip)}
+            className={`px-3 py-2 rounded-lg text-sm font-medium border transition-all duration-150 active:scale-95 ${
+              isSelected
+                ? 'bg-[#1A5C3A] text-white border-[#1A5C3A]'
+                : 'bg-white text-gray-600 border-gray-300 hover:border-[#1A5C3A] hover:text-[#1A5C3A]'
+            }`}
+          >
+            {chip}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── TroubleshootingForm ────────────────────────────────────────
+const UNIT_TYPES = ['split system','furnace','condenser','heat pump','mini split','package unit'];
+
+function TroubleshootingForm({ onResults }) {
+  const [unitType, setUnitType] = useState('');
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
+  const [symptom, setSymptom] = useState('');
+  const [tags, setTags] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const toggleTag = chip => setTags(t => t.includes(chip) ? t.filter(x => x !== chip) : [...t, chip]);
+
+  const handleSubmit = () => {
+    if (!symptom.trim() && tags.length === 0) {
+      setError('Please describe the symptom or select at least one symptom chip.');
+      return;
+    }
+    setError('');
+    setLoading(true);
+    setTimeout(() => {
+      const result = runDiagnostic(unitType, brand, model, symptom, tags);
+      setLoading(false);
+      if (!result) {
+        setError('No matching case found. Try describing the symptom differently or selecting a chip above.');
+        return;
+      }
+      onResults(result);
+    }, 600);
+  };
+
+  return (
+    <div className="space-y-5">
+      {/* Unit Type */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">Unit Type</label>
+        <select
+          value={unitType}
+          onChange={e => setUnitType(e.target.value)}
+          className="w-full text-base border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#1A5C3A] bg-white text-gray-700"
+        >
+          <option value="">Select unit type (optional)</option>
+          {UNIT_TYPES.map(u => <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>)}
+        </select>
+      </div>
+
+      {/* Brand + Model row */}
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Brand <span className="text-gray-400 font-normal">(optional)</span></label>
+          <input
+            type="text"
+            value={brand}
+            onChange={e => setBrand(e.target.value)}
+            placeholder="e.g. Carrier, Lennox"
+            className="w-full text-base border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#1A5C3A]"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Model # <span className="text-gray-400 font-normal">(optional)</span></label>
+          <input
+            type="text"
+            value={model}
+            onChange={e => setModel(e.target.value)}
+            placeholder="e.g. 24ACC636"
+            className="w-full text-base border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#1A5C3A]"
+          />
+        </div>
+      </div>
+
+      {/* Symptom textarea */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">Describe What's Happening</label>
+        <textarea
+          value={symptom}
+          onChange={e => setSymptom(e.target.value)}
+          placeholder="Describe what's happening (e.g. AC not cooling, outdoor unit running but warm air inside, started after storm)"
+          rows={4}
+          className="w-full text-base border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#1A5C3A] resize-none leading-relaxed"
+        />
+      </div>
+
+      {/* Symptom chips */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">Quick Symptom Select</label>
+        <SymptomChips selected={tags} onToggle={toggleTag} />
+      </div>
+
+      {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg p-3">{error}</div>}
+
+      <button
+        onClick={handleSubmit}
+        disabled={loading}
+        className="w-full bg-[#1A5C3A] hover:bg-[#145030] text-white font-bold text-lg py-4 rounded-xl transition-all duration-150 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm"
+      >
+        {loading ? (
+          <span className="flex items-center justify-center gap-2">
+            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+            </svg>
+            Analyzing…
+          </span>
+        ) : 'Get Likely Fixes →'}
+      </button>
+    </div>
+  );
+}
+
+// ── ResultsPanel ──────────────────────────────────────────────
+function ResultsPanel({ result, onReset }) {
+  return (
+    <div className="fade-in space-y-4">
+      {/* Summary */}
+      <div className="bg-[#0D1B2A] rounded-xl p-4 text-white">
+        <div className="text-xs font-bold text-[#6DC99A] uppercase tracking-wider mb-1">Diagnosis Summary</div>
+        <div className="font-bold text-lg">{result.caseTitle}</div>
+        <div className="text-sm text-white/60 mt-1 leading-relaxed">{result.summary}</div>
+      </div>
+
+      {/* Safety */}
+      <SafetyAlert flags={result.safetyFlags} />
+
+      {/* Causes */}
+      <div>
+        <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Top Likely Causes — Ranked</div>
+        {result.causes.map((c, i) => <CauseCard key={i} cause={c} rank={i} />)}
+      </div>
+
+      {/* Suggested parts */}
+      {result.suggestedParts && result.suggestedParts.length > 0 && (
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+          <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Suggested Part Categories</div>
+          <div className="flex flex-wrap gap-2">
+            {result.suggestedParts.map((p, i) => (
+              <span key={i} className="text-sm bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-lg">{p}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Follow-up questions */}
+      {result.followUpQuestions && result.followUpQuestions.length > 0 && (
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div className="text-xs font-bold text-blue-700 uppercase tracking-wider mb-2">🔍 Follow-Up Diagnostic Questions</div>
+          <ol className="space-y-2">
+            {result.followUpQuestions.map((q, i) => (
+              <li key={i} className="text-sm text-blue-900 leading-relaxed">
+                <span className="font-bold">{i + 1}. </span>{q}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {/* Reset */}
+      <button
+        onClick={onReset}
+        className="w-full border-2 border-[#1A5C3A] text-[#1A5C3A] font-bold py-4 rounded-xl text-lg hover:bg-green-50 transition-all active:scale-95"
+      >
+        ← Check Another Issue
+      </button>
+
+      <p className="text-center text-xs text-gray-400 leading-relaxed">
+        Guidance only. Always follow proper HVAC safety procedures, local codes, and manufacturer instructions.
+      </p>
+    </div>
+  );
+}
+
+// ── FeatureCards ──────────────────────────────────────────────
+const FEATURES = [
+  { icon: '🔍', title: 'Symptom to Diagnosis', desc: 'Type what\'s happening and get ranked likely causes instantly — no lookup tables, no guessing.' },
+  { icon: '✅', title: 'Next Checks to Run', desc: 'Practical, field-ready troubleshooting steps you can follow on the job right now.' },
+  { icon: '🏷️', title: 'Model-Aware Guidance', desc: 'Add unit details for more relevant results based on the specific equipment type.' },
+  { icon: '⚠️', title: 'Safety Flags Built In', desc: 'Know immediately when a job involves electrical, refrigerant, combustion, or CO risk.' },
+  { icon: '📱', title: 'Built for the Field', desc: 'Fast, mobile-first, no login required. Works on a phone with one bar of service.' }
+];
+
+function FeatureCards() {
+  return (
+    <section className="py-12 px-4 bg-white">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="text-xs font-bold text-[#1A5C3A] uppercase tracking-widest mb-2">Why It Works</div>
+          <h2 className="text-2xl font-bold text-[#0D1B2A] font-serif">Built for technicians, not managers</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {FEATURES.map((f, i) => (
+            <div key={i} className={`bg-gray-50 border border-gray-200 rounded-xl p-5 ${i === 4 ? 'sm:col-span-2' : ''}`}>
+              <div className="text-2xl mb-2">{f.icon}</div>
+              <div className="font-bold text-[#0D1B2A] mb-1">{f.title}</div>
+              <div className="text-sm text-gray-600 leading-relaxed">{f.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── ExampleCases ──────────────────────────────────────────────
+const EXAMPLES = [
+  {
+    title: 'AC not cooling — outdoor unit running',
+    tags: ['no cool'],
+    causes: ['Dirty air filter', 'Low refrigerant charge', 'Failed run capacitor'],
+    checks: ['Check filter and replace if restricted', 'Check suction line temp — should be 40–55°F', 'Test capacitor µF vs label rating']
+  },
+  {
+    title: 'Furnace starts then shuts off',
+    tags: ['short cycling','no heat'],
+    causes: ['Dirty flame sensor', 'Tripping high limit switch', 'Faulty pressure switch'],
+    checks: ['Clean flame sensor with emery cloth', 'Check air filter — limit trips = airflow issue', 'Inspect pressure switch hose for cracks']
+  },
+  {
+    title: 'Mini split leaking water',
+    tags: ['water leak'],
+    causes: ['Clogged condensate drain', 'Frozen coil thawing', 'Condensate pump failure'],
+    checks: ['Clear drain line with shop vac from outdoor end', 'Check for ice on coil — switch to fan only', 'Test pump float by adding water to reservoir']
+  }
+];
+
+function ExampleCases({ onTryExample }) {
+  return (
+    <section className="py-12 px-4 bg-gray-50 border-t border-gray-200">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="text-xs font-bold text-[#1A5C3A] uppercase tracking-widest mb-2">Example Diagnoses</div>
+          <h2 className="text-2xl font-bold text-[#0D1B2A] font-serif">See how it works</h2>
+        </div>
+        <div className="space-y-4">
+          {EXAMPLES.map((ex, i) => (
+            <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <div className="font-bold text-[#0D1B2A] mb-2">{ex.title}</div>
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {ex.tags.map(t => <span key={t} className="text-xs bg-[#1A5C3A] text-white px-2 py-0.5 rounded-full">{t}</span>)}
+              </div>
+              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Likely Causes</div>
+              <div className="text-sm text-gray-700 mb-3">{ex.causes.join(' · ')}</div>
+              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">First Checks</div>
+              <ul className="space-y-1">
+                {ex.checks.map((c, j) => (
+                  <li key={j} className="text-sm text-gray-700 flex gap-2">
+                    <span className="text-[#6DC99A] font-bold flex-shrink-0">→</span>{c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── EmailGate ──────────────────────────────────────────────────
+function EmailGate({ onAccess }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const emailValid = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  const handleSubmit = async () => {
+    if (!name.trim()) { setError('Please enter your first name.'); return; }
+    if (!emailValid(email)) { setError('Please enter a valid email address.'); return; }
+    setError('');
+    setSubmitting(true);
+    // Store in localStorage so they don't have to re-enter
+    localStorage.setItem('hvacgate_name', name.trim());
+    localStorage.setItem('hvacgate_email', email.trim());
+    try {
+      const formData = new FormData();
+      formData.append('name', name.trim());
+      formData.append('email', email.trim());
+      formData.append('source', 'HVAC Fix Finder — platformprepared.com');
+      formData.append('submitted_at', new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }) + ' PT');
+      formData.append('_subject', 'New HVAC Fix Finder Lead — ' + name.trim());
+      formData.append('_replyto', email.trim());
+      formData.append('_captcha', 'false');
+      await fetch('https://formsubmit.co/nate@gardpartners.com', {
+        method: 'POST',
+        body: formData
+      });
+    } catch (e) {
+      // Fail silently — still grant access so the user isn't blocked
+      console.warn('Lead capture failed:', e);
+    }
+    setSubmitting(false);
+    onAccess(name.trim());
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0D1B2A] flex flex-col items-center justify-center px-4 py-12">
+      {/* Logo */}
+      <a href="/" className="flex items-center gap-2 mb-8">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="6" fill="#0D1B2A"/>
+          <rect x="1" y="21" width="30" height="3" rx="1" fill="#1A5C3A"/>
+          <rect x="7" y="9" width="3" height="14" rx="1" fill="#1A5C3A"/>
+          <rect x="22" y="9" width="3" height="14" rx="1" fill="#1A5C3A"/>
+          <path d="M1 21 L8.5 9 Q16 15.5 23.5 9 L31 21" stroke="#6DC99A" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
+        </svg>
+        <span className="text-white font-bold text-base tracking-wide">Platform Prepared</span>
+      </a>
+
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
+        {/* Badge */}
+        <div className="flex justify-center mb-4">
+          <span className="bg-[#1A5C3A]/10 text-[#1A5C3A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Free Tool</span>
+        </div>
+
+        <h1 className="text-2xl font-bold text-[#0D1B2A] text-center font-serif mb-1">HVAC Fix Finder</h1>
+        <p className="text-gray-500 text-sm text-center mb-6 leading-relaxed">
+          Describe your symptoms. Get ranked likely causes, next checks to run, and safety flags — in seconds.
+        </p>
+
+        <div className="space-y-3">
+          <input
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+            placeholder="Your first name"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#1A5C3A]"
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+            placeholder="Your email address"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#1A5C3A]"
+          />
+          {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg p-3">{error}</div>}
+          <button
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="w-full bg-[#1A5C3A] hover:bg-[#145030] text-white font-bold py-4 rounded-xl text-lg transition-all active:scale-95 disabled:opacity-60"
+          >
+            {submitting ? 'Unlocking…' : 'Get Free Access →'}
+          </button>
+        </div>
+
+        <p className="text-center text-xs text-gray-400 mt-4 leading-relaxed">
+          No spam. We'll occasionally share HVAC ops tips and Platform Prepared updates. Unsubscribe anytime.
+        </p>
+
+        {/* Trust signals */}
+        <div className="flex justify-center gap-4 mt-5 pt-5 border-t border-gray-100">
+          {['8 Case Types','Field-Tested','Safety Flags Built In'].map(t => (
+            <div key={t} className="text-center">
+              <div className="text-xs text-gray-500">{t}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── HVACFixFinderPage (main tool page) ─────────────────────────
+function HVACFixFinderPage({ userName }) {
+  const [result, setResult] = useState(null);
+  const [showTool, setShowTool] = useState(false);
+  const toolRef = useRef(null);
+
+  const handleResults = r => {
+    setResult(r);
+    setTimeout(() => toolRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  };
+
+  const handleReset = () => {
+    setResult(null);
+    setTimeout(() => toolRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  };
+
+  const scrollToTool = () => {
+    setShowTool(true);
+    setTimeout(() => toolRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Nav */}
+      <nav className="bg-[#0D1B2A] px-4 py-3 flex items-center justify-between sticky top-0 z-50 shadow-lg">
+        <a href="/" className="flex items-center gap-2">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#0D1B2A"/>
+            <rect x="1" y="21" width="30" height="3" rx="1" fill="#1A5C3A"/>
+            <rect x="7" y="9" width="3" height="14" rx="1" fill="#1A5C3A"/>
+            <rect x="22" y="9" width="3" height="14" rx="1" fill="#1A5C3A"/>
+            <path d="M1 21 L8.5 9 Q16 15.5 23.5 9 L31 21" stroke="#6DC99A" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
+          </svg>
+          <span className="text-white font-bold text-sm">Platform Prepared</span>
+        </a>
+        <button
+          onClick={scrollToTool}
+          className="bg-[#1A5C3A] text-white text-sm font-bold px-4 py-2 rounded-lg active:scale-95 transition-all"
+        >
+          Try Tool
+        </button>
+      </nav>
+
+      {/* Hero */}
+      <section className="bg-[#0D1B2A] px-4 pt-12 pb-14 text-center">
+        <div className="inline-block bg-[#6DC99A]/10 text-[#6DC99A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 border border-[#6DC99A]/20">
+          Free Field Tool
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white font-serif leading-tight mb-3 max-w-lg mx-auto">
+          Diagnose HVAC problems faster in the field
+        </h1>
+        <p className="text-white/60 text-base leading-relaxed max-w-md mx-auto mb-8">
+          Describe the symptoms, add the unit model, and get likely causes, next checks, and safety flags in seconds.
+        </p>
+        {userName && (
+          <p className="text-[#6DC99A] text-sm mb-4">Welcome back, {userName}.</p>
+        )}
+        <button
+          onClick={scrollToTool}
+          className="bg-[#1A5C3A] hover:bg-[#145030] text-white font-bold text-lg px-8 py-4 rounded-xl transition-all active:scale-95 shadow-lg"
+        >
+          Try HVAC Fix Finder →
+        </button>
+      </section>
+
+      {/* Tool section */}
+      <section ref={toolRef} className="px-4 py-8 max-w-2xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+          <div className="bg-[#1A5C3A] px-5 py-4">
+            <div className="font-bold text-white text-lg">HVAC Fix Finder</div>
+            <div className="text-white/70 text-sm">Describe the problem — get likely causes and next checks instantly</div>
+          </div>
+          <div className="p-5">
+            {result
+              ? <ResultsPanel result={result} onReset={handleReset} />
+              : <TroubleshootingForm onResults={handleResults} />
+            }
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <FeatureCards />
+
+      {/* Examples */}
+      <ExampleCases />
+
+      {/* Footer CTA */}
+      <section className="bg-[#0D1B2A] px-4 py-12 text-center">
+        <div className="max-w-lg mx-auto">
+          <div className="text-xs font-bold text-[#6DC99A] uppercase tracking-widest mb-3">Platform Prepared</div>
+          <h2 className="text-2xl font-bold text-white font-serif mb-3">Need someone to build the operational infrastructure?</h2>
+          <p className="text-white/60 text-sm leading-relaxed mb-6">
+            We embed inside small service businesses post-acquisition and build the systems, processes, and AI tools that create lasting value.
+          </p>
+          <a
+            href="https://platformprepared.com"
+            className="inline-block bg-[#1A5C3A] text-white font-bold px-8 py-4 rounded-xl text-base hover:bg-[#145030] transition-all active:scale-95"
+          >
+            Learn About Platform Prepared →
+          </a>
+        </div>
+      </section>
+
+      {/* Disclaimer */}
+      <div className="bg-gray-100 border-t border-gray-200 px-4 py-4 text-center">
+        <p className="text-xs text-gray-400 leading-relaxed max-w-2xl mx-auto">
+          Guidance only. Always follow proper HVAC safety procedures, manufacturer instructions, and applicable local codes. Work involving refrigerants requires EPA 608 certification. When in doubt, consult a licensed HVAC professional.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   ── SECTION: App Root ────────────────────────────────────────
+   ============================================================ */
+function App() {
+  const [accessGranted, setAccessGranted] = useState(false);
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    // Check localStorage for returning users
+    const savedName  = localStorage.getItem('hvacgate_name');
+    const savedEmail = localStorage.getItem('hvacgate_email');
+    if (savedName && savedEmail) {
+      setUserName(savedName);
+      setAccessGranted(true);
+    }
+  }, []);
+
+  const handleAccess = (name) => {
+    setUserName(name);
+    setAccessGranted(true);
+  };
+
+  if (!accessGranted) return <EmailGate onAccess={handleAccess} />;
+  return <HVACFixFinderPage userName={userName} />;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>

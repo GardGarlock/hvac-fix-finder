@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platform Prepared — Post-Acquisition Value Creation for Service Businesses</title>
+  <meta name="description" content="Platform Prepared embeds inside small service businesses post-acquisition to build the systems, processes, and infrastructure that create lasting operational value." />
+  <meta name="keywords" content="post-acquisition value creation, small service business operations, fractional COO, AI implementation small business, HVAC operations consultant, service business value creation" />
+  <meta property="og:title" content="Platform Prepared — Post-Acquisition Value Creation" />
+  <meta property="og:description" content="We build the systems, processes, and infrastructure that turn a good acquisition into a great business — in the first 90 days." />
+  <meta property="og:type" content="website" />
+  <!-- Favicon: bridge mark on navy -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230D1B2A'/%3E%3Crect x='1' y='21' width='30' height='3' rx='1' fill='%231A5C3A'/%3E%3Crect x='7' y='9' width='3' height='14' rx='1' fill='%231A5C3A'/%3E%3Crect x='22' y='9' width='3' height='14' rx='1' fill='%231A5C3A'/%3E%3Cpath d='M1 21 L8.5 9 Q16 15.5 23.5 9 L31 21' stroke='%236DC99A' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cline x1='13' y1='13.5' x2='13' y2='21' stroke='%236DC99A' stroke-width='1' opacity='0.55'/%3E%3Cline x1='16' y1='15' x2='16' y2='21' stroke='%236DC99A' stroke-width='1' opacity='0.55'/%3E%3Cline x1='19' y1='13.5' x2='19' y2='21' stroke='%236DC99A' stroke-width='1' opacity='0.55'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --navy:       #0D1B2A;
+      --green:      #1A5C3A;
+      --green-mid:  #236B45;
+      --green-pale: #EEF5F1;
+      --green-tint: #F4FAF7;
+      --accent:     #6DC99A;
+      --white:      #FFFFFF;
+      --gray-50:    #F9FAFB;
+      --gray-100:   #F3F4F6;
+      --gray-200:   #E5E7EB;
+      --gray-400:   #9CA3AF;
+      --gray-500:   #6B7280;
+      --gray-600:   #4B5563;
+      --gray-700:   #374151;
+      --gray-900:   #0D1117;
+      --gold-pale:  #FBF7EE;
+      --ff-serif: 'Instrument Serif', Georgia, serif;
+      --ff-sans:  'Inter', system-ui, sans-serif;
+      --radius:    6px;
+      --radius-lg: 12px;
+      --max-w:     1080px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.07);
+      --shadow:    0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: var(--ff-sans);
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gray-700);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+    .sec  { padding: 88px 0; }
+
+    h1 { font-family: var(--ff-serif); font-size: clamp(2.2rem, 4.5vw, 3.5rem); line-height: 1.12; font-weight: 400; color: var(--white); }
+    h2 { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: 1.2;  font-weight: 400; color: var(--gray-900); }
+    h3 { font-family: var(--ff-serif); font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.3; font-weight: 400; color: var(--gray-900); }
+    h4 { font-family: var(--ff-serif); font-size: 1.05rem; font-weight: 400; line-height: 1.35; color: var(--gray-900); }
+
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--green); text-decoration: none; }
+
+    .eyebrow {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .eyebrow--light { color: var(--accent); }
+
+    .rule { width: 40px; height: 2px; background: var(--green); margin: 14px 0 24px; border-radius: 1px; }
+    .rule--center { margin-left: auto; margin-right: auto; }
+    .rule--light { background: var(--accent); }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--ff-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary { background: var(--green); color: var(--white); border-color: var(--green); }
+    .btn-primary:hover { background: var(--green-mid); border-color: var(--green-mid); color: var(--white); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,92,58,0.28); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.35); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--white); border-color: rgba(255,255,255,0.7); }
+    .btn-white { background: var(--white); color: var(--green); border-color: var(--white); }
+    .btn-white:hover { background: var(--gray-50); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+    .btn-lg { padding: 15px 36px; font-size: 0.95rem; }
+
+    /* ===== ANNOUNCEMENT BAR ===== */
+    .announce-bar {
+      background: var(--green);
+      color: var(--white);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      position: relative;
+      z-index: 101;
+    }
+    .announce-bar a {
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 700;
+    }
+    .announce-bar a:hover { opacity: 0.85; }
+    .announce-bar .announce-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 28px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo-name { font-family: var(--ff-serif); font-size: 1.1rem; color: var(--navy); }
+    .nav-logo-name strong { color: var(--green); font-weight: 400; }
+    .nav-logo-sub { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-400); margin-top: 1px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--gray-500); transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--gray-700); border-radius: 1px; }
+    .nav-mobile {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: var(--white); border-bottom: 1px solid var(--gray-200);
+      padding: 20px 28px; flex-direction: column; z-index: 99; box-shadow: var(--shadow);
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { display: block; padding: 12px 0; font-size: 0.95rem; font-weight: 500; color: var(--gray-700); border-bottom: 1px solid var(--gray-100); text-decoration: none; }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile .btn { margin-top: 16px; text-align: center; }
+
+    /* ===== HERO ===== */
+    .hero { background: var(--navy); padding: 88px 0 80px; position: relative; overflow: hidden; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 480px; height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(26,92,58,0.08) 100%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 800px; margin: 0 auto; padding: 0 28px;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; }
+    .hero-eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .hero h1 { margin-bottom: 22px; }
+    .hero-sub { font-family: var(--ff-serif); font-style: italic; font-size: 1.15rem; color: rgba(255,255,255,0.5); margin-bottom: 18px; }
+    .hero-body { font-size: 1.02rem; color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 36px; max-width: 680px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .hero-note { font-size: 0.78rem; color: rgba(255,255,255,0.28); }
+
+    /* ===== STATS ===== */
+    .stats { border-bottom: 1px solid var(--gray-200); }
+    .stats-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 32px 20px; text-align: center; border-right: 1px solid var(--gray-200); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--ff-serif); font-size: 2.4rem; color: var(--green); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.82rem; color: var(--gray-500); line-height: 1.5; }
+    .stat-source { display: block; font-size: 0.65rem; color: var(--gray-400); font-style: italic; margin-top: 3px; }
+
+    /* ===== WHO WE HELP ===== */
+    .icp-intro { text-align: center; margin-bottom: 44px; }
+    .icp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 16px; }
+    .icp-card { border-radius: var(--radius-lg); padding: 36px 32px; border: 1.5px solid; }
+    .icp-card--seller { background: var(--green-tint); border-color: rgba(26,92,58,0.18); }
+    .icp-card--buyer  { background: #F7F8FA;           border-color: rgba(13,27,42,0.12); }
+    .icp-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 18px; }
+    .icp-card--seller .icp-badge { background: var(--green); color: var(--white); }
+    .icp-card--buyer  .icp-badge { background: var(--navy); color: var(--white); }
+    .icp-card h3 { margin-bottom: 14px; font-size: 1.2rem; }
+    .icp-card--seller h3 { color: var(--green); }
+    .icp-card--buyer  h3 { color: var(--navy); }
+    .icp-card p { font-size: 0.92rem; line-height: 1.78; color: var(--gray-600); margin-bottom: 20px; }
+    .icp-card ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .icp-card li { display: flex; gap: 10px; font-size: 0.9rem; color: var(--gray-700); line-height: 1.5; align-items: baseline; }
+    .icp-card--seller li::before { content: '→'; color: var(--green);  flex-shrink: 0; font-weight: 600; }
+    .icp-card--buyer  li::before { content: '→'; color: var(--navy);   flex-shrink: 0; font-weight: 600; }
+    .icp-bridge {
+      background: var(--navy); border-radius: var(--radius-lg); padding: 22px 32px;
+      text-align: center;
+    }
+    .icp-bridge p { font-family: var(--ff-serif); font-size: 1.05rem; color: rgba(255,255,255,0.85); margin: 0; line-height: 1.6; }
+    .icp-bridge span { color: var(--accent); font-style: italic; }
+
+    /* ===== OWNER LOCK STRIP (compact framework) ===== */
+    .ownerlock { background: var(--navy); padding: 64px 0; }
+    .ownerlock-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+    .ownerlock-head { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-bottom: 44px; }
+    .ownerlock-def h2 { color: var(--white); margin-bottom: 14px; }
+    .ownerlock-def p { color: rgba(255,255,255,0.52); font-size: 0.95rem; line-height: 1.85; margin: 0; }
+    .ownerlock-quote { border-left: 2px solid var(--accent); padding-left: 24px; }
+    .ownerlock-quote blockquote { font-family: var(--ff-serif); font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.82); line-height: 1.55; margin-bottom: 10px; }
+    .ownerlock-quote cite { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-style: normal; }
+    .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+    .pillar {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 22px 18px;
+      transition: background 0.2s;
+    }
+    .pillar:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .pillar:last-child  { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+    .pillar:hover { background: rgba(26,92,58,0.1); }
+    .pillar-n { font-family: var(--ff-serif); font-size: 1.4rem; color: rgba(109,201,154,0.18); margin-bottom: 10px; }
+    .pillar h4 { color: var(--white); font-size: 0.9rem; margin-bottom: 7px; line-height: 1.3; }
+    .pillar p { font-size: 0.78rem; color: rgba(255,255,255,0.38); line-height: 1.6; margin: 0; }
+    .pillar-who { margin-top: 12px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+
+    /* ===== BEFORE / AFTER ===== */
+    .transform-intro { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+    .transform-intro h2 { margin-bottom: 14px; }
+    .transform-intro p { font-size: 0.95rem; color: var(--gray-500); line-height: 1.8; }
+    .transform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .t-col { border-radius: var(--radius-lg); padding: 32px 28px; }
+    .t-col--before { background: var(--white); border: 1px solid var(--gray-200); }
+    .t-col--after  { background: var(--green-tint); border: 1.5px solid rgba(26,92,58,0.2); }
+    .t-label { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 20px; display: block; }
+    .t-col--before .t-label { color: var(--gray-400); }
+    .t-col--after  .t-label { color: var(--green); }
+    .t-col ul { list-style: none; }
+    .t-col li { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.9rem; color: var(--gray-700); line-height: 1.5; align-items: flex-start; }
+    .t-col--after li { border-bottom-color: rgba(26,92,58,0.1); color: var(--gray-900); }
+    .t-col li:last-child { border-bottom: none; }
+    .t-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; font-size: 0.6rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .t-col--before .t-icon { background: var(--gray-100); color: var(--gray-400); }
+    .t-col--after  .t-icon { background: var(--green); color: var(--white); }
+    .t-footer { margin-top: 20px; padding: 13px 18px; border-radius: var(--radius); font-family: var(--ff-serif); font-size: 0.95rem; text-align: center; }
+    .t-col--before .t-footer { background: var(--gray-100); color: var(--gray-500); }
+    .t-col--after  .t-footer { background: rgba(26,92,58,0.1); color: var(--green); }
+
+    /* ===== SERVICES ===== */
+    .services-intro { text-align: center; max-width: 600px; margin: 0 auto 52px; }
+    .services-intro h2 { margin-bottom: 14px; }
+    .services-intro p { color: var(--gray-500); font-size: 0.95rem; line-height: 1.8; }
+    .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 20px; }
+    .svc { background: var(--white); border: 1px solid var(--gray-200); padding: 32px 28px; transition: border-color 0.18s, box-shadow 0.18s; }
+    .svc:first-child { border-radius: var(--radius-lg) 0 0 0; }
+    .svc:nth-child(2) { border-radius: 0 var(--radius-lg) 0 0; }
+    .svc:nth-child(3) { border-radius: 0 0 0 0; }
+    .svc:nth-child(4) { border-radius: 0; }
+    .svc--ai { grid-column: 1 / -1; border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important; background: var(--green-tint); border: 1px solid rgba(26,92,58,0.2); border-top: 2px solid var(--green); }
+    .svc-work-cta { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; background: var(--gold-pale); border: 1px solid rgba(212,175,55,0.3); border-radius: var(--radius-lg); padding: 32px 36px; margin: 20px 0; }
+    .svc-work-cta-text h3 { color: var(--navy); font-size: 1.15rem; margin-bottom: 8px; }
+    .svc-work-cta-text p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.75; margin: 0; }
+    .btn-outline-dark { display: inline-block; padding: 12px 24px; border: 2px solid var(--navy); color: var(--navy); border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; white-space: nowrap; transition: background 0.18s, color 0.18s; }
+    .btn-outline-dark:hover { background: var(--navy); color: var(--white); }
+    .svc:hover { border-color: rgba(26,92,58,0.3); box-shadow: var(--shadow); }
+    .svc-n { font-family: var(--ff-serif); font-size: 2.4rem; color: rgba(26,92,58,0.07); line-height: 1; margin-bottom: 14px; }
+    .svc h3 { color: var(--navy); margin-bottom: 6px; }
+    .svc-outcome { font-family: var(--ff-serif); font-style: italic; font-size: 0.92rem; color: var(--green); margin-bottom: 14px; display: block; }
+    .svc p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 16px; }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .svc-tag { font-size: 0.68rem; font-weight: 600; padding: 3px 10px; background: var(--green-pale); color: var(--green); border-radius: 100px; border: 1px solid rgba(26,92,58,0.15); }
+    .svc-promise {
+      background: var(--navy); border-radius: var(--radius-lg); padding: 28px 36px;
+      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+    }
+    .svc-promise blockquote { font-family: var(--ff-serif); font-style: italic; font-size: 1.2rem; color: var(--white); line-height: 1.45; margin-bottom: 8px; }
+    .svc-promise p { font-size: 0.86rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin: 0; }
+
+    /* ===== COST COMPARISON ===== */
+    .alt-intro { text-align: center; max-width: 720px; margin: 0 auto 52px; }
+    .alt-intro h2 { margin-bottom: 14px; }
+    .alt-intro p { color: var(--gray-500); font-size: 0.95rem; line-height: 1.8; }
+    .alt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto 32px; }
+    .alt-col { border-radius: var(--radius-lg); padding: 36px 32px; }
+    .alt-col--a { background: var(--white); border: 1px solid var(--gray-200); }
+    .alt-col--b { background: var(--green-tint); border: 2px solid rgba(26,92,58,0.25); position: relative; }
+    .alt-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--green); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; white-space: nowrap; }
+    .alt-col-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+    .alt-col--a .alt-col-label { color: var(--gray-400); }
+    .alt-col--b .alt-col-label { color: var(--green); }
+    .alt-col h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .alt-col--a h3 { color: var(--gray-700); }
+    .alt-col--b h3 { color: var(--green); }
+    .alt-cost { font-family: var(--ff-serif); font-size: 1.8rem; line-height: 1; margin-bottom: 4px; }
+    .alt-col--a .alt-cost { color: var(--gray-400); }
+    .alt-col--b .alt-cost { color: var(--green); }
+    .alt-cost-sub { font-size: 0.78rem; color: var(--gray-400); margin-bottom: 24px; display: block; }
+    .alt-col--b .alt-cost-sub { color: var(--green); opacity: 0.7; }
+    .alt-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .alt-item { display: flex; gap: 10px; font-size: 0.9rem; line-height: 1.5; align-items: flex-start; }
+    .alt-col--a .alt-item { color: var(--gray-600); }
+    .alt-col--b .alt-item { color: var(--gray-800); }
+    .alt-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; font-size: 0.6rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .alt-col--a .alt-icon { background: var(--gray-100); color: var(--gray-400); }
+    .alt-col--b .alt-icon { background: var(--green); color: var(--white); }
+    .alt-note { text-align: center; font-family: var(--ff-serif); font-style: italic; font-size: 1rem; color: var(--gray-500); max-width: 600px; margin: 0 auto; }
+    .alt-compare-header { text-align: center; margin: 52px 0 24px; }
+    .alt-compare-header h3 { font-family: var(--ff-serif); font-size: 1.3rem; color: var(--gray-600); font-weight: 400; }
+
+    /* ===== PRICING ===== */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 0; }
+    .pricing-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; }
+    .pricing-card--featured { background: var(--green-tint); border: 2px solid rgba(26,92,58,0.3); }
+    .pricing-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400); }
+    .pricing-tag--green { color: var(--green); }
+    .pricing-name { font-family: var(--ff-serif); font-size: 1.2rem; color: var(--navy); margin: 0; }
+    .pricing-cost { font-family: var(--ff-serif); font-size: 1.9rem; color: var(--navy); line-height: 1; }
+    .pricing-card--featured .pricing-cost { color: var(--green); }
+    .pricing-per { font-size: 0.85rem; font-family: var(--ff-sans); font-weight: 400; color: var(--gray-400); margin-left: 4px; }
+    .pricing-desc { font-size: 0.88rem; color: var(--gray-600); line-height: 1.75; margin: 0; }
+    .pricing-items { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .pricing-items li { font-size: 0.85rem; color: var(--gray-600); padding-left: 16px; position: relative; line-height: 1.5; }
+    .pricing-items li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-size: 0.75rem; top: 1px; }
+
+    /* ===== HOW WE OPERATE ===== */
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .principle { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 32px 24px; }
+    .principle:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .principle:last-child  { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+    .principle-n { font-family: var(--ff-serif); font-size: 2rem; color: rgba(109,201,154,0.15); margin-bottom: 12px; line-height: 1; }
+    .principle h4 { color: var(--white); font-size: 1rem; margin-bottom: 10px; line-height: 1.3; }
+    .principle p { font-size: 0.82rem; color: rgba(255,255,255,0.42); line-height: 1.7; margin: 0; }
+
+    /* ===== PROCESS ===== */
+    .process { background: var(--navy); }
+    .process-intro { text-align: center; max-width: 540px; margin: 0 auto 60px; }
+    .process-intro h2 { color: var(--white); margin-bottom: 12px; }
+    .process-intro p { color: rgba(255,255,255,0.45); font-size: 0.92rem; }
+    .steps { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+    .steps::before { content: ''; position: absolute; top: 25px; left: calc(10% + 16px); right: calc(10% + 16px); height: 1px; background: linear-gradient(to right, transparent, rgba(109,201,154,0.4), transparent); }
+    .step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 10px; }
+    .step-dot { width: 50px; height: 50px; border-radius: 50%; background: var(--green); color: var(--white); font-family: var(--ff-serif); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; position: relative; z-index: 1; flex-shrink: 0; }
+    .step h4 { color: var(--white); font-size: 0.9rem; margin-bottom: 8px; }
+    .step p  { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+
+    /* ===== BROKERS ===== */
+    .brokers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .brokers-text h2 { margin-bottom: 18px; }
+    .brokers-text p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.85; margin-bottom: 14px; }
+    .brokers-text .fine { font-size: 0.76rem; color: var(--gray-400); font-style: italic; }
+    .brokers-box { background: var(--navy); border-radius: var(--radius-lg); padding: 28px; }
+    .brokers-box-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; display: block; }
+    .broker-steps { list-style: none; }
+    .broker-step { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: flex-start; }
+    .broker-step:last-child { border-bottom: none; }
+    .broker-arrow { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .broker-step p { font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.6; margin: 0; }
+    .broker-step p strong { color: var(--white); }
+
+    /* ===== ABOUT ===== */
+    .about-grid { display: grid; grid-template-columns: 240px 1fr 1fr; gap: 52px; align-items: start; }
+    .about-photo-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .about-photo {
+      width: 210px; height: 252px; border-radius: var(--radius-lg); overflow: hidden;
+      background: var(--gray-100); border: 1px solid var(--gray-200);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 8%; display: block; }
+    .about-photo-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; padding: 20px; text-align: center; }
+    .about-photo-ph svg { opacity: 0.3; }
+    .about-photo-ph span { font-size: 0.7rem; color: var(--gray-400); line-height: 1.4; }
+    .about-name { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--gray-900); display: block; text-align: center; }
+    .about-title-sm { font-size: 0.75rem; color: var(--gray-400); display: block; text-align: center; margin-top: 2px; line-height: 1.4; }
+    .about-text h2 { margin-bottom: 16px; }
+    .about-text p { font-size: 0.92rem; color: var(--gray-700); line-height: 1.85; }
+    .creds { background: var(--navy); border-radius: var(--radius-lg); padding: 28px; }
+    .creds-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: block; }
+    .cred { padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .cred:last-child { border-bottom: none; }
+    .cred-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+    .cred-val { font-size: 0.86rem; color: rgba(255,255,255,0.68); line-height: 1.5; }
+
+    /* ===== CALCULATOR ===== */
+    .calc-wrap { background: var(--white); }
+    .calc-intro { text-align: center; max-width: 580px; margin: 0 auto 44px; }
+    .calc-intro h2 { margin-bottom: 14px; }
+    .calc-intro p { color: var(--gray-500); font-size: 0.95rem; line-height: 1.8; }
+    .calc-body { max-width: 720px; margin: 0 auto; }
+    .calc-progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+    .calc-prog-text { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-400); text-transform: uppercase; white-space: nowrap; }
+    .calc-prog-bar { flex: 1; height: 3px; background: var(--gray-200); border-radius: 2px; }
+    .calc-prog-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.3s; }
+    .calc-qs { display: flex; flex-direction: column; gap: 16px; }
+    .calc-q { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 22px 24px; transition: border-color 0.2s; }
+    .calc-q.answered { border-color: rgba(26,92,58,0.35); }
+    .calc-q-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--green); margin-bottom: 7px; display: block; }
+    .calc-q-text { font-family: var(--ff-serif); font-size: 1rem; color: var(--gray-900); margin-bottom: 4px; line-height: 1.4; }
+    .calc-q-help { font-size: 0.8rem; color: var(--gray-400); line-height: 1.5; margin-bottom: 14px; }
+    .calc-opts { display: flex; flex-direction: column; gap: 7px; }
+    .calc-opt { display: flex; align-items: center; gap: 11px; padding: 10px 13px; border: 1px solid var(--gray-200); border-radius: var(--radius); cursor: pointer; transition: all 0.15s; }
+    .calc-opt:hover { border-color: rgba(26,92,58,0.4); background: var(--green-tint); }
+    .calc-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .calc-radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--gray-300); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .calc-opt.selected { border-color: var(--green); background: var(--green-tint); }
+    .calc-opt.selected .calc-radio { border-color: var(--green); background: var(--green); }
+    .calc-opt.selected .calc-radio::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--white); }
+    .calc-opt-text { font-size: 0.88rem; color: var(--gray-700); line-height: 1.45; }
+    .calc-opt.selected .calc-opt-text { color: var(--gray-900); font-weight: 500; }
+    .calc-submit-row { text-align: center; margin-top: 28px; }
+    .calc-submit-note { font-size: 0.8rem; color: var(--gray-400); margin-top: 10px; }
+    /* Result */
+    .calc-result { display: none; max-width: 720px; margin: 0 auto; }
+    .calc-result.visible { display: block; }
+    .result-header { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .result-m { border-radius: var(--radius-lg); padding: 22px; text-align: center; }
+    .result-m--current   { background: var(--gray-50); border: 1px solid var(--gray-200); }
+    .result-m--potential { background: var(--green-tint); border: 1.5px solid rgba(26,92,58,0.25); }
+    .result-m-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; display: block; }
+    .result-m--potential .result-m-label { color: var(--green); }
+    .result-multiple { font-family: var(--ff-serif); font-size: 2.4rem; color: var(--gray-900); line-height: 1; }
+    .result-m--potential .result-multiple { color: var(--green); }
+    .result-multiple-sub { font-size: 0.75rem; color: var(--gray-400); margin-top: 4px; }
+    .result-gaps-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 12px; display: block; }
+    .result-gaps { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+    .result-gap { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: var(--gold-pale); border-radius: var(--radius); border-left: 3px solid #C49A3C; }
+    .result-gap-n { width: 24px; height: 24px; border-radius: 50%; background: rgba(196,154,60,0.2); color: #9A7A30; font-size: 0.65rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .result-gap-text { font-size: 0.88rem; color: var(--gray-700); line-height: 1.5; }
+    .result-gap-text strong { color: var(--gray-900); }
+    .result-cta { background: var(--green); border-radius: var(--radius-lg); padding: 24px 28px; text-align: center; }
+    .result-cta p { color: rgba(255,255,255,0.8); font-size: 0.92rem; margin-bottom: 18px; line-height: 1.6; }
+    .calc-reset { background: none; border: none; color: var(--gray-400); font-size: 0.8rem; font-family: var(--ff-sans); cursor: pointer; margin-top: 14px; display: block; margin-left: auto; margin-right: auto; }
+    .calc-reset:hover { color: var(--gray-600); }
+
+    /* Email gate */
+    .calc-email-gate { display: none; max-width: 520px; margin: 0 auto; text-align: center; padding: 44px 40px; background: var(--green-tint); border: 1.5px solid rgba(26,92,58,0.2); border-radius: var(--radius-lg); }
+    .calc-email-gate.visible { display: block; }
+    .calc-email-gate .eyebrow { color: var(--green); }
+    .calc-email-gate h3 { margin: 8px 0 12px; font-size: 1.25rem; color: var(--gray-900); }
+    .email-gate-sub { font-size: 0.92rem; color: var(--gray-600); margin-bottom: 28px; line-height: 1.75; }
+    .email-gate-form { display: flex; flex-direction: column; gap: 10px; max-width: 380px; margin: 0 auto 12px; }
+    .email-gate-input { padding: 13px 16px; border: 1px solid var(--gray-200); border-radius: var(--radius); font-size: 0.95rem; font-family: var(--ff-sans); background: var(--white); color: var(--gray-900); outline: none; transition: border-color 0.15s; }
+    .email-gate-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,92,58,0.08); }
+    .email-gate-input.error { border-color: #C0392B; }
+    .email-gate-error { font-size: 0.78rem; color: #C0392B; margin-top: -4px; text-align: left; display: none; }
+    .email-gate-error.visible { display: block; }
+    .email-gate-note { font-size: 0.74rem; color: var(--gray-400); margin-top: 4px; }
+    .email-gate-skip { background: none; border: none; color: var(--gray-400); font-size: 0.78rem; font-family: var(--ff-sans); cursor: pointer; margin-top: 14px; display: block; margin-left: auto; margin-right: auto; }
+    .email-gate-skip:hover { color: var(--gray-600); }
+
+    /* ===== CTA ===== */
+    .cta-sec { background: var(--green); padding: 88px 0; text-align: center; }
+    .cta-inner { max-width: 600px; margin: 0 auto; padding: 0 28px; }
+    .cta-sec .eyebrow { color: rgba(255,255,255,0.55); }
+    .cta-sec h2 { color: var(--white); margin-bottom: 14px; }
+    .cta-sub { font-family: var(--ff-serif); font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 18px; }
+    .cta-sec > .cta-inner > p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.8; margin-bottom: 32px; }
+    .cta-contact { margin-top: 20px; font-size: 0.82rem; color: rgba(255,255,255,0.42); }
+    .cta-contact a { color: rgba(255,255,255,0.6); transition: color 0.15s; }
+    .cta-contact a:hover { color: var(--white); }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--navy); padding: 40px 28px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { font-family: var(--ff-serif); font-size: 1rem; color: var(--white); }
+    .footer-brand em { color: var(--accent); font-style: normal; }
+    .footer-tag { font-size: 0.72rem; color: rgba(255,255,255,0.25); font-style: italic; margin-top: 3px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.35); transition: color 0.15s; text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { width: 100%; text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.18); padding-top: 20px; margin-top: 4px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .pillars { grid-template-columns: repeat(3, 1fr); }
+      .pillars .pillar:nth-child(1) { border-radius: var(--radius-lg) 0 0 0; }
+      .pillars .pillar:nth-child(3) { border-radius: 0 var(--radius-lg) 0 0; }
+      .pillars .pillar:nth-child(4) { border-radius: 0 0 0 var(--radius-lg); }
+      .pillars .pillar:last-child   { border-radius: 0; }
+      .ownerlock-head { grid-template-columns: 1fr; gap: 32px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid var(--gray-200); }
+      .stat-item:nth-child(4) { border-right: none; border-top: 1px solid var(--gray-200); }
+      .steps { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .step { flex-direction: row; align-items: flex-start; text-align: left; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .step:last-child { border-bottom: none; }
+      .step-dot { flex-shrink: 0; margin-bottom: 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-photo-wrap { flex-direction: row; align-items: flex-start; gap: 20px; }
+      .about-photo { width: 140px; height: 168px; }
+    }
+    @media (max-width: 900px) {
+      .icp-grid { grid-template-columns: 1fr; }
+      .transform-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .alt-grid { grid-template-columns: 1fr; }
+      .principles { grid-template-columns: 1fr; }
+      .principle:first-child { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+      .principle:last-child  { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+      .brokers-grid { grid-template-columns: 1fr; gap: 36px; }
+      .svc-promise { grid-template-columns: 1fr; }
+      .svc-work-cta { grid-template-columns: 1fr; gap: 20px; }
+      .svc--ai { grid-column: 1; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .alt-compare-header { margin: 36px 0 20px; }
+      .result-header { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .sec { padding: 64px 0; }
+      .ownerlock { padding: 52px 0; }
+      .nav-links, .nav > .nav-inner > .btn { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 64px 0; }
+      .pillars { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 500px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item { border-right: none !important; border-top: 1px solid var(--gray-200) !important; }
+      .stat-item:first-child { border-top: none !important; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announce-bar">
+  <span class="announce-pill">Free Tool</span>
+  See our work in action &mdash; try the <a href="/hvac-fix-finder">HVAC Fix Finder</a>, our AI-powered diagnostic tool built for field technicians.
+</div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo" aria-label="Platform Prepared home">
+      <!-- Suspension bridge mark: connection between where the business is and where it needs to be -->
+      <svg width="46" height="22" viewBox="0 0 46 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Road deck -->
+        <rect x="0" y="16" width="46" height="3" rx="1" fill="#1A5C3A"/>
+        <!-- Left tower -->
+        <rect x="10" y="3" width="3.5" height="16" rx="1" fill="#1A5C3A"/>
+        <!-- Right tower -->
+        <rect x="32.5" y="3" width="3.5" height="16" rx="1" fill="#1A5C3A"/>
+        <!-- Main cable: anchor left → left tower top → sag → right tower top → anchor right -->
+        <path d="M 2,16 L 11.75,3 Q 23,12 34.25,3 L 44,16" stroke="#1A5C3A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Vertical suspenders -->
+        <line x1="17"   y1="7.8"  x2="17"   y2="16" stroke="#1A5C3A" stroke-width="1" opacity="0.45"/>
+        <line x1="23"   y1="9.5"  x2="23"   y2="16" stroke="#1A5C3A" stroke-width="1" opacity="0.45"/>
+        <line x1="29"   y1="7.8"  x2="29"   y2="16" stroke="#1A5C3A" stroke-width="1" opacity="0.45"/>
+      </svg>
+      <span class="nav-logo-text">
+        <span class="nav-logo-name">Platform <strong>Prepared</strong></span>
+        <span class="nav-logo-sub">Value Creation &amp; Operations</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#who-we-serve">Who We Help</a></li>
+      <li><a href="#services">What We Build</a></li>
+      <li><a href="#calculator">Score My Business</a></li>
+      <li><a href="#brokers">For Brokers</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Free Diagnostic Call</a>
+    <button class="nav-hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobileMenu">
+  <a href="#who-we-serve" onclick="closeMenu()">Who We Help</a>
+  <a href="#services"     onclick="closeMenu()">What We Build</a>
+  <a href="#calculator"   onclick="closeMenu()">Score My Business</a>
+  <a href="#brokers"      onclick="closeMenu()">For Brokers</a>
+  <a href="#about"        onclick="closeMenu()">About</a>
+  <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary" onclick="closeMenu()">Free Diagnostic Call</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Post-Acquisition Value Creation &mdash; Small Service Businesses</div>
+    <h1>You closed the deal.<br>Now the real work starts.</h1>
+    <p class="hero-sub">We build the infrastructure that turns a good acquisition into a great business.</p>
+    <p class="hero-body">The seller is gone. The processes live in people&rsquo;s heads. The financials don&rsquo;t quite make sense yet. Whether you&rsquo;re 30 days post-close or 3 years into ownership and finally ready to fix the foundation &mdash; the problem is the same. The business isn&rsquo;t running the way it should. We fix that. Embedded alongside your team, we install the systems, document the processes, build the sales engine, and clean the financials &mdash; using modern AI tools that compress months of work into weeks &mdash; until the business is worth significantly more than the day you bought it.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">Book a Free 30-Minute Diagnostic &rarr;</a>
+      <a href="#calculator" class="btn btn-ghost">Score My Business</a>
+    </div>
+    <p class="hero-note">No cost &bull; No obligation &bull; Walk away with a clear picture of where you stand</p>
+  </div>
+</header>
+
+<!-- ===== STATS ===== -->
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Service businesses analyzed for operational value gaps</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">75%</div>
+      <div class="stat-label">Of owners are unprepared when they sell<span class="stat-source">Exit Planning Institute, 2023</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">68%</div>
+      <div class="stat-label">Of listed businesses never sell<span class="stat-source">IBBA Market Pulse Survey</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2&ndash;3&times;</div>
+      <div class="stat-label">More EBITDA multiple for professionally run vs. owner-dependent businesses</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHO WE HELP ===== -->
+<section class="sec" id="who-we-serve">
+  <div class="wrap">
+    <div class="icp-intro">
+      <span class="eyebrow">Who We Work With</span>
+      <h2>Two situations. One solution.</h2>
+      <div class="rule rule--center"></div>
+    </div>
+    <div class="icp-grid">
+      <article class="icp-card icp-card--buyer">
+        <span class="icp-badge">Post-Close — First 90&ndash;180 Days</span>
+        <h3>You closed 90 days ago. The seller is gone. It&rsquo;s messier than the CIM said.</h3>
+        <p>The operation runs on the seller&rsquo;s phone, relationships no one documented, and processes that exist only in the heads of people who may be thinking about leaving. Whether you&rsquo;re a searcher, an SBA buyer, or a PE-backed sponsor &mdash; you need value-creating infrastructure installed before things break.</p>
+        <ul>
+          <li>Get full visibility into what you actually own before tribal knowledge walks out</li>
+          <li>Install the systems, software, and reporting the business should have had</li>
+          <li>Document every core workflow before institutional knowledge disappears</li>
+          <li>Build the platform for organic growth, add-ons, or a future premium exit</li>
+        </ul>
+      </article>
+      <article class="icp-card icp-card--seller">
+        <span class="icp-badge">Owner-Operated &mdash; Ready to Fix the Foundation</span>
+        <h3>The revenue is there. But something in the operation still isn&rsquo;t adding up.</h3>
+        <p>You&rsquo;ve been running this business for years and you know it should be performing better. The team depends on you for everything. The financials are hard to explain to a banker. There&rsquo;s no system that runs without you at the center. That&rsquo;s fixable &mdash; and fixing it creates real, measurable value.</p>
+        <ul>
+          <li>Stop leaving 2&ndash;3 turns of EBITDA on the table</li>
+          <li>Build clean, bankable financials that hold up to scrutiny</li>
+          <li>Make your presence optional so the business runs without you</li>
+          <li>Go to market when you choose, at the multiple your business deserves</li>
+        </ul>
+      </article>
+    </div>
+    <div class="icp-bridge">
+      <p>The work is the same for both. <span>A professionally run business &mdash; clean books, documented processes, a real sales system, and a team that doesn&rsquo;t need you &mdash; is always worth more than one that isn&rsquo;t.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OWNER LOCK STRIP ===== -->
+<section class="ownerlock" id="framework">
+  <div class="ownerlock-inner">
+    <div class="ownerlock-head">
+      <div class="ownerlock-def">
+        <span class="eyebrow eyebrow--light">The Value Creation Framework</span>
+        <h2>Five dimensions. Every gap is money left on the table.</h2>
+        <div class="rule rule--light" style="margin-top:14px;margin-bottom:18px;"></div>
+        <p><strong style="color:rgba(255,255,255,0.85);">Owner Lock</strong> is the condition where a business cannot operate, grow, or transfer without its owner at the center. It shows up in five measurable dimensions — and every gap suppresses the value of what you own, whether you plan to sell or simply want a business that runs without you.</p>
+      </div>
+      <div class="ownerlock-quote">
+        <blockquote>&ldquo;If your company is doing solid revenue but the money doesn&rsquo;t feel solid &mdash; that&rsquo;s almost always an Owner Lock problem. Not a sales problem.&rdquo;</blockquote>
+        <cite>&mdash; Nathan Garlock, Founder &bull; Platform Prepared</cite>
+      </div>
+    </div>
+    <div class="pillars">
+      <article class="pillar">
+        <div class="pillar-n">01</div>
+        <h4>Team Redundancy</h4>
+        <p>The owner takes a three-week vacation and the operation doesn&rsquo;t miss a beat. We build the management layer and eliminate key-man risk.</p>
+        <div class="pillar-who">Sellers &bull; Buyers &bull; Lenders</div>
+      </article>
+      <article class="pillar">
+        <div class="pillar-n">02</div>
+        <h4>Repeatable Revenue</h4>
+        <p>SBA lenders won&rsquo;t fund revenue that lives in the owner&rsquo;s rolodex. We build documented recurring revenue with diversified customer concentration.</p>
+        <div class="pillar-who">SBA Lenders &bull; Buyers at LOI</div>
+      </article>
+      <article class="pillar">
+        <div class="pillar-n">03</div>
+        <h4>Digital Infrastructure</h4>
+        <p>We implement the right CRM, field software, and AI tools for your trade and train your team until daily use is second nature &mdash; cutting busywork and surfacing insights the business never had time to find.</p>
+        <div class="pillar-who">Scalability &bull; Buyer Confidence</div>
+      </article>
+      <article class="pillar">
+        <div class="pillar-n">04</div>
+        <h4>Clean Financials</h4>
+        <p>COGS separated, overhead correctly allocated, gross profit clearly visible. We coordinate with your CPA to get books diligence-ready.</p>
+        <div class="pillar-who">Every Lender &bull; Every Buyer</div>
+      </article>
+      <article class="pillar">
+        <div class="pillar-n">05</div>
+        <h4>Documented Processes</h4>
+        <p>We write the SOPs and build training systems so every core workflow is on paper and any team member can execute correctly.</p>
+        <div class="pillar-who">Everyone at the Table</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BEFORE / AFTER ===== -->
+<section class="sec" style="background:var(--gray-50); border-top:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200);">
+  <div class="wrap">
+    <div class="transform-intro">
+      <span class="eyebrow">The Transformation</span>
+      <h2>The same business. A fundamentally different operation.</h2>
+      <div class="rule rule--center"></div>
+      <p>Most service businesses are underperforming their own potential. The revenue is real — but it's fragile, owner-dependent, and impossible to scale. We fix the foundation. Same team, same customers, dramatically better business.</p>
+    </div>
+    <div class="transform-grid">
+      <div class="t-col t-col--before">
+        <span class="t-label">Before</span>
+        <ul>
+          <li><span class="t-icon">&times;</span>Owner answers every call, makes every decision</li>
+          <li><span class="t-icon">&times;</span>Revenue reports exist but COGS and overhead aren&rsquo;t separated</li>
+          <li><span class="t-icon">&times;</span>Pricing based on competitors, not actual margins</li>
+          <li><span class="t-icon">&times;</span>Customer data in spreadsheets or people&rsquo;s heads</li>
+          <li><span class="t-icon">&times;</span>No written processes — everything is tribal knowledge</li>
+          <li><span class="t-icon">&times;</span>Revenue depends entirely on the owner&rsquo;s relationships</li>
+          <li><span class="t-icon">&times;</span>Owner can&rsquo;t step away without the business suffering</li>
+        </ul>
+        <div class="t-footer">Worth 3&ndash;4&times; EBITDA &mdash; and hard to grow or sell</div>
+      </div>
+      <div class="t-col t-col--after">
+        <span class="t-label">After</span>
+        <ul>
+          <li><span class="t-icon">&#10003;</span>Management layer runs daily operations independently</li>
+          <li><span class="t-icon">&#10003;</span>Clean P&amp;L — gross profit, overhead, and net profit clearly visible</li>
+          <li><span class="t-icon">&#10003;</span>Pricing built from true overhead and target margin</li>
+          <li><span class="t-icon">&#10003;</span>CRM with full customer history, job dashboards, daily use</li>
+          <li><span class="t-icon">&#10003;</span>SOPs for every workflow &mdash; any team member can execute</li>
+          <li><span class="t-icon">&#10003;</span>40%+ recurring revenue, diversified customer base</li>
+          <li><span class="t-icon">&#10003;</span>Owner takes a 3-week vacation. Business runs fine.</li>
+        </ul>
+        <div class="t-footer">Worth 6&ndash;8&times; EBITDA &mdash; and built to grow, hold, or sell</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="services-intro">
+      <span class="eyebrow">What We Build Together</span>
+      <h2>We are not consultants. We are operators.</h2>
+      <div class="rule rule--center"></div>
+      <p>Consultants deliver reports. We deliver working systems, trained teams, and documented processes &mdash; and we stay until they hold. Four workstreams deployed in the sequence that moves your multiple the fastest.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="svc-n">01</div>
+        <h3>Team &amp; Leadership</h3>
+        <span class="svc-outcome">You step back. The operation doesn&rsquo;t miss a beat.</span>
+        <p>We build the management layer, define roles and accountability, and install the comp plans that make the structure hold without you in the room. Buyers stop seeing a job. They see a business.</p>
+        <div class="svc-tags"><span class="svc-tag">Org design</span><span class="svc-tag">Role clarity</span><span class="svc-tag">Key-man risk</span><span class="svc-tag">Comp plans</span></div>
+      </article>
+      <article class="svc">
+        <div class="svc-n">02</div>
+        <h3>GTM, Sales &amp; Revenue Engine</h3>
+        <span class="svc-outcome">Revenue stops depending on you picking up the phone.</span>
+        <p>We build the go-to-market strategy, sales management structure, and pipeline system that generates business without you. Pricing rebuilt from your actual overhead. Comp plans that incentivize selling. Referral engines that create a predictable pipeline.</p>
+        <div class="svc-tags"><span class="svc-tag">GTM strategy</span><span class="svc-tag">Sales management</span><span class="svc-tag">Pricing strategy</span><span class="svc-tag">Pipeline tracking</span></div>
+      </article>
+      <article class="svc">
+        <div class="svc-n">03</div>
+        <h3>Digital Infrastructure &amp; CRM</h3>
+        <span class="svc-outcome">Any owner — current or future — has full visibility from day one.</span>
+        <p>We research the right technology for your trade and implement it with your team, not just for them. CRM, field service software, reporting stack. Data migrated, workflows configured, people trained until it&rsquo;s second nature.</p>
+        <div class="svc-tags"><span class="svc-tag">Jobber</span><span class="svc-tag">ServiceTitan</span><span class="svc-tag">Housecall Pro</span><span class="svc-tag">HubSpot</span><span class="svc-tag">Data migration</span></div>
+      </article>
+      <article class="svc">
+        <div class="svc-n">04</div>
+        <h3>Process Documentation &amp; SOPs</h3>
+        <span class="svc-outcome">What lives in people&rsquo;s heads gets onto paper &mdash; permanently.</span>
+        <p>We sit with your team, map every core workflow, and write the SOPs anyone can execute. Estimating, scheduling, dispatch, invoicing, collections. A new hire ramps in two weeks instead of three months. That&rsquo;s a transferable asset.</p>
+        <div class="svc-tags"><span class="svc-tag">Process mapping</span><span class="svc-tag">SOP manuals</span><span class="svc-tag">Training systems</span><span class="svc-tag">Onboarding guides</span></div>
+      </article>
+      <article class="svc svc--ai">
+        <div class="svc-n">05</div>
+        <h3>AI Tools &amp; Automation</h3>
+        <span class="svc-outcome">Your team does more with the same people &mdash; without burning them out.</span>
+        <p>We identify and implement the AI tools that create the most leverage across your specific operation &mdash; from customer communication and scheduling to job costing, follow-up, and reporting. No chatbot pilots. No vendor demos. Tools that are live, trained, and used by your team within 30 days.</p>
+        <div class="svc-tags"><span class="svc-tag">Workflow automation</span><span class="svc-tag">Customer communication</span><span class="svc-tag">AI reporting</span><span class="svc-tag">Scheduling &amp; dispatch</span><span class="svc-tag">Job costing</span></div>
+      </article>
+    </div>
+
+    <!-- See Our Work CTA -->
+    <div class="svc-work-cta">
+      <div class="svc-work-cta-text">
+        <h3>Want to see exactly what this looks like inside a real business?</h3>
+        <p>We&rsquo;ve built implementation plans, AI quick-win playbooks, and 90-day operational roadmaps for service businesses across HVAC, plumbing, landscaping, and more. Ask us for examples and we&rsquo;ll send you access directly.</p>
+      </div>
+      <a href="mailto:nate@platformprepared.com?subject=I'd like to see examples of your work&body=Hi Nathan, I'd like to see examples of what Platform Prepared has built. Here's a bit about my situation: " class="btn btn-outline-dark">Request Access to Our Work &rarr;</a>
+    </div>
+
+    <div class="svc-promise">
+      <div>
+        <blockquote>&ldquo;Every engagement is month-to-month. We earn the next month by delivering results in this one.&rdquo;</blockquote>
+        <p>No long-term contracts. No 80-page reports. We stay embedded until the systems hold, the team runs without you, and the multiple reflects what you actually built.</p>
+      </div>
+      <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book the Diagnostic &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COST COMPARISON ===== -->
+<section class="sec" id="the-alternative" style="background:var(--gray-50); border-top:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200);">
+  <div class="wrap">
+    <div class="alt-intro">
+      <span class="eyebrow">How We Work</span>
+      <h2>You need an operator, not a consultant.<br>Here&rsquo;s what that looks like.</h2>
+      <div class="rule rule--center"></div>
+      <p>Every engagement starts with a free diagnostic. From there, we match the scope to what you actually need &mdash; from a targeted 30-day sprint to a full embedded buildout.</p>
+    </div>
+
+    <!-- Pricing tiers -->
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tag">Start Here</div>
+        <h3 class="pricing-name">Diagnostic Call</h3>
+        <div class="pricing-cost">Free</div>
+        <p class="pricing-desc">30 minutes. We score your business across the 8 value drivers, identify the top gaps suppressing your multiple, and tell you exactly what to build first.</p>
+        <ul class="pricing-items">
+          <li>Business Value Score reviewed together</li>
+          <li>Top 3 value gaps identified</li>
+          <li>Clear recommended next step</li>
+          <li>No obligation</li>
+        </ul>
+        <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark" style="margin-top:auto;">Book Free Call &rarr;</a>
+      </div>
+      <div class="pricing-card pricing-card--featured">
+        <div class="pricing-tag pricing-tag--green">Most Common</div>
+        <h3 class="pricing-name">Embedded Implementation</h3>
+        <div class="pricing-cost">$6,000&ndash;$10,000<span class="pricing-per">/month</span></div>
+        <p class="pricing-desc">We embed alongside your team and build. Systems, processes, sales engine, financials, AI tools &mdash; the full operational infrastructure, delivered and running.</p>
+        <ul class="pricing-items">
+          <li>Dedicated time inside your business each week</li>
+          <li>All 5 workstreams covered in priority sequence</li>
+          <li>Month-to-month &mdash; no long-term contracts</li>
+          <li>Results delivered, not just recommended</li>
+          <li>Embedded until the systems hold</li>
+        </ul>
+        <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:auto;">Start With a Call &rarr;</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tag">Fast Results</div>
+        <h3 class="pricing-name">Quick-Win Sprint</h3>
+        <div class="pricing-cost">$5,000&ndash;$8,000<span class="pricing-per">flat</span></div>
+        <p class="pricing-desc">A focused 30-day project targeting one high-leverage gap &mdash; a CRM implementation, AI tool rollout, financial cleanup, or sales system buildout. Defined scope, defined deliverables.</p>
+        <ul class="pricing-items">
+          <li>One focused workstream</li>
+          <li>30-day delivery window</li>
+          <li>Defined deliverables upfront</li>
+          <li>Ideal for post-acquisition first move</li>
+        </ul>
+        <a href="mailto:nate@platformprepared.com?subject=Quick-Win Sprint Inquiry" class="btn btn-outline-dark" style="margin-top:auto;">Ask About a Sprint &rarr;</a>
+      </div>
+    </div>
+
+    <!-- vs. Full-time hire comparison -->
+    <div class="alt-compare-header">
+      <h3>How this compares to hiring full-time</h3>
+    </div>
+    <div class="alt-grid">
+      <div class="alt-col alt-col--a">
+        <span class="alt-col-label">Full-Time Director of Operations</span>
+        <div class="alt-cost">$150K&ndash;$250K</div>
+        <span class="alt-cost-sub">annual salary &mdash; plus benefits, 401K, search costs, and 3&ndash;6 months to hire</span>
+        <ul class="alt-items">
+          <li><span class="alt-icon">&times;</span>3&ndash;6 month search before they start</li>
+          <li><span class="alt-icon">&times;</span>They advise. Your team still has to implement.</li>
+          <li><span class="alt-icon">&times;</span>If they leave, you start over from scratch</li>
+          <li><span class="alt-icon">&times;</span>Fixed salary cost regardless of results</li>
+          <li><span class="alt-icon">&times;</span>No incentive to move fast or prove monthly value</li>
+          <li><span class="alt-icon">&times;</span>Generalist hire &mdash; steep learning curve on your business type</li>
+        </ul>
+      </div>
+      <div class="alt-col alt-col--b">
+        <span class="alt-badge">Platform Prepared</span>
+        <span class="alt-col-label">Embedded Fractional Operator</span>
+        <div class="alt-cost">$6,000&ndash;$10,000</div>
+        <span class="alt-cost-sub">per month &mdash; month-to-month, no contracts, no overhead</span>
+        <ul class="alt-items">
+          <li><span class="alt-icon">&#10003;</span>Embedded alongside your team in 1&ndash;2 weeks</li>
+          <li><span class="alt-icon">&#10003;</span>Strategy <em>and</em> execution &mdash; we build it, not just recommend it</li>
+          <li><span class="alt-icon">&#10003;</span>Month-to-month &mdash; we earn the next month by delivering this one</li>
+          <li><span class="alt-icon">&#10003;</span>200+ service businesses analyzed &mdash; we know what moves the multiple</li>
+          <li><span class="alt-icon">&#10003;</span>No search cost, no onboarding lag, no key-person risk</li>
+          <li><span class="alt-icon">&#10003;</span>AI tools included &mdash; you get more output with your existing team</li>
+        </ul>
+      </div>
+    </div>
+    <p class="alt-note">&ldquo;The right operator at the right scale &mdash; execution included, results tied to your timeline.&rdquo;</p>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="sec process" id="how-it-works">
+  <div class="wrap">
+    <div class="process-intro">
+      <span class="eyebrow eyebrow--light">How Every Engagement Works</span>
+      <h2 style="color:white;">Five stages. Clear progress. No surprises.</h2>
+      <div class="rule rule--center rule--light"></div>
+      <p>Built around your business and what moves the multiple most, fastest.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-dot">1</div>
+        <div>
+          <h4>Free Diagnostic</h4>
+          <p>30-minute call. We score your business across five dimensions and show you exactly what&rsquo;s suppressing your multiple.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot">2</div>
+        <div>
+          <h4>Platform Roadmap</h4>
+          <p>A written, prioritized plan — what gets built, in what order, and why — based on value impact and your specific situation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot">3</div>
+        <div>
+          <h4>Build Together</h4>
+          <p>We embed alongside your team. Systems deployed, processes documented, people trained. Visible progress every week.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot">4</div>
+        <div>
+          <h4>Mature &amp; Hold</h4>
+          <p>Monthly accountability, weekly check-ins, KPI dashboards. We make sure it holds until the owner can genuinely step back.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot">5</div>
+        <div>
+          <h4>Platform Ready</h4>
+          <p>Your business runs without you. Professionally documented, financially clean, and worth significantly more than when we started.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-n">01</div>
+        <h4>We embed. We don&rsquo;t advise.</h4>
+        <p>Consultants hand you a report and leave. We sit with your team, build the systems ourselves, and stay until they hold. Every week you see the work, not a status update.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-n">02</div>
+        <h4>Month-to-month means we&rsquo;re aligned with your results.</h4>
+        <p>No long-term contracts. No retainer you&rsquo;re locked into. We earn the next month by delivering measurable progress in this one. Our incentive and yours are identical.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-n">03</div>
+        <h4>We know what buyers and lenders actually look at.</h4>
+        <p>We&rsquo;ve evaluated 200+ essential services businesses from the buy side &mdash; screened to LOI and exclusivity. We don&rsquo;t guess what moves your multiple. We&rsquo;ve seen it across hundreds of deals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CALCULATOR ===== -->
+<section class="sec calc-wrap" id="calculator">
+  <div class="wrap">
+    <div class="calc-intro">
+      <span class="eyebrow">Business Value Score</span>
+      <h2>What multiple would your business command if you sold today?</h2>
+      <div class="rule rule--center"></div>
+      <p>Nine questions. Two minutes. See your estimated EBITDA multiple, your top operational gaps, and exactly what&rsquo;s suppressing the value of what you own.</p>
+    </div>
+    <div class="calc-body" id="calc-form-area">
+      <div class="calc-progress-row">
+        <span class="calc-prog-text" id="prog-text">0 of 9 answered</span>
+        <div class="calc-prog-bar"><div class="calc-prog-fill" id="prog-fill" style="width:0%"></div></div>
+      </div>
+      <div class="calc-qs" id="calc-qs">
+
+        <div class="calc-q" data-q="ebitda">
+          <span class="calc-q-num">1 of 9 &nbsp;&middot;&nbsp; <em>Financial Clarity</em></span>
+          <p class="calc-q-text">What is your annual EBITDA?</p>
+          <p class="calc-q-help">Earnings before interest, taxes, depreciation, and amortization &mdash; your true business profit. Larger businesses trade at higher multiples and attract more buyers.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="ebitda" value="0"><span class="calc-radio"></span><span class="calc-opt-text">Under $500K</span></label>
+            <label class="calc-opt"><input type="radio" name="ebitda" value="1"><span class="calc-radio"></span><span class="calc-opt-text">$500K – $1M</span></label>
+            <label class="calc-opt"><input type="radio" name="ebitda" value="2"><span class="calc-radio"></span><span class="calc-opt-text">$1M – $2M</span></label>
+            <label class="calc-opt"><input type="radio" name="ebitda" value="3"><span class="calc-radio"></span><span class="calc-opt-text">$2M+</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="trend">
+          <span class="calc-q-num">2 of 9 &nbsp;&middot;&nbsp; <em>Sales Independence</em></span>
+          <p class="calc-q-text">What is your revenue trend over the last 2 years?</p>
+          <p class="calc-q-help">Buyers pay premiums for growth. Declining revenue significantly suppresses multiples.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="trend" value="0"><span class="calc-radio"></span><span class="calc-opt-text">Declining</span></label>
+            <label class="calc-opt"><input type="radio" name="trend" value="1"><span class="calc-radio"></span><span class="calc-opt-text">Flat (within 5%)</span></label>
+            <label class="calc-opt"><input type="radio" name="trend" value="2"><span class="calc-radio"></span><span class="calc-opt-text">Growing 5–15%</span></label>
+            <label class="calc-opt"><input type="radio" name="trend" value="3"><span class="calc-radio"></span><span class="calc-opt-text">Growing 15%+</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="owner">
+          <span class="calc-q-num">3 of 9 &nbsp;&middot;&nbsp; <em>Team Redundancy</em></span>
+          <p class="calc-q-text">How many hours per week are you personally required in the business?</p>
+          <p class="calc-q-help">Owner dependency is the #1 multiple suppressor. Buyers won't pay a premium for a job.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="owner" value="0"><span class="calc-radio"></span><span class="calc-opt-text">60+ hours — I am the business</span></label>
+            <label class="calc-opt"><input type="radio" name="owner" value="1"><span class="calc-radio"></span><span class="calc-opt-text">40–60 hours — heavily involved daily</span></label>
+            <label class="calc-opt"><input type="radio" name="owner" value="2"><span class="calc-radio"></span><span class="calc-opt-text">20–40 hours — some delegation in place</span></label>
+            <label class="calc-opt"><input type="radio" name="owner" value="3"><span class="calc-radio"></span><span class="calc-opt-text">Under 20 hours — my team runs the operation</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="financials">
+          <span class="calc-q-num">4 of 9 &nbsp;&middot;&nbsp; <em>Financial Clarity</em></span>
+          <p class="calc-q-text">How would you describe your financial records?</p>
+          <p class="calc-q-help">Clean books require COGS properly separated, labor correctly allocated, and gross profit clearly visible.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="financials" value="0"><span class="calc-radio"></span><span class="calc-opt-text">Messy — hard to tell what jobs are actually profitable</span></label>
+            <label class="calc-opt"><input type="radio" name="financials" value="1"><span class="calc-radio"></span><span class="calc-opt-text">Basic — revenue tracked, but COGS and overhead aren't separated</span></label>
+            <label class="calc-opt"><input type="radio" name="financials" value="2"><span class="calc-radio"></span><span class="calc-opt-text">Clean — organized P&amp;L with gross profit and overhead visible</span></label>
+            <label class="calc-opt"><input type="radio" name="financials" value="3"><span class="calc-radio"></span><span class="calc-opt-text">Diligence-ready — any lender or buyer could underwrite immediately</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="crm">
+          <span class="calc-q-num">5 of 9 &nbsp;&middot;&nbsp; <em>Digital Infrastructure</em></span>
+          <p class="calc-q-text">Do you have a CRM or field service software in consistent daily use?</p>
+          <p class="calc-q-help">Buyers need to see the full customer base. If it lives in a spreadsheet, it doesn't transfer at closing.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="crm" value="0"><span class="calc-radio"></span><span class="calc-opt-text">No — customer data lives in spreadsheets or people's heads</span></label>
+            <label class="calc-opt"><input type="radio" name="crm" value="1"><span class="calc-radio"></span><span class="calc-opt-text">We have something but the team doesn't use it consistently</span></label>
+            <label class="calc-opt"><input type="radio" name="crm" value="2"><span class="calc-radio"></span><span class="calc-opt-text">Yes — full customer history, job tracking, team uses it daily</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="sops">
+          <span class="calc-q-num">6 of 9 &nbsp;&middot;&nbsp; <em>Team Redundancy</em></span>
+          <p class="calc-q-text">Do you have written SOPs for your core workflows?</p>
+          <p class="calc-q-help">Knowledge trapped in one person's head is a liability at closing. Buyers can't replicate it. Lenders can't underwrite it.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="sops" value="0"><span class="calc-radio"></span><span class="calc-opt-text">No — everything lives in my head or key employees' heads</span></label>
+            <label class="calc-opt"><input type="radio" name="sops" value="1"><span class="calc-radio"></span><span class="calc-opt-text">Some — a few things documented, but inconsistent</span></label>
+            <label class="calc-opt"><input type="radio" name="sops" value="2"><span class="calc-radio"></span><span class="calc-opt-text">Yes — core workflows documented, any team member can follow them</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="recurring">
+          <span class="calc-q-num">7 of 9 &nbsp;&middot;&nbsp; <em>Repeatable Revenue</em></span>
+          <p class="calc-q-text">What percentage of your revenue is recurring (contracts, service agreements)?</p>
+          <p class="calc-q-help">Recurring revenue is the most valuable revenue. SBA lenders fund it. Buyers pay premiums for predictable income.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="recurring" value="0"><span class="calc-radio"></span><span class="calc-opt-text">Under 10%</span></label>
+            <label class="calc-opt"><input type="radio" name="recurring" value="1"><span class="calc-radio"></span><span class="calc-opt-text">10–25%</span></label>
+            <label class="calc-opt"><input type="radio" name="recurring" value="2"><span class="calc-radio"></span><span class="calc-opt-text">25–40%</span></label>
+            <label class="calc-opt"><input type="radio" name="recurring" value="3"><span class="calc-radio"></span><span class="calc-opt-text">40%+ — strong recurring base</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="concentration">
+          <span class="calc-q-num">8 of 9 &nbsp;&middot;&nbsp; <em>Repeatable Revenue</em></span>
+          <p class="calc-q-text">What is your largest single customer as a percentage of revenue?</p>
+          <p class="calc-q-help">High customer concentration is a significant red flag in diligence and can collapse deals at the bank.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="concentration" value="0"><span class="calc-radio"></span><span class="calc-opt-text">Over 30% — significant concentration risk</span></label>
+            <label class="calc-opt"><input type="radio" name="concentration" value="1"><span class="calc-radio"></span><span class="calc-opt-text">15–30% — somewhat concentrated</span></label>
+            <label class="calc-opt"><input type="radio" name="concentration" value="2"><span class="calc-radio"></span><span class="calc-opt-text">Under 15% — well diversified</span></label>
+          </div>
+        </div>
+
+        <div class="calc-q" data-q="sales">
+          <span class="calc-q-num">9 of 9 &nbsp;&middot;&nbsp; <em>Sales Independence</em></span>
+          <p class="calc-q-text">Does your business generate new revenue without you personally involved?</p>
+          <p class="calc-q-help">If growth depends on your relationships, it's not a transferable asset — it's a job.</p>
+          <div class="calc-opts">
+            <label class="calc-opt"><input type="radio" name="sales" value="0"><span class="calc-radio"></span><span class="calc-opt-text">No — I handle most sales and customer relationships personally</span></label>
+            <label class="calc-opt"><input type="radio" name="sales" value="1"><span class="calc-radio"></span><span class="calc-opt-text">Partially — some systems but still highly dependent on me</span></label>
+            <label class="calc-opt"><input type="radio" name="sales" value="2"><span class="calc-radio"></span><span class="calc-opt-text">Yes — pipeline tracked, team sells, revenue doesn't depend on me</span></label>
+          </div>
+        </div>
+
+      </div>
+      <div class="calc-submit-row">
+        <button class="btn btn-primary btn-lg" id="calc-btn" onclick="calculateMultiple()" disabled>Calculate My Multiple &rarr;</button>
+        <p class="calc-submit-note" id="calc-note">Answer all 9 questions to see your results</p>
+      </div>
+    </div>
+
+    <!-- Email gate — shown before results to capture lead -->
+    <div class="calc-email-gate" id="calc-email-gate">
+      <span class="eyebrow">Your results are ready</span>
+      <h3>Where should we send your Business Value Score?</h3>
+      <p class="email-gate-sub">Your estimated acquisition multiple and top gaps are calculated. Enter your name and email and we&rsquo;ll follow up with context on what to fix first &mdash; only if it looks like we can help.</p>
+      <div class="email-gate-form">
+        <input type="text" id="gate-name" placeholder="Your first name" class="email-gate-input" autocomplete="given-name" />
+        <input type="email" id="gate-email" placeholder="Your email address *" class="email-gate-input" autocomplete="email" />
+        <div class="email-gate-error" id="gate-error">Please enter a valid email address.</div>
+        <button class="btn btn-primary btn-lg" onclick="submitEmailGate()">See My Results &rarr;</button>
+      </div>
+      <p class="email-gate-note">No spam. We&rsquo;ll only reach out if we think we can move your multiple.</p>
+      <button class="email-gate-skip" onclick="skipEmailGate()">Skip &mdash; just show me the results</button>
+    </div>
+
+    <div class="calc-result" id="calc-result">
+      <div class="result-header">
+        <div class="result-m result-m--current">
+          <span class="result-m-label">Estimated Current Multiple</span>
+          <div class="result-multiple" id="res-current">—</div>
+          <div class="result-multiple-sub">× EBITDA today</div>
+        </div>
+        <div class="result-m result-m--potential">
+          <span class="result-m-label">Potential After Platform Prepared</span>
+          <div class="result-multiple" id="res-potential">—</div>
+          <div class="result-multiple-sub">× EBITDA with operational gaps closed</div>
+        </div>
+      </div>
+      <span class="result-gaps-label">Your top value creation opportunities</span>
+      <div class="result-gaps" id="res-gaps"></div>
+      <div class="result-cta">
+        <p>These estimates reflect typical essential services transaction data, adjusted for your EBITDA size and operational quality. Multiples vary by industry, deal structure, and market conditions. A free 30-minute diagnostic gives you a precise, business-specific score — and a prioritized plan for what to fix first.</p>
+        <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-white">Book Your Free Diagnostic Call &rarr;</a>
+      </div>
+      <button class="calc-reset" onclick="resetCalc()">&#8592; Retake the assessment</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BROKERS ===== -->
+<section class="sec" id="brokers" style="background:var(--gray-50); border-top:1px solid var(--gray-200);">
+  <div class="wrap">
+    <div class="brokers-grid">
+      <div>
+        <span class="eyebrow">For Business Brokers</span>
+        <h2>We prepare them.<br>You sell them.</h2>
+        <div class="rule"></div>
+        <p>We are not a broker. We don&rsquo;t list businesses, don&rsquo;t represent sellers, and don&rsquo;t compete with you in any way. We prepare businesses so that when they reach you, they&rsquo;re ready &mdash; and your listing commands the premium it deserves.</p>
+        <p>When an owner comes to you but the business isn&rsquo;t ready &mdash; messy books, owner-dependent, no systems &mdash; send them to us. We&rsquo;ll work alongside them over 6&ndash;18 months and return them to you as a premium listing. Your deal closes faster. Your success fee is larger.</p>
+        <p class="fine">Platform Prepared is an operations advisory firm. We do not list, broker, or sell businesses.</p>
+      </div>
+      <div class="brokers-box">
+        <span class="brokers-box-label">How the Referral Works</span>
+        <ul class="broker-steps">
+          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>You identify an owner whose business isn&rsquo;t ready.</strong> Messy books, owner-dependent operation, no systems.</p></li>
+          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>You refer them to us for a free diagnostic.</strong> We score the business and show them what&rsquo;s suppressing their multiple.</p></li>
+          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>We embed and build alongside the owner.</strong> Systems installed, financials organized, processes documented.</p></li>
+          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>When ready, we bring them back to you</strong> as a premium, diligence-ready listing.</p></li>
+          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>Bigger success fee. Cleaner diligence. Smoother close.</strong></p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo">
+          <img src="nathan.jpg?v=4" alt="Nathan Garlock, Founder of Platform Prepared">
+        </div>
+        <span class="about-name">Nathan Garlock</span>
+        <span class="about-title-sm">Founder, Platform Prepared<br>Columbia Business School MBA</span>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">About</span>
+        <h2>I know where the value is hiding.</h2>
+        <div class="rule"></div>
+        <p>I&rsquo;ve analyzed more than 200 small service businesses for operational and financial gaps &mdash; the kind that suppress value, frustrate owners, and kill deals. I know exactly what a high-performing operation looks like, what stands between most businesses and that standard, and how to close the gap systematically.</p>
+        <p>I don&rsquo;t hand you a report and wish you luck. I embed in your business &mdash; sitting with your team, building the systems, writing the processes, implementing the AI tools that make it all stick &mdash; and stay until it genuinely runs without any single person. Including me.</p>
+        <p>I founded Platform Prepared because the gap between what a service business is worth and what it could be worth is almost always an operations problem &mdash; not a market problem. Based in University Place, WA. Serving essential services companies across the Pacific Northwest.</p>
+      </div>
+      <div class="creds">
+        <span class="creds-label">Background &amp; Credentials</span>
+        <div class="cred"><div class="cred-tag">Value Creation</div><div class="cred-val">200+ small service businesses analyzed for operational gaps, value drivers, and growth leverage points</div></div>
+        <div class="cred"><div class="cred-tag">Education</div><div class="cred-val">Columbia Business School, MBA</div></div>
+        <div class="cred"><div class="cred-tag">Operations</div><div class="cred-val">Director of Operations at a PE-backed venture &mdash; built all systems, processes, and reporting from zero with a 17-person team</div></div>
+        <div class="cred"><div class="cred-tag">Revenue Leadership</div><div class="cred-val">Interim CRO &mdash; rebuilt comp plans, implemented full sales and marketing tech stack, $630M in C-suite pipeline generated</div></div>
+        <div class="cred"><div class="cred-tag">Team Building</div><div class="cred-val">Built high-performing teams from inception. Launched $1M+ ARR products from scratch.</div></div>
+        <div class="cred"><div class="cred-tag">Sales</div><div class="cred-val">#1 in organization — $630M in C-suite pipeline generated</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-sec" id="contact">
+  <div class="cta-inner">
+    <span class="eyebrow">Start Here</span>
+    <h2>Find out exactly what your business is worth &mdash; and what&rsquo;s holding it back.</h2>
+    <p class="cta-sub">Free 30-minute Value Creation Diagnostic.</p>
+    <p>We score your business across five dimensions, identify the gaps suppressing its value, and show you what to build first and why. You walk away with a clear picture of where you stand &mdash; whether you&rsquo;re 90 days post-close or 3 years into ownership.</p>
+    <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-lg">Book Your Free Diagnostic Call &rarr;</a>
+    <div class="cta-contact">
+      <p><a href="tel:2533637177">(253) 363-7177</a> &nbsp;&bull;&nbsp; <a href="mailto:nate@gardpartners.com">nate@gardpartners.com</a></p>
+      <p style="margin-top:5px;">University Place, WA &nbsp;&bull;&nbsp; Pacific Northwest</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Platform <em>Prepared</em></div>
+      <div class="footer-tag">&ldquo;From owner-dependent to professionally run.&rdquo;</div>
+    </div>
+    <div class="footer-links">
+      <a href="#who-we-serve">Who We Help</a>
+      <a href="#services">What We Build</a>
+      <a href="#calculator">Score My Business</a>
+      <a href="#brokers">For Brokers</a>
+      <a href="#about">About</a>
+      <a href="mailto:nate@gardpartners.com">Contact</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 Platform Prepared &nbsp;&bull;&nbsp; University Place, WA &nbsp;&bull;&nbsp;
+      <a href="mailto:nate@gardpartners.com" style="color:rgba(255,255,255,0.18);">nate@gardpartners.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* NAV */
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function closeMenu()  { document.getElementById('mobileMenu').classList.remove('open'); }
+  document.addEventListener('click', function(e) {
+    var m = document.getElementById('mobileMenu'), b = document.querySelector('.nav-hamburger');
+    if (m && m.classList.contains('open') && !m.contains(e.target) && !b.contains(e.target)) m.classList.remove('open');
+  });
+
+  /* CALCULATOR */
+  var QUESTIONS = [
+    { name:'ebitda',        max:3, label:'Financial Clarity',        gap:'Financial Clarity: EBITDA size directly sets your buyer pool and baseline multiple. Growing past key size thresholds materially expands your options and the premium buyers will pay.' },
+    { name:'trend',         max:3, label:'Sales Independence',       gap:'Sales Independence: Declining or flat revenue suppresses multiples significantly. Buyers are purchasing your future, not your past — demonstrated growth signals a business that sells itself.' },
+    { name:'owner',         max:3, label:'Team Redundancy',          gap:'Team Redundancy: High owner involvement is the #1 value suppressor. A business that runs without you is worth dramatically more than one that can\'t — to buyers, lenders, and to you.' },
+    { name:'financials',    max:3, label:'Financial Clarity',        gap:'Financial Clarity: Clean, structured financials are required by every lender and scrutinized by every buyer. Messy books kill deals or reduce price significantly in diligence.' },
+    { name:'crm',           max:2, label:'Digital Infrastructure',   gap:'Digital Infrastructure: Without a CRM in consistent use, your customer base doesn\'t transfer cleanly. Knowledge that lives in people\'s heads walks out the door at closing.' },
+    { name:'sops',          max:2, label:'Team Redundancy',          gap:'Team Redundancy: Undocumented processes are a liability. Buyers can\'t replicate what only exists in one person\'s head, and lenders can\'t underwrite it. SOPs are what make a business transferable.' },
+    { name:'recurring',     max:3, label:'Repeatable Revenue',       gap:'Repeatable Revenue: Predictable, contracted income is the most valuable revenue a service business can have. It reduces buyer risk, increases lender confidence, and commands premium multiples.' },
+    { name:'concentration', max:2, label:'Repeatable Revenue',       gap:'Repeatable Revenue: High customer concentration is a serious red flag. No single customer should represent more than 15% of revenue — one client leaving post-close can collapse the entire investment thesis.' },
+    { name:'sales',         max:2, label:'Sales Independence',       gap:'Sales Independence: Owner-dependent sales means your revenue pipeline may not survive the transition. A documented, repeatable sales engine — one that works without you — commands significantly higher multiples.' }
+  ];
+
+  /* Multiples by EBITDA tier × quality score
+     Reflects real essential-services market data:
+     sub-$1M businesses typically trade at 2–4× regardless of quality;
+     larger businesses command premium for professionalization.
+     Format: [min_quality_score, curr_lo, curr_hi, pot_lo, pot_hi] */
+  var BRACKETS = {
+    0: [ /* Under $500K */
+      [0,  2.0, 2.5,  3.5, 4.5],
+      [5,  2.5, 3.0,  4.0, 5.0],
+      [10, 3.0, 3.5,  4.5, 5.5],
+      [15, 3.5, 4.0,  5.0, 6.0]
+    ],
+    1: [ /* $500K–$1M */
+      [0,  2.5, 3.0,  4.0, 5.0],
+      [5,  3.0, 3.5,  4.5, 5.5],
+      [10, 3.5, 4.5,  5.0, 6.5],
+      [15, 4.0, 5.0,  5.5, 7.0]
+    ],
+    2: [ /* $1M–$2M */
+      [0,  3.0, 4.0,  5.0, 6.5],
+      [5,  4.0, 5.0,  5.5, 7.0],
+      [10, 4.5, 5.5,  6.5, 7.5],
+      [15, 5.5, 6.5,  7.0, 8.5]
+    ],
+    3: [ /* $2M+ */
+      [0,  3.5, 4.5,  6.0, 7.0],
+      [5,  4.5, 5.5,  6.5, 7.5],
+      [10, 5.5, 6.5,  7.0, 8.5],
+      [15, 6.0, 7.5,  7.5, 9.5]
+    ]
+  };
+
+  var _calcAnswers = null;
+
+  document.querySelectorAll('.calc-opt input[type="radio"]').forEach(function(r) {
+    r.addEventListener('change', function() {
+      document.querySelectorAll('.calc-opt input[name="'+this.name+'"]').forEach(function(o){ o.closest('.calc-opt').classList.remove('selected'); });
+      this.closest('.calc-opt').classList.add('selected');
+      this.closest('.calc-q').classList.add('answered');
+      updateProg();
+    });
+  });
+
+  function getAnswers() {
+    var a = {};
+    QUESTIONS.forEach(function(q){ var c = document.querySelector('input[name="'+q.name+'"]:checked'); a[q.name] = c ? parseInt(c.value) : null; });
+    return a;
+  }
+  function countAnswered(a) { return QUESTIONS.filter(function(q){ return a[q.name]!==null; }).length; }
+  function updateProg() {
+    var a = getAnswers(), n = countAnswered(a), t = QUESTIONS.length;
+    document.getElementById('prog-fill').style.width = Math.round(n/t*100)+'%';
+    document.getElementById('prog-text').textContent = n+' of '+t+' answered';
+    var btn = document.getElementById('calc-btn'), note = document.getElementById('calc-note');
+    if (n===t) { btn.disabled=false; note.textContent='All questions answered — see your results'; }
+    else { btn.disabled=true; note.textContent=(t-n)+' question'+(t-n!==1?'s':'')+' remaining'; }
+  }
+
+  function calculateMultiple() {
+    var answers = getAnswers();
+    if (countAnswered(answers) < QUESTIONS.length) return;
+    _calcAnswers = answers;
+    document.getElementById('calc-form-area').style.display='none';
+    var gate = document.getElementById('calc-email-gate');
+    gate.classList.add('visible');
+    gate.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function submitEmailGate() {
+    var emailEl = document.getElementById('gate-email');
+    var errEl   = document.getElementById('gate-error');
+    var email   = emailEl.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailEl.classList.add('error');
+      errEl.classList.add('visible');
+      emailEl.focus();
+      return;
+    }
+    emailEl.classList.remove('error');
+    errEl.classList.remove('visible');
+    /* Lead captured — name + email available here for integration */
+    var name = document.getElementById('gate-name').value.trim();
+    console.log('Platform Prepared lead:', name, email);
+    showResults();
+  }
+
+  function skipEmailGate() { showResults(); }
+
+  function showResults() {
+    var answers = _calcAnswers;
+    if (!answers) return;
+    var ebitdaTier   = answers['ebitda'] != null ? answers['ebitda'] : 0;
+    var qualityScore = 0;
+    var gaps = [];
+    QUESTIONS.forEach(function(q) {
+      var v = answers[q.name];
+      if (q.name === 'ebitda') return;
+      qualityScore += v;
+      gaps.push({name: q.label, pct: v/q.max, gap: q.gap});
+    });
+    gaps.sort(function(a,b){ return a.pct - b.pct; });
+    var tierBrackets = BRACKETS[ebitdaTier] || BRACKETS[0];
+    var bracket = tierBrackets[0];
+    tierBrackets.forEach(function(b){ if(qualityScore >= b[0]) bracket = b; });
+    document.getElementById('res-current').textContent   = bracket[1].toFixed(1)+'–'+bracket[2].toFixed(1)+'×';
+    document.getElementById('res-potential').textContent = bracket[3].toFixed(1)+'–'+bracket[4].toFixed(1)+'×';
+    var html='';
+    gaps.slice(0,3).forEach(function(g,i){
+      html+='<div class="result-gap"><div class="result-gap-n">'+(i+1)+'</div><div class="result-gap-text"><strong>'+g.name+'</strong> — '+g.gap+'</div></div>';
+    });
+    document.getElementById('res-gaps').innerHTML=html;
+    document.getElementById('calc-email-gate').classList.remove('visible');
+    var r = document.getElementById('calc-result');
+    r.classList.add('visible');
+    r.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetCalc() {
+    _calcAnswers = null;
+    document.querySelectorAll('.calc-opt input[type="radio"]').forEach(function(r){ r.checked=false; });
+    document.querySelectorAll('.calc-opt').forEach(function(o){ o.classList.remove('selected'); });
+    document.querySelectorAll('.calc-q').forEach(function(q){ q.classList.remove('answered'); });
+    document.getElementById('prog-fill').style.width='0%';
+    document.getElementById('prog-text').textContent='0 of 9 answered';
+    document.getElementById('calc-btn').disabled=true;
+    document.getElementById('calc-note').textContent='Answer all 9 questions to see your results';
+    document.getElementById('calc-form-area').style.display='block';
+    document.getElementById('calc-email-gate').classList.remove('visible');
+    document.getElementById('calc-result').classList.remove('visible');
+    var n=document.getElementById('gate-name'), e=document.getElementById('gate-email');
+    if(n) n.value=''; if(e){ e.value=''; e.classList.remove('error'); }
+    document.getElementById('gate-error').classList.remove('visible');
+    document.getElementById('calculator').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platform Prepared — AI Portfolio Resource · Footbridge Partners</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230D1B2A'/%3E%3Crect x='1' y='21' width='30' height='3' rx='1' fill='%231A5C3A'/%3E%3Crect x='7' y='9' width='3' height='14' rx='1' fill='%231A5C3A'/%3E%3Crect x='22' y='9' width='3' height='14' rx='1' fill='%231A5C3A'/%3E%3Cpath d='M1 21 L8.5 9 Q16 15.5 23.5 9 L31 21' stroke='%236DC99A' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --navy:       #0D1B2A;
+      --green:      #1A5C3A;
+      --green-mid:  #236B45;
+      --green-pale: #EEF5F1;
+      --green-tint: #F4FAF7;
+      --accent:     #6DC99A;
+      --gold:       #C49A3C;
+      --gold-pale:  #FBF7EE;
+      --white:      #FFFFFF;
+      --gray-50:    #F9FAFB;
+      --gray-100:   #F3F4F6;
+      --gray-200:   #E5E7EB;
+      --gray-400:   #9CA3AF;
+      --gray-500:   #6B7280;
+      --gray-600:   #4B5563;
+      --gray-700:   #374151;
+      --gray-900:   #0D1117;
+      --ff-serif: 'Instrument Serif', Georgia, serif;
+      --ff-sans:  'Inter', system-ui, sans-serif;
+      --radius: 6px; --radius-lg: 12px;
+      --max-w: 1040px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.09);
+    }
+    body { font-family: var(--ff-sans); font-size: 1rem; line-height: 1.7; color: var(--gray-700); background: var(--white); -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+    h1 { font-family: var(--ff-serif); font-size: clamp(2rem,4vw,3.2rem); line-height: 1.12; font-weight: 400; }
+    h2 { font-family: var(--ff-serif); font-size: clamp(1.6rem,3vw,2.4rem); line-height: 1.2; font-weight: 400; color: var(--gray-900); }
+    h3 { font-family: var(--ff-serif); font-size: 1.25rem; font-weight: 400; color: var(--gray-900); line-height: 1.3; }
+    h4 { font-family: var(--ff-serif); font-size: 1rem; font-weight: 400; line-height: 1.35; color: var(--gray-900); }
+    p { margin-bottom: 1rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--green); text-decoration: none; }
+    .eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+    .eyebrow--light { color: var(--accent); }
+    .rule { width: 40px; height: 2px; background: var(--green); margin: 12px 0 22px; border-radius: 1px; }
+    .rule--center { margin-left: auto; margin-right: auto; }
+    .rule--light { background: var(--accent); }
+    .btn { display: inline-block; font-family: var(--ff-sans); font-size: 0.88rem; font-weight: 600; padding: 12px 26px; border-radius: var(--radius); border: 2px solid transparent; cursor: pointer; transition: all 0.18s ease; text-decoration: none; letter-spacing: 0.01em; }
+    .btn-primary { background: var(--green); color: var(--white); border-color: var(--green); }
+    .btn-primary:hover { background: var(--green-mid); border-color: var(--green-mid); color: var(--white); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,92,58,0.28); }
+    .btn-lg { padding: 14px 34px; font-size: 0.95rem; }
+    .btn-white { background: var(--white); color: var(--green); border-color: var(--white); }
+    .btn-white:hover { background: var(--gray-50); transform: translateY(-1px); }
+    .sec { padding: 80px 0; }
+
+    /* ═══ PASSWORD GATE ═══ */
+    #gate {
+      position: fixed; inset: 0; z-index: 1000;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    .gate-inner { text-align: center; max-width: 400px; padding: 0 24px; }
+    .gate-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 48px; }
+    .gate-logo-name { font-family: var(--ff-serif); font-size: 1.2rem; color: var(--white); }
+    .gate-logo-name strong { color: var(--accent); font-weight: 400; }
+    .gate-badge { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(109,201,154,0.3); padding: 4px 12px; border-radius: 100px; margin-bottom: 28px; }
+    .gate-title { font-family: var(--ff-serif); font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
+    .gate-sub { font-size: 0.88rem; color: rgba(255,255,255,0.45); margin-bottom: 32px; line-height: 1.7; }
+    .gate-input { width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius); color: var(--white); font-family: var(--ff-sans); font-size: 1rem; text-align: center; letter-spacing: 0.08em; outline: none; margin-bottom: 12px; transition: border-color 0.15s; }
+    .gate-input:focus { border-color: var(--accent); }
+    .gate-input::placeholder { color: rgba(255,255,255,0.25); letter-spacing: 0.04em; }
+    .gate-input.error { border-color: #E05C5C; animation: shake 0.35s ease; }
+    .gate-error { font-size: 0.78rem; color: #E05C5C; min-height: 20px; margin-bottom: 16px; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+
+    /* ═══ MAIN CONTENT ═══ */
+    #main { display: none; }
+
+    /* NAV */
+    .nav { position: sticky; top:0; z-index:100; background: var(--white); border-bottom: 1px solid var(--gray-200); box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .nav-logo-name { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--navy); }
+    .nav-logo-name strong { color: var(--green); font-weight: 400; }
+    .nav-logo-sub { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-400); display: block; margin-top: 1px; }
+    .nav-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); background: var(--green-pale); border: 1px solid rgba(26,92,58,0.2); padding: 3px 10px; border-radius: 100px; }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .nav-link { font-size: 0.82rem; font-weight: 500; color: var(--gray-500); text-decoration: none; transition: color 0.15s; }
+    .nav-link:hover { color: var(--green); }
+
+    /* HERO */
+    .hero { background: var(--navy); padding: 72px 0 64px; }
+    .hero-inner { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .hero h1 { color: var(--white); margin-bottom: 18px; }
+    .hero-sub { font-family: var(--ff-serif); font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .hero-body { font-size: 0.98rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 32px; max-width: 640px; }
+    .hero-creds { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-cred { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 100px; }
+
+    /* SAMPLE WORK */
+    .sample-intro { text-align: center; max-width: 660px; margin: 0 auto 52px; }
+    .sample-intro h2 { margin-bottom: 12px; }
+    .sample-intro p { color: var(--gray-500); font-size: 0.95rem; line-height: 1.8; }
+    .sample-doc { border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+    .sample-doc-header { background: var(--navy); padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .sample-doc-title { font-family: var(--ff-serif); font-size: 1.3rem; color: var(--white); }
+    .sample-doc-meta { font-size: 0.72rem; color: rgba(255,255,255,0.35); line-height: 1.8; }
+    .sample-doc-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: rgba(109,201,154,0.12); border: 1px solid rgba(109,201,154,0.25); padding: 4px 12px; border-radius: 100px; white-space: nowrap; }
+    .sample-body { padding: 0; }
+    .sample-section { padding: 32px 36px; border-bottom: 1px solid var(--gray-100); }
+    .sample-section:last-child { border-bottom: none; }
+    .sample-section-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; display: block; }
+    .sample-section h4 { color: var(--gray-900); margin-bottom: 10px; font-size: 1.05rem; }
+    .sample-section p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.8; }
+    .quick-wins { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+    .qw { background: var(--green-tint); border: 1px solid rgba(26,92,58,0.15); border-radius: var(--radius-lg); padding: 20px; }
+    .qw-n { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 7px; }
+    .qw h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 6px; }
+    .qw p { font-size: 0.83rem; color: var(--gray-600); line-height: 1.65; }
+    .qw-impact { display: inline-block; margin-top: 10px; font-size: 0.68rem; font-weight: 700; color: var(--green); background: var(--green-pale); padding: 2px 9px; border-radius: 100px; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-row { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--gray-100); align-items: start; }
+    .tl-row:last-child { border-bottom: none; }
+    .tl-phase { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; color: var(--green); text-transform: uppercase; padding-top: 2px; }
+    .tl-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .tl-items li { font-size: 0.87rem; color: var(--gray-700); display: flex; gap: 9px; align-items: baseline; }
+    .tl-items li::before { content: '→'; color: var(--green); flex-shrink: 0; font-weight: 600; }
+    .prompt-box { background: var(--gray-900); border-radius: var(--radius); padding: 18px 20px; margin-top: 6px; }
+    .prompt-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+    .prompt-text { font-family: 'Courier New', monospace; font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.7; white-space: pre-wrap; }
+    .roi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 4px; }
+    .roi-item { text-align: center; background: var(--green-tint); border: 1px solid rgba(26,92,58,0.15); border-radius: var(--radius-lg); padding: 18px; }
+    .roi-num { font-family: var(--ff-serif); font-size: 2rem; color: var(--green); line-height: 1; margin-bottom: 4px; }
+    .roi-label { font-size: 0.78rem; color: var(--gray-500); line-height: 1.4; }
+
+    /* GENERATOR */
+    .gen-intro { text-align: center; max-width: 600px; margin: 0 auto 44px; }
+    .gen-intro h2 { margin-bottom: 12px; }
+    .gen-intro p { color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.8; }
+    .gen-card { max-width: 780px; margin: 0 auto; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 36px; }
+    .gen-step { display: none; }
+    .gen-step.active { display: block; }
+    .gen-q { font-family: var(--ff-serif); font-size: 1.2rem; color: var(--white); margin-bottom: 20px; }
+    .gen-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .gen-opt { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 14px 18px; cursor: pointer; transition: all 0.15s; color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 500; text-align: left; }
+    .gen-opt:hover, .gen-opt.sel { background: rgba(26,92,58,0.25); border-color: rgba(109,201,154,0.45); color: var(--white); }
+    .gen-opt .opt-sub { font-size: 0.74rem; color: rgba(255,255,255,0.35); display: block; margin-top: 3px; font-weight: 400; }
+    .gen-opt.sel .opt-sub { color: rgba(255,255,255,0.55); }
+    .gen-back { background: none; border: none; color: rgba(255,255,255,0.35); font-size: 0.8rem; font-family: var(--ff-sans); cursor: pointer; margin-top: 20px; display: inline-flex; align-items: center; gap: 6px; }
+    .gen-back:hover { color: rgba(255,255,255,0.6); }
+    .gen-progress { display: flex; gap: 6px; margin-bottom: 28px; }
+    .gen-dot { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); flex: 1; transition: background 0.25s; }
+    .gen-dot.done { background: var(--accent); }
+    /* Result */
+    .gen-result { display: none; max-width: 780px; margin: 0 auto; }
+    .gen-result.visible { display: block; }
+    .result-doc { border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); overflow: hidden; }
+    .result-doc-hd { background: rgba(26,92,58,0.3); border-bottom: 1px solid rgba(109,201,154,0.2); padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .result-doc-hd h3 { color: var(--white); font-size: 1.1rem; }
+    .result-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(109,201,154,0.1); border: 1px solid rgba(109,201,154,0.25); padding: 3px 10px; border-radius: 100px; }
+    .result-body { padding: 28px; }
+    .result-block { margin-bottom: 24px; }
+    .result-block:last-child { margin-bottom: 0; }
+    .result-block-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
+    .result-wins { display: flex; flex-direction: column; gap: 10px; }
+    .result-win { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; background: rgba(255,255,255,0.03); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.07); }
+    .result-win-n { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: var(--white); font-size: 0.65rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .result-win-body strong { display: block; font-size: 0.88rem; color: var(--white); margin-bottom: 4px; font-weight: 600; }
+    .result-win-body p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
+    .result-tl { display: flex; flex-direction: column; gap: 8px; }
+    .result-tl-row { display: grid; grid-template-columns: 90px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .result-tl-row:last-child { border-bottom: none; }
+    .result-tl-phase { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: var(--accent); letter-spacing: 0.06em; padding-top: 2px; }
+    .result-tl-items { font-size: 0.83rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+    .result-cta-box { background: var(--green); border-radius: var(--radius-lg); padding: 22px 24px; text-align: center; margin-top: 28px; }
+    .result-cta-box p { color: rgba(255,255,255,0.85); font-size: 0.88rem; margin-bottom: 14px; line-height: 1.65; }
+    .gen-reset { background: none; border: none; color: rgba(255,255,255,0.3); font-size: 0.78rem; font-family: var(--ff-sans); cursor: pointer; margin-top: 12px; display: block; margin-left: auto; margin-right: auto; }
+    .gen-reset:hover { color: rgba(255,255,255,0.55); }
+
+    /* ABOUT & CTA */
+    .about-row { display: grid; grid-template-columns: 200px 1fr; gap: 44px; align-items: start; }
+    .about-photo-sm { width: 160px; height: 192px; border-radius: var(--radius-lg); overflow: hidden; background: var(--gray-100); border: 1px solid var(--gray-200); }
+    .about-photo-sm img { width: 100%; height: 100%; object-fit: cover; object-position: center 8%; }
+    .about-name { font-family: var(--ff-serif); font-size: 1rem; color: var(--gray-900); margin-top: 10px; }
+    .about-title-sm { font-size: 0.72rem; color: var(--gray-400); line-height: 1.5; }
+    .about-text p { font-size: 0.92rem; color: var(--gray-700); line-height: 1.85; }
+    .cred-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .cred-pill { font-size: 0.68rem; font-weight: 600; color: var(--green); background: var(--green-pale); border: 1px solid rgba(26,92,58,0.2); padding: 3px 10px; border-radius: 100px; }
+    .cta-box { background: var(--navy); border-radius: var(--radius-lg); padding: 44px; text-align: center; margin-top: 52px; }
+    .cta-box h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-box p { color: rgba(255,255,255,0.55); font-size: 0.95rem; max-width: 500px; margin: 0 auto 28px; line-height: 1.8; }
+    .cta-contact { margin-top: 16px; font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .cta-contact a { color: rgba(255,255,255,0.5); }
+
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 28px; text-align: center; }
+    .footer-note { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+
+    @media (max-width: 768px) {
+      .quick-wins, .roi-grid { grid-template-columns: 1fr; }
+      .about-row { grid-template-columns: 1fr; }
+      .gen-opts { grid-template-columns: 1fr; }
+      .tl-row { grid-template-columns: 1fr; gap: 6px; }
+      .tl-phase { margin-bottom: 4px; }
+      .sample-section { padding: 24px 20px; }
+      .sample-doc-header { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     PASSWORD GATE
+═══════════════════════════════════════ -->
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo">
+      <svg width="40" height="19" viewBox="0 0 46 22" fill="none" aria-hidden="true">
+        <rect x="0" y="16" width="46" height="3" rx="1" fill="#1A5C3A"/>
+        <rect x="10" y="3" width="3.5" height="16" rx="1" fill="#1A5C3A"/>
+        <rect x="32.5" y="3" width="3.5" height="16" rx="1" fill="#1A5C3A"/>
+        <path d="M 2,16 L 11.75,3 Q 23,12 34.25,3 L 44,16" stroke="#6DC99A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="17" y1="7.8" x2="17" y2="16" stroke="#6DC99A" stroke-width="1" opacity="0.5"/>
+        <line x1="23" y1="9.5" x2="23" y2="16" stroke="#6DC99A" stroke-width="1" opacity="0.5"/>
+        <line x1="29" y1="7.8" x2="29" y2="16" stroke="#6DC99A" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <span class="gate-logo-name">Platform <strong>Prepared</strong></span>
+    </div>
+    <div class="gate-badge">Private Preview &mdash; Footbridge Partners</div>
+    <p class="gate-title">Welcome, Greg.</p>
+    <p class="gate-sub">This page contains examples of Nathan&rsquo;s work and a live tool built specifically for search-acquired service businesses. Enter the access code to continue.</p>
+    <input type="password" id="gate-pw" class="gate-input" placeholder="Access code" autocomplete="off" />
+    <div class="gate-error" id="gate-err"></div>
+    <button class="btn btn-primary btn-lg" onclick="checkPw()" style="width:100%;">Access Preview &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════ -->
+<div id="main">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://platformprepared.com" class="nav-logo">
+      <svg width="36" height="17" viewBox="0 0 46 22" fill="none" aria-hidden="true">
+        <rect x="0" y="16" width="46" height="3" rx="1" fill="#1A5C3A"/>
+        <rect x="10" y="3" width="3.5" height="16" rx="1" fill="#1A5C3A"/>
+        <rect x="32.5" y="3" width="3.5" height="16" rx="1" fill="#1A5C3A"/>
+        <path d="M 2,16 L 11.75,3 Q 23,12 34.25,3 L 44,16" stroke="#6DC99A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="17" y1="7.8" x2="17" y2="16" stroke="#6DC99A" stroke-width="1" opacity="0.5"/>
+        <line x1="23" y1="9.5" x2="23" y2="16" stroke="#6DC99A" stroke-width="1" opacity="0.5"/>
+        <line x1="29" y1="7.8" x2="29" y2="16" stroke="#6DC99A" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <div>
+        <span class="nav-logo-name">Platform <strong>Prepared</strong></span>
+        <span class="nav-logo-sub">Operations &amp; Exit Advisory</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <span class="nav-badge">Private &mdash; Footbridge Partners</span>
+      <a href="#sample" class="nav-link">Sample Work</a>
+      <a href="#generator" class="nav-link">AI Tool</a>
+      <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size:0.8rem;padding:9px 18px;">Schedule a Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Built for Footbridge Partners &mdash; Search-Acquired Portfolio Companies</div>
+    <h1 style="color:white;">AI that delivers results inside small service businesses. Not pilots. Not reports.</h1>
+    <p class="hero-sub">Real implementations. Owner-aligned outcomes. Results in the first 30 days.</p>
+    <p class="hero-body">I built this page specifically for you, Greg. Below you&rsquo;ll find a sample AI implementation plan &mdash; the kind of deliverable I produce when I drop into a portfolio company &mdash; plus a live tool that generates a custom AI quick-win plan for any business in your portfolio. The tool below works. Try it.</p>
+    <div class="hero-creds">
+      <span class="hero-cred">200+ essential services businesses evaluated</span>
+      <span class="hero-cred">Columbia Business School MBA</span>
+      <span class="hero-cred">Former buy-side operator &amp; deal screener</span>
+      <span class="hero-cred">TPG-backed portfolio ops experience</span>
+      <span class="hero-cred">Own &amp; operate residential service brands</span>
+    </div>
+  </div>
+</header>
+
+<!-- SAMPLE WORK -->
+<section class="sec" id="sample">
+  <div class="wrap">
+    <div class="sample-intro">
+      <span class="eyebrow">Example of My Work</span>
+      <h2>AI Implementation Plan: Post-Acquisition HVAC Company</h2>
+      <div class="rule rule--center"></div>
+      <p>This is a representative example of what I deliver in the first engagement with a portfolio company &mdash; a prioritized, implementable AI plan grounded in how these businesses actually operate. Built for a 12-person residential HVAC company, 90 days post-close.</p>
+    </div>
+
+    <div class="sample-doc">
+      <div class="sample-doc-header">
+        <div>
+          <div class="sample-doc-title">AI Operations Plan &mdash; Residential HVAC Company</div>
+          <div class="sample-doc-meta">Post-Close, Day 30 &bull; 12 FTEs &bull; $2.8M Revenue &bull; ServiceTitan CRM</div>
+        </div>
+        <span class="sample-doc-badge">Representative Deliverable</span>
+      </div>
+
+      <div class="sample-body">
+
+        <div class="sample-section">
+          <span class="sample-section-label">Situation Assessment</span>
+          <h4>What I Found in Week One</h4>
+          <p>The seller ran dispatch from memory and a whiteboard. Customer follow-up was ad hoc &mdash; maybe 20% of unsold quotes ever got a second touch. Technicians wrote job notes in ServiceTitan sporadically. No system for converting one-time customers to service agreement holders. Revenue was healthy but the operation was entirely in the seller&rsquo;s head. Classic owner-dependent business, and classic opportunity.</p>
+        </div>
+
+        <div class="sample-section">
+          <span class="sample-section-label">Priority Quick Wins</span>
+          <h4>Four AI implementations. All live within 30 days.</h4>
+          <div class="quick-wins">
+            <div class="qw">
+              <div class="qw-n">Quick Win 01</div>
+              <h4>Quote Follow-Up System</h4>
+              <p>Claude drafts personalized follow-up emails and texts for every open quote older than 48 hours. CSR reviews and sends in under 2 minutes. Previously, 80% of quotes got no follow-up.</p>
+              <span class="qw-impact">+15&ndash;25% close rate on open quotes</span>
+            </div>
+            <div class="qw">
+              <div class="qw-n">Quick Win 02</div>
+              <h4>Technician Job Note Completion</h4>
+              <p>Claude turns a 2-sentence voice memo from a tech into a complete ServiceTitan job note, including next recommended services. Reduces admin time, improves data quality, flags upsell opportunities.</p>
+              <span class="qw-impact">40 min/day admin saved per tech</span>
+            </div>
+            <div class="qw">
+              <div class="qw-n">Quick Win 03</div>
+              <h4>Service Agreement Upsell Identification</h4>
+              <p>Each week Claude scans the customer list and identifies accounts that have had 2+ visits without a service agreement. Produces a prioritized call list with a suggested pitch for each account type.</p>
+              <span class="qw-impact">Recurring revenue conversion engine</span>
+            </div>
+            <div class="qw">
+              <div class="qw-n">Quick Win 04</div>
+              <h4>Seller Knowledge Capture</h4>
+              <p>Two-hour structured interview with the departing seller. Claude processes the transcript and produces vendor relationships, customer quirks, pricing logic, and informal processes &mdash; documented permanently.</p>
+              <span class="qw-impact">Tribal knowledge made transferable</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sample-section">
+          <span class="sample-section-label">Implementation Timeline</span>
+          <h4>90 Days from First Engagement</h4>
+          <div class="timeline">
+            <div class="tl-row">
+              <div class="tl-phase">Week 1&ndash;2</div>
+              <ul class="tl-items">
+                <li>Discovery: observe dispatch, ride-alongs with 2 techs, pull 90 days of job data</li>
+                <li>Seller knowledge capture interview — full documentation</li>
+                <li>Audit ServiceTitan data quality and workflow gaps</li>
+              </ul>
+            </div>
+            <div class="tl-row">
+              <div class="tl-phase">Week 3&ndash;5</div>
+              <ul class="tl-items">
+                <li>Quote follow-up system live — prompts built, CSR trained, first sends</li>
+                <li>Job note voice-to-text workflow deployed to all techs</li>
+                <li>First service agreement upsell list produced and worked</li>
+              </ul>
+            </div>
+            <div class="tl-row">
+              <div class="tl-phase">Week 6&ndash;8</div>
+              <ul class="tl-items">
+                <li>Customer communication templates live (estimates, completion, reviews)</li>
+                <li>Weekly AI output review — calibrate prompts based on CSR feedback</li>
+                <li>Seasonal demand planning: build AI-assisted marketing calendar for shoulder season</li>
+              </ul>
+            </div>
+            <div class="tl-row">
+              <div class="tl-phase">Day 60&ndash;90</div>
+              <ul class="tl-items">
+                <li>Measure: close rate on quotes, service agreement conversion, admin hours saved</li>
+                <li>Document all AI workflows in the operating manual</li>
+                <li>Train successor CSR or office manager to own and maintain the system</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sample-section">
+          <span class="sample-section-label">Example Prompt (Quote Follow-Up)</span>
+          <h4>What the system actually looks like in practice</h4>
+          <div class="prompt-box">
+            <span class="prompt-label">Prompt deployed in Claude — CSR uses daily</span>
+            <div class="prompt-text">You are a customer service assistant for [Company Name], a residential HVAC company in [City]. We are following up on an open estimate.
+
+Customer: {customer_name}
+Service quoted: {service_description}
+Quote amount: {quote_amount}
+Days since quote: {days_open}
+Last contact note: {last_note}
+
+Write a warm, non-pushy follow-up message (email format). Acknowledge that decisions take time. Remind them of the value. Offer to answer questions or adjust scope. Match our tone: honest, local, not salesy.
+
+Keep it under 120 words. Use their first name.</div>
+          </div>
+        </div>
+
+        <div class="sample-section">
+          <span class="sample-section-label">Expected Impact — 90 Days</span>
+          <h4>Measurable outcomes, not activity reports</h4>
+          <div class="roi-grid">
+            <div class="roi-item">
+              <div class="roi-num">+18%</div>
+              <div class="roi-label">Quote-to-job close rate on followed-up estimates</div>
+            </div>
+            <div class="roi-item">
+              <div class="roi-num">6&ndash;8 hrs</div>
+              <div class="roi-label">Weekly admin hours saved across office + field team</div>
+            </div>
+            <div class="roi-item">
+              <div class="roi-num">12&ndash;18</div>
+              <div class="roi-label">New service agreements closed from upsell identification list</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI QUICK-WIN GENERATOR -->
+<section class="sec" id="generator" style="background:var(--navy);">
+  <div class="wrap">
+    <div class="gen-intro">
+      <span class="eyebrow eyebrow--light">Live Tool</span>
+      <h2 style="color:white;">AI Quick-Win Generator</h2>
+      <div class="rule rule--center rule--light"></div>
+      <p>Pick any business in your portfolio. Answer three questions. Get a prioritized AI implementation plan in under 30 seconds. This is how I think about every engagement.</p>
+    </div>
+
+    <div id="gen-form">
+      <div class="gen-card">
+        <div class="gen-progress">
+          <div class="gen-dot" id="d0"></div>
+          <div class="gen-dot" id="d1"></div>
+          <div class="gen-dot" id="d2"></div>
+        </div>
+
+        <!-- Step 1: Business Type -->
+        <div class="gen-step active" id="step0">
+          <p class="gen-q">What type of business is this portfolio company?</p>
+          <div class="gen-opts">
+            <button class="gen-opt" onclick="pick(0,'hvac','HVAC / Heating &amp; Cooling')">HVAC / Heating &amp; Cooling<span class="opt-sub">Residential &amp; commercial service, install, and maintenance</span></button>
+            <button class="gen-opt" onclick="pick(0,'plumbing','Plumbing')">Plumbing<span class="opt-sub">Service, drain, water heater, remodel work</span></button>
+            <button class="gen-opt" onclick="pick(0,'pest','Pest Control')">Pest Control<span class="opt-sub">Residential &amp; commercial pest, termite, wildlife</span></button>
+            <button class="gen-opt" onclick="pick(0,'roofing','Roofing')">Roofing<span class="opt-sub">Residential replacement, repair, storm damage</span></button>
+            <button class="gen-opt" onclick="pick(0,'landscaping','Landscaping / Lawn Care')">Landscaping / Lawn Care<span class="opt-sub">Maintenance routes, design/build, seasonal services</span></button>
+            <button class="gen-opt" onclick="pick(0,'electrical','Electrical')">Electrical<span class="opt-sub">Residential service, panel upgrades, EV chargers</span></button>
+            <button class="gen-opt" onclick="pick(0,'cleaning','Commercial Cleaning')">Commercial Cleaning<span class="opt-sub">Janitorial contracts, commercial accounts</span></button>
+            <button class="gen-opt" onclick="pick(0,'pool','Pool Service')">Pool Service<span class="opt-sub">Weekly maintenance routes, repair, equipment install</span></button>
+          </div>
+        </div>
+
+        <!-- Step 2: Top Challenge -->
+        <div class="gen-step" id="step1">
+          <p class="gen-q">What&rsquo;s the top operational challenge right now?</p>
+          <div class="gen-opts">
+            <button class="gen-opt" onclick="pick(1,'followup','Quote &amp; Lead Follow-Up')">Quote &amp; Lead Follow-Up<span class="opt-sub">Too many open estimates, poor conversion, slow response</span></button>
+            <button class="gen-opt" onclick="pick(1,'scheduling','Scheduling &amp; Dispatch')">Scheduling &amp; Dispatch<span class="opt-sub">Inefficient routing, tech utilization, last-minute changes</span></button>
+            <button class="gen-opt" onclick="pick(1,'knowledge','Tribal Knowledge &amp; SOPs')">Tribal Knowledge &amp; SOPs<span class="opt-sub">Everything is in one person&rsquo;s head — seller, manager, or owner</span></button>
+            <button class="gen-opt" onclick="pick(1,'recurring','Recurring Revenue Growth')">Recurring Revenue Growth<span class="opt-sub">Low contract/agreement penetration, one-time customer base</span></button>
+            <button class="gen-opt" onclick="pick(1,'admin','Admin &amp; Back-Office Load')">Admin &amp; Back-Office Load<span class="opt-sub">Too much time on paperwork, invoicing, reporting, note-taking</span></button>
+            <button class="gen-opt" onclick="pick(1,'reviews','Customer Reviews &amp; Reputation')">Customer Reviews &amp; Reputation<span class="opt-sub">Low Google review count, inconsistent follow-up after jobs</span></button>
+          </div>
+          <button class="gen-back" onclick="goBack(1)">&#8592; Back</button>
+        </div>
+
+        <!-- Step 3: Team Size -->
+        <div class="gen-step" id="step2">
+          <p class="gen-q">How large is the team?</p>
+          <div class="gen-opts" style="grid-template-columns:repeat(2,1fr);">
+            <button class="gen-opt" onclick="pick(2,'micro','Under 5 people')">Under 5 people<span class="opt-sub">Owner + a couple of techs or crew members</span></button>
+            <button class="gen-opt" onclick="pick(2,'small','5&ndash;15 people')">5&ndash;15 people<span class="opt-sub">Small but established — office staff, field team</span></button>
+            <button class="gen-opt" onclick="pick(2,'mid','15&ndash;40 people')">15&ndash;40 people<span class="opt-sub">Multiple crews or service teams, some middle management</span></button>
+            <button class="gen-opt" onclick="pick(2,'larger','40+ people')">40+ people<span class="opt-sub">Larger operation, multiple departments or locations</span></button>
+          </div>
+          <button class="gen-back" onclick="goBack(2)">&#8592; Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="gen-result" id="gen-result">
+      <div class="result-doc">
+        <div class="result-doc-hd">
+          <h3 id="result-title">AI Quick-Win Plan</h3>
+          <span class="result-tag">Generated by Platform Prepared</span>
+        </div>
+        <div class="result-body" id="result-body"></div>
+      </div>
+      <div class="result-cta-box">
+        <p>This is the kind of assessment I run in day one of every engagement &mdash; with your specific data, your team, and your tools. A 20-minute call is enough to scope the right starting point for any company in your portfolio.</p>
+        <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-white">Schedule 20 Minutes with Nathan &rarr;</a>
+      </div>
+      <button class="gen-reset" onclick="resetGen()">&#8592; Assess a different company</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT NATHAN -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <span class="eyebrow">About Nathan Garlock</span>
+    <div class="rule" style="margin-bottom:36px;"></div>
+    <div class="about-row">
+      <div>
+        <div class="about-photo-sm">
+          <img src="nathan.jpg?v=4" alt="Nathan Garlock" />
+        </div>
+        <div class="about-name">Nathan Garlock</div>
+        <div class="about-title-sm">Founder, Platform Prepared<br>Columbia Business School MBA</div>
+      </div>
+      <div class="about-text">
+        <h2>Why I&rsquo;m the right fit for Footbridge&rsquo;s portfolio.</h2>
+        <div class="rule" style="margin:14px 0 20px;"></div>
+        <p>I&rsquo;ve evaluated over 200 essential services businesses from the buy side &mdash; screened deals through LOI and exclusivity. I know exactly what operators find when they open the hood on a newly acquired service business, because I was the one doing the screening. Owner-dependent revenue, tribal knowledge, messy tech, underdocumented processes. Every time.</p>
+        <p>I don&rsquo;t run AI pilots or deliver strategy decks. I drop into the business, sit with the team, identify what will move the needle fastest, build it, and train whoever owns it long-term. Everything I implement comes with documentation so it holds after I&rsquo;m gone.</p>
+        <p>I also run Gard Partners, a permanent capital portfolio of residential and commercial service businesses &mdash; pest control, roofing, backflow testing, HVAC services. I&rsquo;m deploying AI in those companies right now as an owner, not as an outside advisor. That&rsquo;s a different level of accountability.</p>
+        <div class="cred-pills">
+          <span class="cred-pill">Columbia Business School MBA</span>
+          <span class="cred-pill">200+ deals evaluated buy-side</span>
+          <span class="cred-pill">TPG-backed ops (Director, $3.2M P&amp;L)</span>
+          <span class="cred-pill">Interim CRO — rebuilt sales stack</span>
+          <span class="cred-pill">Gard Partners portfolio owner</span>
+          <span class="cred-pill">CEPA Candidate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.4);">Next Step</span>
+      <h2>Let&rsquo;s talk about your portfolio.</h2>
+      <p>20 minutes. You tell me which companies are the priority. I&rsquo;ll tell you exactly where AI can deliver a fast, measurable win &mdash; and what it would take to get there.</p>
+      <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-lg">Book a 20-Minute Call &rarr;</a>
+      <div class="cta-contact">
+        <p><a href="tel:2533637177">(253) 363-7177</a> &nbsp;&bull;&nbsp; <a href="mailto:nate@gardpartners.com">nate@gardpartners.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-note">
+    Platform Prepared &mdash; Private preview for Footbridge Partners. Not for distribution.
+    &nbsp;&bull;&nbsp; <a href="https://platformprepared.com" style="color:rgba(255,255,255,0.25);">platformprepared.com</a>
+  </div>
+</footer>
+
+</div><!-- end #main -->
+
+<script>
+/* ─── PASSWORD GATE ─── */
+function checkPw() {
+  var pw = document.getElementById('gate-pw').value.trim();
+  var el = document.getElementById('gate-pw');
+  var err = document.getElementById('gate-err');
+  if (pw.toLowerCase() === 'footbridge') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+    window.scrollTo(0,0);
+  } else {
+    el.classList.add('error');
+    err.textContent = 'Incorrect access code. Check Nathan\'s email for the password.';
+    setTimeout(function(){ el.classList.remove('error'); }, 400);
+  }
+}
+document.getElementById('gate-pw').addEventListener('keydown', function(e){ if(e.key==='Enter') checkPw(); });
+
+/* ─── QUICK-WIN GENERATOR ─── */
+var answers = { biz:'', challenge:'', size:'' };
+var bizLabel = '', challengeLabel = '';
+
+function pick(step, val, label) {
+  if(step===0){ answers.biz=val; bizLabel=label; nextStep(1); }
+  else if(step===1){ answers.challenge=val; challengeLabel=label; nextStep(2); }
+  else if(step===2){ answers.size=val; showResult(); }
+}
+function nextStep(n) {
+  document.querySelectorAll('.gen-step').forEach(function(s,i){ s.classList.toggle('active', i===n); });
+  for(var i=0;i<n;i++) document.getElementById('d'+i).classList.add('done');
+}
+function goBack(step) {
+  document.querySelectorAll('.gen-step').forEach(function(s,i){ s.classList.toggle('active', i===(step-1)); });
+  document.getElementById('d'+(step-1)).classList.remove('done');
+}
+function resetGen() {
+  answers={biz:'',challenge:'',size:''};
+  document.getElementById('gen-form').style.display='block';
+  document.getElementById('gen-result').classList.remove('visible');
+  document.querySelectorAll('.gen-dot').forEach(function(d){ d.classList.remove('done'); });
+  document.querySelectorAll('.gen-step').forEach(function(s,i){ s.classList.toggle('active', i===0); });
+}
+
+/* ─── PLAYBOOK DATA ─── */
+var WINS = {
+  followup: [
+    { title:'Quote Follow-Up System', body:'Claude drafts a personalized, non-pushy follow-up for every open estimate older than 48 hrs. CSR reviews and sends in under 2 minutes. Converts 15–25% of otherwise dead quotes.', impact:'Est. +15–25% quote close rate' },
+    { title:'After-Job Review Request', body:'Immediately after job completion in the field software, Claude drafts a personalized review request text. Doubles Google review velocity within 60 days.', impact:'2× review volume in 60 days' },
+    { title:'Lapsed Customer Re-engagement', body:'Claude identifies customers with no activity in 12+ months and drafts a reactivation outreach campaign. Typically recovers 8–12% of lapsed accounts.', impact:'8–12% lapsed account recovery' }
+  ],
+  scheduling: [
+    { title:'Dispatch Priority Scoring', body:'Each morning Claude receives the day\'s job list and ranks them by priority factors: urgency, proximity, tech skill match, and estimated drive time. Dispatcher uses as a starting point.', impact:'10–15% efficiency gain on routes' },
+    { title:'Technician Utilization Report', body:'Claude analyzes weekly job data and flags underutilized time blocks, recurring no-shows, and jobs that consistently run over. Weekly 1-page report for the dispatcher.', impact:'Identify 3–5 hrs/week of recoverable time' },
+    { title:'Last-Minute Opening Fill System', body:'When a job cancels, Claude instantly drafts a "we have an opening today" message for 5 customers on the waitlist or with a known upcoming need.', impact:'Fill rate on cancellations from 20% to 60%' }
+  ],
+  knowledge: [
+    { title:'Seller Knowledge Capture', body:'Structured 2-hour interview with the departing seller. Claude processes the transcript and produces a permanent document of customer relationships, vendor contacts, pricing logic, and undocumented processes.', impact:'Critical tribal knowledge secured before departure' },
+    { title:'SOP Generation from Observation', body:'I observe a workflow, then Claude converts my field notes into a step-by-step SOP any new hire can follow. First 5 core processes documented in week one.', impact:'5 core SOPs built in first 2 weeks' },
+    { title:'Training Knowledge Base', body:'Claude turns your existing job notes, completed work orders, and verbal instruction patterns into a searchable internal knowledge base for new technicians.', impact:'New hire ramp time cut by 30–50%' }
+  ],
+  recurring: [
+    { title:'Service Agreement Upsell Identification', body:'Claude analyzes the customer list weekly and flags one-time customers with 2+ service visits who don\'t have an agreement. Produces a prioritized call list with suggested pitch for each.', impact:'12–18 new agreements per month typical' },
+    { title:'Agreement Renewal Campaign', body:'Claude identifies agreements expiring in 45 days and drafts a personalized renewal outreach for each customer, referencing their specific service history.', impact:'90%+ renewal rate on at-risk agreements' },
+    { title:'First-Visit to Agreement Conversion', body:'After every first-time repair visit, Claude drafts a follow-up that explains the value of a maintenance agreement in the context of what was just serviced.', impact:'20–35% first-visit-to-agreement conversion' }
+  ],
+  admin: [
+    { title:'Voice-to-Job-Note System', body:'Technician leaves a 30-second voice memo after every job. Claude converts it to a complete, structured job note in the field software — including next recommended services and parts used.', impact:'40+ min/day saved per technician' },
+    { title:'Estimate Writing Acceleration', body:'Claude generates first-draft estimates from a brief description of the scope. CSR or owner edits rather than writes from scratch. Estimate turnaround goes from hours to minutes.', impact:'75% reduction in estimate prep time' },
+    { title:'Weekly KPI Summary', body:'Claude pulls raw data from your field software and generates a plain-English weekly performance summary: revenue vs. target, tickets closed, open estimates, tech utilization.', impact:'Owner visibility in 5 min/week instead of 2 hrs' }
+  ],
+  reviews: [
+    { title:'Post-Job Review Request System', body:'Triggered 2 hours after job completion, Claude drafts a personalized review request that references the specific job performed. Increases review capture rate from ~5% to 25–35%.', impact:'5× increase in review capture rate' },
+    { title:'Review Response Templates', body:'Claude drafts a thoughtful, specific response to every new Google review within the hour. Owner approves in 30 seconds. Demonstrates responsiveness to prospective customers.', impact:'Response time from days to hours' },
+    { title:'Referral Request Integration', body:'Claude identifies completed jobs with 5-star outcomes and flags them for a referral ask — a separate, warm message sent 2 weeks post-job.', impact:'Referral pipeline built systematically' }
+  ]
+};
+
+var TL = {
+  micro: [
+    { phase:'Week 1', items:'Observe operations, identify biggest time sinks, interview owner' },
+    { phase:'Week 2–3', items:'Deploy first AI workflow — the single highest-impact quick win' },
+    { phase:'Week 4–6', items:'Train owner to use and maintain the system independently' },
+    { phase:'Day 45+', items:'Measure results, document everything, add second workflow if capacity allows' }
+  ],
+  small: [
+    { phase:'Week 1', items:'Operations audit, field ride-alongs, pull 90 days of job data' },
+    { phase:'Week 2–3', items:'Build and deploy first two AI workflows with CSR or office staff' },
+    { phase:'Week 4–6', items:'Refine prompts based on real usage, train team, add third workflow' },
+    { phase:'Day 60–90', items:'Measure impact, document all workflows, hand off ownership internally' }
+  ],
+  mid: [
+    { phase:'Week 1', items:'Cross-functional discovery: dispatch, field, office, management' },
+    { phase:'Week 2–4', items:'Deploy three priority workflows across multiple team roles' },
+    { phase:'Week 5–8', items:'Integration with field software data flows, weekly calibration sessions' },
+    { phase:'Day 60–90', items:'Full documentation, internal champion training, monthly review cadence' }
+  ],
+  larger: [
+    { phase:'Week 1–2', items:'Structured ops audit across departments, stakeholder interviews' },
+    { phase:'Week 3–5', items:'Pilot top three AI workflows in one team/location first' },
+    { phase:'Week 6–9', items:'Expand to full team, calibrate, address change management needs' },
+    { phase:'Day 90+', items:'Systemized AI operations playbook, owner documentation, ongoing governance' }
+  ]
+};
+
+function showResult() {
+  document.getElementById('gen-form').style.display='none';
+  var wins = WINS[answers.challenge] || WINS.admin;
+  var tl   = TL[answers.size] || TL.small;
+  document.getElementById('result-title').textContent = 'AI Quick-Win Plan: ' + bizLabel;
+  var html = '';
+  // Quick wins
+  html += '<div class="result-block"><span class="result-block-label">Priority Quick Wins — ' + challengeLabel + '</span><div class="result-wins">';
+  wins.forEach(function(w,i){
+    html += '<div class="result-win"><div class="result-win-n">'+(i+1)+'</div><div class="result-win-body"><strong>'+w.title+'</strong><p>'+w.body+'<br><em style="color:var(--accent);font-size:0.78rem;">'+w.impact+'</em></p></div></div>';
+  });
+  html += '</div></div>';
+  // Timeline
+  html += '<div class="result-block"><span class="result-block-label">Implementation Timeline</span><div class="result-tl">';
+  tl.forEach(function(row){
+    html += '<div class="result-tl-row"><div class="result-tl-phase">'+row.phase+'</div><div class="result-tl-items">'+row.items+'</div></div>';
+  });
+  html += '</div></div>';
+  // Note
+  html += '<div class="result-block" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:16px;"><p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.7;"><em>This plan is generated from patterns across 200+ essential services businesses. A real engagement starts with observing your specific operation — the actual implementation is always built around what I find in week one, not what a template says.</em></p></div>';
+  document.getElementById('result-body').innerHTML = html;
+  document.getElementById('gen-result').classList.add('visible');
+  document.getElementById('gen-result').scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+</body>
+</html>

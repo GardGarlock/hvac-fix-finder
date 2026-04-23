@@ -1,0 +1,40 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      ".claude/**",
+      "Context*",
+      "*.md"
+    ],
+    "rewrites": [
+      {
+        "source": "/footbridge",
+        "destination": "/footbridge.html"
+      },
+      {
+        "source": "/hvac-fix-finder",
+        "destination": "/hvac-fix-finder.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.html",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          { "key": "Cache-Control", "value": "max-age=31536000" }
+        ]
+      }
+    ]
+  }
+}
