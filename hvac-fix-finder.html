@@ -605,6 +605,498 @@ const HVAC_CASES = [
         suggestedParts: ['Compatible replacement thermostat', 'C-wire power adapter kit', 'Thermostat wire (if new run needed)']
       }
     ]
+  },
+  {
+    id: 'carrier-defrost-test',
+    title: 'Carrier Defrost Speed-up Procedure',
+    brand: 'carrier',
+    unitTypes: ['heat pump', 'condenser'],
+    symptomKeywords: ['carrier', 'defrost', 'speedup', 'pins', 'dft', 'jumper', 'force defrost'],
+    symptomTags: ['won\'t start'],
+    safetyFlags: ['electrical'],
+    followUpQuestions: [
+      'Is the defrost thermostat closed or jumpered? (Pins must see a closed circuit to trigger).',
+      'How long have the pins been shorted? (90-min interval requires ~21 seconds).'
+    ],
+    suggestedParts: ['Defrost control board', 'Defrost thermostat', 'Jumper wire kit'],
+    likelyCauses: [
+      {
+        name: 'Manual Defrost Force (Speed-up)',
+        confidence: 'High',
+        explanation: 'CAUTION: UNIT DAMAGE HAZARD. This procedure speeds up the defrost timer by a factor of 256 for field testing. If pins are shorted to other terminals, the board will fail.',
+        nextChecks: [
+          'Jumper the DFT input to simulate a closed defrost thermostat.',
+          'Short the speed-up pins and remove the short immediately when the unit shifts.',
+          'Check for 24v between C and W2 during the cycle.',
+          'Verify the defrost thermostat opens at ~65°F.'
+        ],
+        suggestedParts: ['Carrier OEM Defrost Board']
+      },
+      {
+        name: 'Defrost Thermostat (DFT) Stuck Open',
+        confidence: 'High',
+        explanation: 'If the DFT is open, the speed-up pins will not initiate a defrost cycle. The board requires a closed circuit from the thermostat to prove the coil is cold enough to need defrosting.',
+        nextChecks: [
+          'Measure continuity across DFT leads while coil is below 30°F.',
+          'If open while iced, the thermostat is defective.',
+          'Check for loose spade connectors at the DFT board terminals.'
+        ],
+        suggestedParts: ['Defrost Thermostat (DFT)']
+      },
+      {
+        name: 'Defrost Board Logic Failure',
+        confidence: 'Medium',
+        explanation: 'The control board may fail to recognize the shorted pins or fail to energize the reversing valve and outdoor fan relay during the test.',
+        nextChecks: [
+          'Verify 24V power at the R and C terminals of the board.',
+          'Check for burnt traces or insect nests on the back of the PCB.',
+          'Ensure the 30, 60, or 90-minute jumper is securely seated.'
+        ],
+        suggestedParts: ['Carrier OEM Defrost Board']
+      }
+    ]
+  },
+  {
+    id: 'carrier-filter-drier-specs',
+    title: 'Carrier Filter Drier Requirements',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'package unit'],
+    symptomKeywords: ['carrier', 'filter drier', 'puron', '72 hours', 'suction line', 'liquid line'],
+    symptomTags: ['no cool'],
+    safetyFlags: ['refrigerant-handling'],
+    followUpQuestions: [
+      'Is this a new installation or a system repair?',
+      'Has a suction line filter drier been left in the system for more than 72 hours?'
+    ],
+    suggestedParts: ['Liquid-line filter drier (600 psig rated)', 'Suction-line filter drier'],
+    likelyCauses: [
+      {
+        name: 'Improper Filter Drier Usage',
+        confidence: 'High',
+        explanation: 'Carrier Puron (R-410A) systems require driers with a 600 psig rating. Using an older R-22 rated drier can result in a catastrophic shell failure due to higher operating pressures.',
+        nextChecks: [
+          'Check the psig rating stamped on the drier shell.',
+          'Verify it is a liquid-line drier and not a suction-line drier installed backwards.',
+          'Confirm no moisture entered the lineset during open-air brazing.'
+        ],
+        suggestedParts: ['Carrier approved Liquid Line Drier (600 psig)']
+      },
+      {
+        name: 'Suction Drier Left in Circuit > 72 Hours',
+        confidence: 'High',
+        explanation: 'Carrier guidelines strictly state suction line driers are for temporary cleanup only. Leaving them in longer than 72 hours leads to a high pressure drop and potential compressor oil starvation.',
+        nextChecks: [
+          'Check the install date on the suction drier label.',
+          'Measure pressure drop across the drier; if > 2 psig, it is restricted.',
+          'Schedule a follow-up to remove the drier and install a permanent liquid line drier.'
+        ],
+        suggestedParts: ['Replacement Suction Drier', 'Copper Couplings']
+      },
+      {
+        name: 'Drier Damaged During Brazing',
+        confidence: 'Medium',
+        explanation: 'Failure to wrap the filter drier in a wet cloth during installation can damage the internal desiccant or the spring-loaded bypass, releasing debris into the TXV.',
+        nextChecks: [
+          'Look for scorched paint or discoloration on the drier body.',
+          'Check for restricted flow/high subcooling at the liquid line.',
+          'Inspect the TXV screen for desiccant beads or soot.'
+        ],
+        suggestedParts: ['Carrier approved Liquid Line Drier', 'Hard shutoff Puron TXV']
+      }
+    ]
+  },
+  {
+    id: 'carrier-puron-txv',
+    title: 'Carrier Puron (R-410A) TXV Requirements',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'mini split'],
+    symptomKeywords: ['carrier', 'puron', 'txv', 'r-22', 'metering device', 'hard shutoff'],
+    symptomTags: ['no cool', 'ice buildup'],
+    safetyFlags: ['refrigerant-handling'],
+    followUpQuestions: [
+      'Is the indoor unit original to the system or was it part of an R-22 conversion?',
+      'Is there ice forming on the suction line or evaporator coil?'
+    ],
+    suggestedParts: ['Hard shutoff Puron TXV', 'R-410A Refrigerant'],
+    likelyCauses: [
+      {
+        name: 'Incompatible Metering Device',
+        confidence: 'High',
+        explanation: 'Carrier Puron systems require a hard shutoff TXV. Using an R-22 TXV or a fixed piston will cause improper superheat and likely compressor floodback or starvation.',
+        nextChecks: [
+          'Verify the TXV model number specifically mentions R-410A or Puron.',
+          'Ensure the piston (if used in older coils) has been removed before TXV installation.',
+          'Check for 500 micron vacuum prior to recharging.'
+        ],
+        suggestedParts: ['Carrier Hard Shutoff TXV Kit']
+      },
+      {
+        name: 'TXV Sensing Bulb Misplacement',
+        confidence: 'High',
+        explanation: 'If the sensing bulb is not at the 10 or 2 o\'clock position on the suction line, or is not insulated, it will misread the suction temp and cause the TXV to hunt or stay wide open.',
+        nextChecks: [
+          'Check bulb position on the suction header.',
+          'Ensure bulb is clamped tightly to clean, bare copper (not over insulation).',
+          'Verify the bulb is fully wrapped in insulation to prevent interference from ambient air.'
+        ],
+        suggestedParts: ['TXV Bulb Straps', 'Thumb Gum / Insulation tape']
+      },
+      {
+        name: 'Internal TXV Contamination',
+        confidence: 'Medium',
+        explanation: 'Puron systems use POE oil, which is a powerful solvent. It can loosen debris or moisture-induced sludge that clogs the fine orifice of the hard-shutoff TXV.',
+        nextChecks: [
+          'Check for erratic superheat readings (hunting).',
+          'Perform a "tap test" on the valve body to see if flow resumes.',
+          'Inspect the liquid line drier—if it wasn\'t replaced with the TXV, it may be the source of debris.'
+        ],
+        suggestedParts: ['Carrier Hard Shutoff TXV', 'Liquid Line Drier']
+      }
+    ]
+  },
+  {
+    id: 'low-ambient-lockout',
+    title: 'AC Shuts Down in Cold Weather',
+    brand: 'carrier',
+    unitTypes: ['split system', 'condenser', 'package unit'],
+    symptomKeywords: ['carrier', 'cold outside', 'winter cooling', 'low ambient', 'trips in cold', 'shuts off after 3 minutes', '55 degrees', 'low pressure switch'],
+    symptomTags: ['no cool'],
+    safetyFlags: ['electrical'],
+    followUpQuestions: [
+      'Is the outdoor temperature below 55°F (12.7°C)?',
+      'Does the unit run for exactly 3 minutes before shutting down, or does it trip immediately?'
+    ],
+    suggestedParts: ['Winter Start Control kit', 'Wind Baffle', '4-inch support feet/risers', 'Low Ambient Pressure Switch'],
+    likelyCauses: [
+      {
+        name: 'Missing Winter Start Control',
+        confidence: 'High',
+        explanation: 'In temperatures below 55°F, the low-pressure switch may trip before the system stabilizes. The Winter Start Control bypasses this switch for the first 3 minutes of operation.',
+        nextChecks: [
+          'Verify outdoor ambient temperature is below 55°F.',
+          'Check if a Winter Start Control (KSAWS) is installed in the control box.',
+          'Observe if the system trips on low pressure within the first 180 seconds.'
+        ],
+        suggestedParts: ['Winter Start Control (KSAWS0101AAA)']
+      },
+      {
+        name: 'Missing Wind Baffles or Unit Risers',
+        confidence: 'Medium',
+        explanation: 'Carrier requires wind baffles for cooling below 55°F. Additionally, 4-inch support feet are REQUIRED when baffles are used to ensure proper airflow for moderate ambient temps.',
+        nextChecks: [
+          'Inspect the outdoor unit for 20 GA steel wind baffles.',
+          'Check the base—is it raised 4 inches off the pad on risers?',
+          'Verify airflow is not being short-circuited by the baffle plates.'
+        ],
+        suggestedParts: ['Wind Baffle assembly', '4-in support feet']
+      },
+      {
+        name: 'Faulty Low Pressure Switch',
+        confidence: 'Medium',
+        explanation: 'On AC-only units, a weak low-pressure switch may open prematurely in cold weather. Note: Heat Pumps use a loss-of-charge switch instead, which shouldn\'t cause this nuisance trip.',
+        nextChecks: [
+          'Confirm if the unit is a Heat Pump (which shouldn\'t have this issue) or AC-only.',
+          'Measure pressure when the switch opens; compare to the part\'s PSI rating.',
+          'Check for a slow refrigerant leak that only drops below the threshold in cold weather.'
+        ],
+        suggestedParts: ['Low Pressure Switch', 'Loss of Charge Switch']
+      }
+    ]
+  },
+  {
+    id: 'cabinet-vibration-noise',
+    title: 'Cabinet or Louver Vibration',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'condenser'],
+    symptomKeywords: ['carrier', 'rattling', 'vibrating', 'buzzing', 'metal noise', 'louver noise', 'shaking panel', 'clattering'],
+    symptomTags: ['strange noise'],
+    safetyFlags: ['electrical'],
+    followUpQuestions: [
+      'Does the noise stop if you press your hand against the side louvers?',
+      'Was the unit recently shipped or moved, or did the noise start after a recent service?'
+    ],
+    suggestedParts: ['Louver spacers', 'Panel screws', 'Vibration isolators'],
+    likelyCauses: [
+      {
+        name: 'Missing or Dislodged Louver Spacers',
+        confidence: 'High',
+        explanation: 'Deluxe 4-sided units employ one louver spacer on each of the four sides. These must be trapped between the coil surface and louver at the center of each side to prevent movement.',
+        nextChecks: [
+          'Check all four sides of the coil for the notched spacer blocks.',
+          'Look in the base pan for spacers that may have fallen out during shipment.',
+          'Manually re-seat any dislodged spacers (refer to Fig. 3 in manual).'
+        ],
+        suggestedParts: ['Carrier Louver Spacers (A11380a)']
+      },
+      {
+        name: 'Improper Cabinet Reassembly',
+        confidence: 'High',
+        explanation: 'Removing the top cover can damage grill panels or corner posts. If the screws holding the top cover to the louver panels aren\'t tightened, the unit will rattle significantly.',
+        nextChecks: [
+          'Verify all screws are reinstalled in the top-to-louver joints.',
+          'Check the electrical control panel screws at the top and base pan.',
+          'Ensure no tool or belt-buckle damage to the top cover is causing "oil-canning" noise.'
+        ],
+        suggestedParts: ['Replacement sheet metal screws', 'Top Cover']
+      },
+      {
+        name: 'Fan Motor Vibration',
+        confidence: 'Medium',
+        explanation: 'If the nuts securing the fan motor to the top cover are loose, or the fan blade is out of balance, the entire top assembly will vibrate against the cabinet side panels.',
+        nextChecks: [
+          'Check the nuts holding the motor to the top cover assembly.',
+          'Verify the fan rotates freely without hitting the grill or louvers.',
+          'Inspect the fan blade for chips or build-up that causes imbalance.'
+        ],
+        suggestedParts: ['Motor mounting nuts', 'Carrier Fan Blade']
+      }
+    ]
+  },
+  {
+    id: 'carrier-aluminum-wiring-fault',
+    title: 'Aluminum Branch Circuit Failure',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'condenser', 'package unit'],
+    symptomKeywords: ['carrier', 'aluminum wire', 'voltage drop', 'corrosion', 'burnt wire', 'al/cu', 'flickering'],
+    symptomTags: ['won\'t start', 'trips breaker'],
+    safetyFlags: ['electrical', 'high-voltage', 'fire-risk'],
+    followUpQuestions: [
+      'Is the wiring between the service panel and the disconnect aluminum?',
+      'Are the connectors at the disconnect marked with "Al/Cu" and a UL symbol?'
+    ],
+    suggestedParts: ['UL-approved Al/Cu connectors', 'Pentrox A corrosion inhibitor', 'Copper whip (disconnect to unit)'],
+    likelyCauses: [
+      {
+        name: 'Incompatible Wire Connectors',
+        confidence: 'High',
+        explanation: 'Using standard copper connectors on aluminum branch circuits causes galvanic corrosion. Carrier requires UL-approved Al/Cu connectors for all aluminum-to-copper transitions.',
+        nextChecks: [
+          'Inspect connectors at the disconnect; look for the "Al/Cu" stamp.',
+          'Check for "brush-scratching" preparation and Pentrox A coating on aluminum strands.',
+          'Verify only copper wire is used between the unit disconnect and the unit itself (aluminum is prohibited for the final whip).'
+        ],
+        suggestedParts: ['UL-approved Al/Cu lugs', 'Pentrox A']
+      },
+      {
+        name: 'Excessive Voltage Drop',
+        confidence: 'Medium',
+        explanation: 'Aluminum wire must be sized correctly to ensure the voltage drop between the service panel and the unit does not exceed 2% of the rated voltage.',
+        nextChecks: [
+          'Measure voltage at the service panel and compare to the voltage at the unit disconnect under load.',
+          'Verify wire gauge has the current capacity of the specified copper equivalent.',
+          'Ensure no strands were cut off to fit the wire into a smaller connector.'
+        ],
+        suggestedParts: ['Correct-gauge aluminum or copper branch wiring']
+      },
+      {
+        name: 'Loose Terminal Connections',
+        confidence: 'High',
+        explanation: 'Aluminum expands and contracts more than copper. Connections must be re-checked for tightness after the unit has reached operating temperatures.',
+        nextChecks: [
+          'Power off and check torque on all field-installed lugs.',
+          'Look for signs of heat (discolored insulation) at the branch circuit terminals.',
+          'Verify connections are completely covered if exposed to moisture to prevent electrochemical action.'
+        ],
+        suggestedParts: ['Replacement disconnect block']
+      }
+    ]
+  },
+  {
+    id: 'carrier-contactor-capacitor-fault',
+    title: 'Contactor or Run Capacitor Failure',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'condenser'],
+    symptomKeywords: ['carrier', 'contactor', 'capacitor', 'mfd', '2650', 'amps', 'coil', 'humming'],
+    symptomTags: ['won\'t start'],
+    safetyFlags: ['electrical', 'high-voltage'],
+    followUpQuestions: [
+      'Do you hear the outdoor unit humming but the fan or compressor isn\'t spinning?',
+      'Is the capacitor top bulging or leaking fluid?'
+    ],
+    suggestedParts: ['Dual run capacitor', 'Single-pole contactor', '15,000-ohm resistor (for discharging)'],
+    likelyCauses: [
+      {
+        name: 'Failed Run Capacitor',
+        confidence: 'High',
+        explanation: 'Carrier specifies that a capacitor must be replaced if it is not within ±10% of its rated value. Capacitors are phase-shifting devices required to start single-phase motors.',
+        nextChecks: [
+          'Power off and discharge capacitor with a 15,000-ohm, 2-watt resistor.',
+          'Use the manual formula: Capacitance (mfd) = (2650 * amps) / volts.',
+          'Check for bulging, dents, or leaks; replace immediately if found.',
+          'On an analog ohmmeter (R x 10k), check for 0 resistance (shorted) or no movement (open).'
+        ],
+        suggestedParts: ['Carrier Dual Run Capacitor']
+      },
+      {
+        name: 'Contactor Coil Failure',
+        confidence: 'High',
+        explanation: 'The contactor coil requires 20V to 30V AC to pull in. If voltage is present but the contactor does not engage, the coil is defective.',
+        nextChecks: [
+          'With power off, check coil continuity with an ohmmeter (low resistance is normal).',
+          'With thermostat calling, verify 24VAC at the coil terminals.',
+          'Check if contacts move freely or are physically stuck/melted.'
+        ],
+        suggestedParts: ['Carrier 24V Contactor']
+      },
+      {
+        name: 'Pitted or Burnt Contacts',
+        confidence: 'Medium',
+        explanation: 'Severe burning or arcing on contact points increases resistance, preventing high-voltage power from reaching the compressor.',
+        nextChecks: [
+          'With power off and contacts manually depressed, check for ~0 ohms across poles.',
+          'Visually inspect contact surfaces for black pitting or "welding."',
+          'Verify 1 side of the line is energized on single-pole contactor models.'
+        ],
+        suggestedParts: ['Single-pole or Double-pole contactor']
+      }
+    ]
+  },
+  {
+    id: 'carrier-start-assist-fault',
+    title: 'Start Assist / PTC Thermistor Failure',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'condenser'],
+    symptomKeywords: ['carrier', 'ptc', 'start assist', 'thermistor', 'hard start', '10 minutes', 'beige'],
+    symptomTags: ['won\'t start'],
+    safetyFlags: ['electrical'],
+    followUpQuestions: [
+      'Does the compressor try to start and then trip after a few seconds?',
+      'Has the unit been off for at least 10 minutes before your last start attempt?'
+    ],
+    suggestedParts: ['PTC Start Thermistor', 'Hard start kit', 'Bleed resistor'],
+    likelyCauses: [
+      {
+        name: 'Defective PTC Start Thermistor',
+        confidence: 'High',
+        explanation: 'The PTC provides a starting boost. A good thermistor should measure 100-180% of its ohm rating. For a 12.5-ohm (beige) device, it should read 12.5-22.5 ohms.',
+        nextChecks: [
+          'Power off and remove PTC from the unit.',
+          'Wait 10 minutes for it to cool to ambient temperature.',
+          'Measure resistance; if >200% of rating or significantly lower, it is defective.',
+          'Inspect for burnt smell or cracked casing.'
+        ],
+        suggestedParts: ['12.5-ohm PTC Thermistor (Beige)']
+      },
+      {
+        name: 'Insufficient Cooling Time (Short Cycle)',
+        confidence: 'Medium',
+        explanation: 'PTC devices heat up to increase resistance and remove themselves from the circuit. If the off-cycle is too short, the device cannot cool down and loses its effectiveness as a start device.',
+        nextChecks: [
+          'Check for a missing or failed Cycle Protector delay.',
+          'Verify the thermostat is not short-cycling the system.',
+          'Allow the unit to sit for 10 minutes and attempt a restart.'
+        ],
+        suggestedParts: ['Cycle Protector relay']
+      },
+      {
+        name: 'Bleed Resistor Interference',
+        confidence: 'Low',
+        explanation: 'If a bleed resistor is wired across the start capacitor and not disconnected during testing, it will cause erroneous ohmmeter readings.',
+        nextChecks: [
+          'Disconnect the bleed resistor before applying an ohmmeter to the start capacitor.',
+          'Check if the resistor is cracked or overheated.'
+        ],
+        suggestedParts: ['Replacement bleed resistor']
+      }
+    ]
+  },
+  {
+    id: 'carrier-pressure-switch-trip',
+    title: 'Puron Pressure Switch Lockout',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'condenser'],
+    symptomKeywords: ['carrier', 'puron', 'pink stripe', 'high pressure', 'low pressure', '610 psig', '50 psig', 'loss of charge'],
+    symptomTags: ['short cycling', 'no cool'],
+    safetyFlags: ['refrigerant-handling', 'electrical'],
+    followUpQuestions: [
+      'Do the pressure switch wires have a pink stripe?',
+      'Is the outdoor fan motor running when the system cuts out?'
+    ],
+    suggestedParts: ['Puron High Pressure Switch', 'Puron Low Pressure Switch', 'Loss of Charge Switch'],
+    likelyCauses: [
+      {
+        name: 'Low Pressure Trip (AC Only)',
+        confidence: 'High',
+        explanation: 'The Puron low-pressure switch opens at 50 psig. This is usually caused by a loss of charge, a severely dirty air filter, or failed indoor blower motor.',
+        nextChecks: [
+          'Check for continuity across the switch with power off (should be closed).',
+          'Verify suction pressure is above 50 psig (Puron) or 27 psig (R-22).',
+          'Look for the pink stripe on wires to ensure the correct Puron-rated switch is installed.'
+        ],
+        suggestedParts: ['Low Pressure Switch (50 psig)']
+      },
+      {
+        name: 'High Pressure Trip (Dirty Coil)',
+        confidence: 'High',
+        explanation: 'The Puron high-pressure switch opens at 610 or 670 psig. This is typically caused by a dirty condenser coil, fan motor failure, or air re-circulation.',
+        nextChecks: [
+          'Inspect the condenser coil for debris or grass clippings.',
+          'Verify the switch closes at 420-470 psig.',
+          'Check for a failed condenser fan motor or a bad fan capacitor.'
+        ],
+        suggestedParts: ['High Pressure Switch (610-670 psig)']
+      },
+      {
+        name: 'Loss of Charge Trip (Heat Pump)',
+        confidence: 'Medium',
+        explanation: 'On heat pumps, the loss of charge switch is located on the liquid line. It opens at 23 psig (Puron) or 7 psig (R-22). This protects the compressor during heating mode when the liquid line acts as the low side.',
+        nextChecks: [
+          'Confirm system charge levels.',
+          'Verify continuity across the liquid line switch.',
+          'On 2-stage units, check the control board logic which is designed to ignore trips during defrost.'
+        ],
+        suggestedParts: ['Loss of Charge Switch (23 psig)']
+      }
+    ]
+  },
+  {
+    id: 'carrier-cch-tdr-fault',
+    title: 'Heater or Blower Delay Failure',
+    brand: 'carrier',
+    unitTypes: ['split system', 'heat pump', 'furnace'],
+    symptomKeywords: ['carrier', 'crankcase heater', 'tdr', '90 seconds', 'migration', 'flooded start', 'blower continuous', 'single pole'],
+    symptomTags: ['no cool', 'strange noise'],
+    safetyFlags: ['electrical', 'high-voltage'],
+    followUpQuestions: [
+      'Does the indoor blower run continuously even when the fan switch is set to AUTO?',
+      'Do you hear a loud clunking or grinding sound from the compressor only on startup?'
+    ],
+    suggestedParts: ['Time Delay Relay (TDR)', 'Crankcase Heater (CCH)', 'Ambient Temp Switch'],
+    likelyCauses: [
+      {
+        name: 'Failed Time Delay Relay (TDR)',
+        confidence: 'High',
+        explanation: 'The TDR keeps the indoor blower running for 90 seconds after shutdown. If the blower runs continuously in AUTO mode, the solid-state TDR is likely shorted and defective.',
+        nextChecks: [
+          'Verify the fan relay is receiving 24V from the TDR.',
+          'Check if the TDR resets when the thermostat closes again.',
+          'Confirm the TDR is drawing approximately 0.5 amps.'
+        ],
+        suggestedParts: ['Carrier 90-second TDR']
+      },
+      {
+        name: 'Open Crankcase Heater (CCH)',
+        confidence: 'High',
+        explanation: 'The CCH prevents refrigerant migration to the compressor shell. If it fails, liquid refrigerant can cause a "flooded start" that damages the compressor. On single-pole contactors, it is wired in series with the compressor run windings.',
+        nextChecks: [
+          'With power off, check for an open circuit (infinity ohms) across heater leads.',
+          'Carefully feel the area around the heater for warmth (only if system hasn\'t just run).',
+          'On 460V units, check the CCH Ambient Switch; it should be closed if the temperature is below 65°F.'
+        ],
+        suggestedParts: ['Carrier Crankcase Heater']
+      },
+      {
+        name: 'Failed CCH Ambient Temp Switch',
+        confidence: 'Medium',
+        explanation: 'On 460V units, the CCH is controlled by a relay and an ambient switch. If the switch stays open below 65°F, the heater will never energize, leading to condensation in the compressor.',
+        nextChecks: [
+          'Check if the OD ambient is below 65°F.',
+          'Test for 24V power from the indoor transformer R & C leads to the CCH relay coil.',
+          'Check if the relay stays energized even when the ambient is above 85°F.'
+        ],
+        suggestedParts: ['Ambient Temperature Switch']
+      }
+    ]
   }
 ];
 
@@ -612,8 +1104,8 @@ const HVAC_CASES = [
    ── SECTION: diagnosticEngine.ts ──────────────────────────
    ============================================================ */
 
-function matchCases(symptomText, selectedTags, unitType) {
-  const text = (symptomText || '').toLowerCase();
+function matchCases(symptomText, selectedTags, unitType, brand) {
+  const text = [symptomText, brand].filter(Boolean).join(' ').toLowerCase();
   const scores = HVAC_CASES.map(c => {
     let score = 0;
     // Keyword match in symptom text
@@ -636,7 +1128,7 @@ function matchCases(symptomText, selectedTags, unitType) {
 }
 
 function runDiagnostic(unitType, brand, model, symptomText, selectedTags) {
-  const matched = matchCases(symptomText, selectedTags, unitType);
+  const matched = matchCases(symptomText, selectedTags, unitType, brand);
   if (!matched) return null;
 
   const causes = matched.likelyCauses.slice(0, 3);
