@@ -10,6 +10,8 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -663,6 +665,19 @@ function buildSummary(unitType, brand, model, symptomText, tags, matched) {
   return desc;
 }
 
+function MarkdownView({ content }) {
+  const html = marked.parse(content || '');
+  
+  return (
+    <div 
+      className="prose prose-sm prose-slate max-w-none 
+                 prose-headings:font-bold prose-headings:text-[#0D1B2A] 
+                 prose-strong:text-red-700 prose-li:my-0"
+      dangerouslySetInnerHTML={{ __html: html }} 
+    />
+  );
+}
+
 /* ============================================================
    ── SECTION: Components ─────────────────────────────────────
    ============================================================ */
@@ -738,7 +753,9 @@ function CauseCard({ cause, rank }) {
 
       {open && (
         <div className="px-4 pb-4 border-t border-gray-100 fade-in">
-          <p className="text-gray-700 text-sm leading-relaxed mt-3 mb-3">{cause.explanation}</p>
+          <div className="mt-3 mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+            <MarkdownView content={cause.explanation} />
+          </div>
 
           <div className="text-xs font-bold text-[#1A5C3A] uppercase tracking-wider mb-2">Next Checks to Run</div>
           <ol className="space-y-2">
@@ -809,22 +826,63 @@ function TroubleshootingForm({ onResults }) {
 
   const toggleTag = chip => setTags(t => t.includes(chip) ? t.filter(x => x !== chip) : [...t, chip]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!symptom.trim() && tags.length === 0) {
-      setError('Please describe the symptom or select at least one symptom chip.');
+      setError('Please describe the symptom.');
       return;
     }
     setError('');
-    setLoading(true);
-    setTimeout(() => {
+
+    const runFallback = () => {
       const result = runDiagnostic(unitType, brand, model, symptom, tags);
-      setLoading(false);
       if (!result) {
-        setError('No matching case found. Try describing the symptom differently or selecting a chip above.');
+        setError('No matching case found.');
         return;
       }
-      onResults(result);
-    }, 600);
+      onResults({ ...result, source: 'General Knowledge Base' });
+    };
+
+    const isCarrier = brand?.toLowerCase().trim() === 'carrier';
+    if (!isCarrier) {
+      runFallback();
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const query = `${symptom} ${tags.join(" ")}`.trim();
+      const url = `http://127.0.0.1:8000/diagnose?query=${encodeURIComponent(query)}`;
+      
+      const response = await fetch(url);
+      
+      console.log("Fetch Status:", response.status); 
+
+      const data = await response.json();
+      console.log("Received Data:", data);
+
+      if (data.results && data.results.length > 0) {
+        onResults({
+          caseTitle: "Carrier Service Manual Diagnosis",
+          source: "Official Carrier Manual",
+          summary: `Identified ${data.results.length} matches in Carrier documentation.`,
+          causes: data.results.map(r => ({
+            name: r.name,
+            confidence: r.confidence,
+            explanation: r.explanation,
+            nextChecks: ["Follow the specific sequence outlined in the manual text."]
+          })),
+          safetyFlags: ['electrical'],
+          suggestedParts: []
+        });
+      } else {
+        runFallback();
+      }
+    } catch (err) {
+      console.error("Diagnostic Error:", err);
+      runFallback();
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -1,0 +1,5 @@
+# Dependencies for the FastAPI backend (server.py). Install with:
+#   pip install -r requirements.txt
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+sentence-transformers>=2.2.0
