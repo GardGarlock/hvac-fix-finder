@@ -539,14 +539,99 @@
       .stat-item:first-child { border-top: none !important; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ===== NEW: LOGIN BUTTON ===== */
+    .btn-login { background: transparent; color: var(--gray-600); border-color: var(--gray-300); padding: 9px 18px; font-size: 0.82rem; }
+    .btn-login:hover { background: var(--gray-50); color: var(--navy); border-color: var(--gray-500); }
+    .btn-outline-dark { background: transparent; color: var(--gray-900); border-color: var(--gray-400); }
+    .btn-outline-dark:hover { background: var(--gray-900); color: var(--white); transform: translateY(-1px); }
+
+    /* ===== NEW: FEATURE GRID (Platform Capabilities) ===== */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .feature-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 32px 28px; }
+    .feature-card-n { font-family: var(--ff-serif); font-size: 2rem; color: var(--accent); opacity: 0.5; margin-bottom: 12px; line-height: 1; }
+    .feature-card h4 { color: var(--white); margin-bottom: 10px; }
+    .feature-card p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin: 0; }
+    .feature-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: rgba(109,201,154,0.15); border-radius: 20px; padding: 3px 10px; margin-bottom: 14px; }
+
+    /* ===== NEW: STORY CARDS (Use Cases) ===== */
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .story-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow-sm); }
+    .story-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); background: var(--green-tint); border-radius: 20px; padding: 4px 12px; align-self: flex-start; }
+    .story-persona { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
+    .story-persona-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .story-persona-name { font-weight: 600; font-size: 0.9rem; color: var(--gray-900); line-height: 1.3; }
+    .story-persona-role { font-size: 0.78rem; color: var(--gray-500); }
+    .story-conflict { font-size: 0.88rem; color: var(--gray-600); line-height: 1.6; }
+    .story-result { background: var(--green-tint); border-left: 3px solid var(--green); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 16px; font-size: 0.85rem; color: var(--gray-700); margin-top: auto; }
+    .story-result strong { color: var(--green); display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+
+    /* ===== NEW: MARKETPLACE SPLIT ===== */
+    .mkt-split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .mkt-side { border-radius: var(--radius-lg); padding: 36px 32px; }
+    .mkt-side--supply { background: var(--navy); color: white; }
+    .mkt-side--demand { background: var(--green-tint); border: 1px solid rgba(26,92,58,0.15); }
+    .mkt-side-label { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 20px; padding: 3px 10px; margin-bottom: 16px; }
+    .mkt-side--supply .mkt-side-label { background: rgba(109,201,154,0.2); color: var(--accent); }
+    .mkt-side--demand .mkt-side-label { background: rgba(26,92,58,0.12); color: var(--green); }
+    .mkt-side--supply h3 { color: white; margin-bottom: 10px; }
+    .mkt-side--demand h3 { color: var(--navy); margin-bottom: 10px; }
+    .mkt-side--supply p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 20px; }
+    .mkt-side--demand p { color: var(--gray-600); font-size: 0.9rem; margin-bottom: 20px; }
+    .mkt-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .mkt-list li { display: flex; gap: 10px; font-size: 0.88rem; align-items: flex-start; }
+    .mkt-side--supply .mkt-list li { color: rgba(255,255,255,0.75); }
+    .mkt-side--demand .mkt-list li { color: var(--gray-700); }
+    .mkt-list li::before { content: '→'; font-weight: 700; flex-shrink: 0; }
+    .mkt-side--supply .mkt-list li::before { color: var(--accent); }
+    .mkt-side--demand .mkt-list li::before { color: var(--green); }
+
+    /* ===== NEW: ICP THREE-COL ===== */
+    .icp-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .icp-card-3 { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; }
+    .icp-card-3--agency { border-top: 3px solid var(--green); }
+    .icp-card-3--creator { border-top: 3px solid var(--accent); }
+    .icp-card-3--expert { border-top: 3px solid var(--gold-pale); border-top-color: #D4AF37; }
+    .icp-card-3 .icp-badge { align-self: flex-start; }
+    .icp-card-3 h3 { font-size: 1.1rem; }
+    .icp-card-3 ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; }
+    .icp-card-3 li { display: flex; gap: 10px; font-size: 0.87rem; color: var(--gray-600); align-items: flex-start; }
+    .icp-card-3 li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .icp-metric { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--gray-100); margin-top: auto; padding-top: 16px; }
+    .icp-metric-item { text-align: center; padding: 8px 0; }
+    .icp-metric-item:first-child { border-right: 1px solid var(--gray-100); }
+    .icp-metric-val { font-family: var(--ff-serif); font-size: 1.3rem; color: var(--navy); }
+    .icp-metric-lab { font-size: 0.72rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ===== NEW: PARTNER SECTION ===== */
+    .partner-box { background: var(--navy); border-radius: var(--radius-lg); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .partner-box h2 { color: white; }
+    .partner-box .rule { background: var(--accent); }
+    .partner-box p { color: rgba(255,255,255,0.7); }
+    .partner-steps { display: flex; flex-direction: column; gap: 16px; }
+    .partner-step { display: flex; gap: 16px; align-items: flex-start; }
+    .partner-step-dot { width: 32px; height: 32px; border-radius: 50%; background: rgba(109,201,154,0.15); border: 1px solid rgba(109,201,154,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .partner-step-text h4 { color: white; font-size: 0.95rem; margin-bottom: 4px; }
+    .partner-step-text p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin: 0; }
+
+    @media (max-width: 900px) {
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .story-grid { grid-template-columns: 1fr; }
+      .mkt-split { grid-template-columns: 1fr; }
+      .icp-grid-3 { grid-template-columns: 1fr; }
+      .partner-box { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
 <!-- ===== ANNOUNCEMENT BAR ===== -->
 <div class="announce-bar">
-  <span class="announce-pill">Free Tool</span>
-  See our work in action &mdash; try the <a href="/hvac-fix-finder">HVAC Fix Finder</a>, our AI-powered diagnostic tool built for field technicians.
+  <span class="announce-pill">Early Access</span>
+  Platform Prepared is now open for founding members &mdash; <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer">claim your spot before we fill the first 100 seats &rarr;</a>
 </div>
 
 <!-- ===== NAV ===== -->
@@ -570,43 +655,45 @@
       </svg>
       <span class="nav-logo-text">
         <span class="nav-logo-name">Platform <strong>Prepared</strong></span>
-        <span class="nav-logo-sub">Value Creation &amp; Operations</span>
+        <span class="nav-logo-sub">AI Agency Infrastructure</span>
       </span>
     </a>
     <ul class="nav-links">
-      <li><a href="#who-we-serve">Who We Help</a></li>
-      <li><a href="#services">What We Build</a></li>
-      <li><a href="#calculator">Score My Business</a></li>
-      <li><a href="#brokers">For Brokers</a></li>
+      <li><a href="#platform">The Platform</a></li>
+      <li><a href="#who-we-serve">Who It&rsquo;s For</a></li>
+      <li><a href="#use-cases">Use Cases</a></li>
+      <li><a href="#marketplace">Marketplace</a></li>
       <li><a href="#about">About</a></li>
     </ul>
-    <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Free Diagnostic Call</a>
+    <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-login">Login</a>
+    <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Early Access</a>
     <button class="nav-hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 <div class="nav-mobile" id="mobileMenu">
-  <a href="#who-we-serve" onclick="closeMenu()">Who We Help</a>
-  <a href="#services"     onclick="closeMenu()">What We Build</a>
-  <a href="#calculator"   onclick="closeMenu()">Score My Business</a>
-  <a href="#brokers"      onclick="closeMenu()">For Brokers</a>
+  <a href="#platform"     onclick="closeMenu()">The Platform</a>
+  <a href="#who-we-serve" onclick="closeMenu()">Who It&rsquo;s For</a>
+  <a href="#use-cases"    onclick="closeMenu()">Use Cases</a>
+  <a href="#marketplace"  onclick="closeMenu()">Marketplace</a>
   <a href="#about"        onclick="closeMenu()">About</a>
-  <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary" onclick="closeMenu()">Free Diagnostic Call</a>
+  <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-login" onclick="closeMenu()">Login</a>
+  <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" onclick="closeMenu()">Get Early Access</a>
 </div>
 
 <!-- ===== HERO ===== -->
 <header class="hero" id="top">
   <div class="hero-inner">
-    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Post-Acquisition Value Creation &mdash; Small Service Businesses</div>
-    <h1>You closed the deal.<br>Now the real work starts.</h1>
-    <p class="hero-sub">We build the infrastructure that turns a good acquisition into a great business.</p>
-    <p class="hero-body">The seller is gone. The processes live in people&rsquo;s heads. The financials don&rsquo;t quite make sense yet. Whether you&rsquo;re 30 days post-close or 3 years into ownership and finally ready to fix the foundation &mdash; the problem is the same. The business isn&rsquo;t running the way it should. We fix that. Embedded alongside your team, we install the systems, document the processes, build the sales engine, and clean the financials &mdash; using modern AI tools that compress months of work into weeks &mdash; until the business is worth significantly more than the day you bought it.</p>
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Automation-as-a-Service Infrastructure &mdash; For AI Agencies, Builders &amp; Domain Experts</div>
+    <h1>Launch a sovereign<br>AI agency in a weekend.</h1>
+    <p class="hero-sub">Platform Prepared is the operating system for AI-driven service businesses &mdash; white-labeled client portals, usage-based billing, and a marketplace of ready-to-deploy AI tools.</p>
+    <p class="hero-body">You built the automation. Now what? Most AI agencies collapse under the weight of billing complexity, API cost management, and client portals stitched together from a dozen mismatched tools. Platform Prepared replaces all of it &mdash; a single integrated environment that gives you the client management, monetization engine, and AI marketplace you need to run a professional, sovereign AI business from day one. Your brand. Your data. Your clients. We just build the infrastructure.</p>
     <div class="hero-actions">
-      <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">Book a Free 30-Minute Diagnostic &rarr;</a>
-      <a href="#calculator" class="btn btn-ghost">Score My Business</a>
+      <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">Get Early Access &rarr;</a>
+      <a href="#who-we-serve" class="btn btn-ghost">See Who It&rsquo;s For</a>
     </div>
-    <p class="hero-note">No cost &bull; No obligation &bull; Walk away with a clear picture of where you stand</p>
+    <p class="hero-note">Currently in early access &bull; First 100 agencies get founding member pricing &bull; No credit card required</p>
   </div>
 </header>
 
@@ -614,352 +701,353 @@
 <div class="stats">
   <div class="stats-grid">
     <div class="stat-item">
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Service businesses analyzed for operational value gaps</div>
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Months of dev time saved on billing, portals, and security infrastructure</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">75%</div>
-      <div class="stat-label">Of owners are unprepared when they sell<span class="stat-source">Exit Planning Institute, 2023</span></div>
+      <div class="stat-num">40&ndash;70%</div>
+      <div class="stat-label">Cost reduction using managed open-source models vs. proprietary APIs<span class="stat-source">Llama 4 / DeepSeek vs. OpenAI / Anthropic</span></div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">68%</div>
-      <div class="stat-label">Of listed businesses never sell<span class="stat-source">IBBA Market Pulse Survey</span></div>
+      <div class="stat-num">$10B+</div>
+      <div class="stat-label">AI services market projected by 2027 &mdash; the agency layer is the fastest-growing segment<span class="stat-source">Gartner, 2024</span></div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">2&ndash;3&times;</div>
-      <div class="stat-label">More EBITDA multiple for professionally run vs. owner-dependent businesses</div>
+      <div class="stat-num">1 weekend</div>
+      <div class="stat-label">Time to go from raw automation to a fully branded, billable AI agency storefront</div>
     </div>
   </div>
 </div>
 
-<!-- ===== WHO WE HELP ===== -->
+<!-- ===== WHO WE SERVE ===== -->
 <section class="sec" id="who-we-serve">
   <div class="wrap">
     <div class="icp-intro">
-      <span class="eyebrow">Who We Work With</span>
-      <h2>Two situations. One solution.</h2>
+      <span class="eyebrow">Who It&rsquo;s For</span>
+      <h2>Three paths in. One platform.</h2>
       <div class="rule rule--center"></div>
+      <p style="max-width:600px;margin:0 auto;">We serve three distinct customer types. Each comes to Platform Prepared for a different reason &mdash; and leaves with the same unfair advantage.</p>
     </div>
-    <div class="icp-grid">
-      <article class="icp-card icp-card--buyer">
-        <span class="icp-badge">Post-Close — First 90&ndash;180 Days</span>
-        <h3>You closed 90 days ago. The seller is gone. It&rsquo;s messier than the CIM said.</h3>
-        <p>The operation runs on the seller&rsquo;s phone, relationships no one documented, and processes that exist only in the heads of people who may be thinking about leaving. Whether you&rsquo;re a searcher, an SBA buyer, or a PE-backed sponsor &mdash; you need value-creating infrastructure installed before things break.</p>
+    <div class="icp-grid-3" style="margin-top:40px;">
+
+      <article class="icp-card-3 icp-card-3--agency">
+        <span class="icp-badge" style="background:var(--green-tint);color:var(--green);">Primary Revenue Driver</span>
+        <h3>The AI Agency</h3>
+        <p style="font-size:0.88rem;color:var(--gray-600);">You have clients and you&rsquo;re delivering AI-powered services &mdash; but you&rsquo;re stitching together billing, portals, and API tracking from a dozen fragmented tools. You need an operating system, not another app.</p>
         <ul>
-          <li>Get full visibility into what you actually own before tribal knowledge walks out</li>
-          <li>Install the systems, software, and reporting the business should have had</li>
-          <li>Document every core workflow before institutional knowledge disappears</li>
-          <li>Build the platform for organic growth, add-ons, or a future premium exit</li>
+          <li>White-labeled client portals under your brand</li>
+          <li>Usage-based billing tied to real API consumption</li>
+          <li>Instant access to the marketplace to stock your storefront</li>
+          <li>Client data stays in your silo &mdash; sovereign by default</li>
         </ul>
+        <div class="icp-metric">
+          <div class="icp-metric-item"><div class="icp-metric-val">$5K</div><div class="icp-metric-lab">Avg monthly retainer</div></div>
+          <div class="icp-metric-item"><div class="icp-metric-val">Day 1</div><div class="icp-metric-lab">Time to first client</div></div>
+        </div>
       </article>
-      <article class="icp-card icp-card--seller">
-        <span class="icp-badge">Owner-Operated &mdash; Ready to Fix the Foundation</span>
-        <h3>The revenue is there. But something in the operation still isn&rsquo;t adding up.</h3>
-        <p>You&rsquo;ve been running this business for years and you know it should be performing better. The team depends on you for everything. The financials are hard to explain to a banker. There&rsquo;s no system that runs without you at the center. That&rsquo;s fixable &mdash; and fixing it creates real, measurable value.</p>
+
+      <article class="icp-card-3 icp-card-3--creator">
+        <span class="icp-badge" style="background:rgba(109,201,154,0.15);color:#1A5C3A;">Primary Supply Driver</span>
+        <h3>The Vibe Coder</h3>
+        <p style="font-size:0.88rem;color:var(--gray-600);">You built something useful with Bolt, Cursor, or Claude &mdash; and 50,000 people want it. But you have no login system, no billing, no way to cap API costs before you get a $10K bill. You need a business wrapped around your tool.</p>
         <ul>
-          <li>Stop leaving 2&ndash;3 turns of EBITDA on the table</li>
-          <li>Build clean, bankable financials that hold up to scrutiny</li>
-          <li>Make your presence optional so the business runs without you</li>
-          <li>Go to market when you choose, at the multiple your business deserves</li>
+          <li>Plug your tool into Platform Prepared in an afternoon</li>
+          <li>We provide the body: Stripe billing, user accounts, API limits</li>
+          <li>List on the marketplace and earn passive income from agency resellers</li>
+          <li>Focus on the code. We handle the business infrastructure.</li>
         </ul>
+        <div class="icp-metric">
+          <div class="icp-metric-item"><div class="icp-metric-val">500+</div><div class="icp-metric-lab">Potential subscribers</div></div>
+          <div class="icp-metric-item"><div class="icp-metric-val">12+</div><div class="icp-metric-lab">Agency resellers</div></div>
+        </div>
       </article>
-    </div>
-    <div class="icp-bridge">
-      <p>The work is the same for both. <span>A professionally run business &mdash; clean books, documented processes, a real sales system, and a team that doesn&rsquo;t need you &mdash; is always worth more than one that isn&rsquo;t.</span></p>
+
+      <article class="icp-card-3 icp-card-3--expert">
+        <span class="icp-badge" style="background:#FBF7EE;color:#8B7028;">Efficiency &amp; Productization</span>
+        <h3>The Domain Expert</h3>
+        <p style="font-size:0.88rem;color:var(--gray-600);">You know your industry cold &mdash; law, healthcare, real estate, finance &mdash; but building AI tools from scratch isn&rsquo;t your skill. You need a plug-and-play storefront stocked with pre-built automations relevant to your vertical.</p>
+        <ul>
+          <li>Browse marketplace assets built for your specific industry</li>
+          <li>Launch a branded AI storefront without writing a line of code</li>
+          <li>Charge clients for AI tools as a premium service layer</li>
+          <li>Your expertise becomes the moat. The platform provides the tools.</li>
+        </ul>
+        <div class="icp-metric">
+          <div class="icp-metric-item"><div class="icp-metric-val">0</div><div class="icp-metric-lab">Lines of code needed</div></div>
+          <div class="icp-metric-item"><div class="icp-metric-val">1 week</div><div class="icp-metric-lab">To first paid client</div></div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
-<!-- ===== OWNER LOCK STRIP ===== -->
-<section class="ownerlock" id="framework">
+<!-- ===== PLATFORM FEATURES ===== -->
+<section class="ownerlock" id="platform">
   <div class="ownerlock-inner">
     <div class="ownerlock-head">
       <div class="ownerlock-def">
-        <span class="eyebrow eyebrow--light">The Value Creation Framework</span>
-        <h2>Five dimensions. Every gap is money left on the table.</h2>
+        <span class="eyebrow eyebrow--light">The Platform</span>
+        <h2>Infrastructure-as-a-Service for the AI economy.</h2>
         <div class="rule rule--light" style="margin-top:14px;margin-bottom:18px;"></div>
-        <p><strong style="color:rgba(255,255,255,0.85);">Owner Lock</strong> is the condition where a business cannot operate, grow, or transfer without its owner at the center. It shows up in five measurable dimensions — and every gap suppresses the value of what you own, whether you plan to sell or simply want a business that runs without you.</p>
+        <p style="color:rgba(255,255,255,0.7);">Platform Prepared abstracts the backend complexity of running an AI-driven service business. It replaces a fragmented tech stack &mdash; Stripe, a custom portal, a logging database, an API gateway &mdash; with a single integrated environment. Non-technical entrepreneurs deploy professional AI products without building custom architecture. Technical builders get a commercialization layer that lets them focus on what they&rsquo;re actually good at.</p>
       </div>
       <div class="ownerlock-quote">
-        <blockquote>&ldquo;If your company is doing solid revenue but the money doesn&rsquo;t feel solid &mdash; that&rsquo;s almost always an Owner Lock problem. Not a sales problem.&rdquo;</blockquote>
-        <cite>&mdash; Nathan Garlock, Founder &bull; Platform Prepared</cite>
+        <blockquote>&ldquo;The next wave of SaaS won&rsquo;t be built by engineers at big companies. It&rsquo;ll be built by domain experts and vibe coders who have the right infrastructure underneath them.&rdquo;</blockquote>
+        <cite>&mdash; Nathan Garlock, Co-Founder &bull; Platform Prepared</cite>
       </div>
     </div>
-    <div class="pillars">
-      <article class="pillar">
-        <div class="pillar-n">01</div>
-        <h4>Team Redundancy</h4>
-        <p>The owner takes a three-week vacation and the operation doesn&rsquo;t miss a beat. We build the management layer and eliminate key-man risk.</p>
-        <div class="pillar-who">Sellers &bull; Buyers &bull; Lenders</div>
-      </article>
-      <article class="pillar">
-        <div class="pillar-n">02</div>
-        <h4>Repeatable Revenue</h4>
-        <p>SBA lenders won&rsquo;t fund revenue that lives in the owner&rsquo;s rolodex. We build documented recurring revenue with diversified customer concentration.</p>
-        <div class="pillar-who">SBA Lenders &bull; Buyers at LOI</div>
-      </article>
-      <article class="pillar">
-        <div class="pillar-n">03</div>
-        <h4>Digital Infrastructure</h4>
-        <p>We implement the right CRM, field software, and AI tools for your trade and train your team until daily use is second nature &mdash; cutting busywork and surfacing insights the business never had time to find.</p>
-        <div class="pillar-who">Scalability &bull; Buyer Confidence</div>
-      </article>
-      <article class="pillar">
-        <div class="pillar-n">04</div>
-        <h4>Clean Financials</h4>
-        <p>COGS separated, overhead correctly allocated, gross profit clearly visible. We coordinate with your CPA to get books diligence-ready.</p>
-        <div class="pillar-who">Every Lender &bull; Every Buyer</div>
-      </article>
-      <article class="pillar">
-        <div class="pillar-n">05</div>
-        <h4>Documented Processes</h4>
-        <p>We write the SOPs and build training systems so every core workflow is on paper and any team member can execute correctly.</p>
-        <div class="pillar-who">Everyone at the Table</div>
-      </article>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-n">01</div>
+        <span class="feature-badge">Client Management</span>
+        <h4>White-Labeled Client Portals</h4>
+        <p>Your brand. Your domain. Your clients&rsquo; experience. Every agency gets a fully white-labeled portal where clients log in, track deliverables, and interact with their AI tools &mdash; with zero Platform Prepared branding visible.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-n">02</div>
+        <span class="feature-badge">Monetization Engine</span>
+        <h4>Usage-Based Billing &amp; Invoicing</h4>
+        <p>Native Stripe integration with metered, usage-based invoicing &mdash; essential for managing variable API costs. Charge clients exactly what their usage costs you, plus your margin. No more guessing at flat retainers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-n">03</div>
+        <span class="feature-badge">Marketplace</span>
+        <h4>AI Tool Marketplace</h4>
+        <p>Browse, license, and deploy modular AI automations from third-party builders directly into your client-facing storefront. Stock your agency with proven tools in minutes &mdash; no development required.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-n">04</div>
+        <span class="feature-badge">API Abstraction</span>
+        <h4>Unified API Gateway</h4>
+        <p>Standardized API usage tracking across OpenAI, Anthropic, Llama, and DeepSeek. One integration. Every model. Non-technical operators deploy AI products without building custom database or logging architecture.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-n">05</div>
+        <span class="feature-badge">Data Sovereignty</span>
+        <h4>Private Clean Rooms</h4>
+        <p>Client data never touches public model servers. Every agency runs in an isolated environment &mdash; the IT block that kills most AI consultant deals gets lifted the moment you can say &ldquo;this runs in a private clean room on our domain.&rdquo;</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-n">06</div>
+        <span class="feature-badge">Cost Efficiency</span>
+        <h4>Managed Open-Source Models</h4>
+        <p>Access Llama 4, DeepSeek, and other managed open-source models at 40&ndash;70% below OpenAI and Anthropic API pricing. Pass savings to clients or keep the margin. The infrastructure choice is yours.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== BEFORE / AFTER ===== -->
-<section class="sec" style="background:var(--gray-50); border-top:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200);">
+<!-- ===== USE CASES ===== -->
+<section class="sec" id="use-cases" style="background:var(--gray-50); border-top:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200);">
   <div class="wrap">
     <div class="transform-intro">
-      <span class="eyebrow">The Transformation</span>
-      <h2>The same business. A fundamentally different operation.</h2>
+      <span class="eyebrow">Use Cases</span>
+      <h2>Three people. Three problems. One platform.</h2>
       <div class="rule rule--center"></div>
-      <p>Most service businesses are underperforming their own potential. The revenue is real — but it's fragile, owner-dependent, and impossible to scale. We fix the foundation. Same team, same customers, dramatically better business.</p>
+      <p>Platform Prepared was built around the real problems real operators face when trying to run a professional AI service business.</p>
     </div>
-    <div class="transform-grid">
-      <div class="t-col t-col--before">
-        <span class="t-label">Before</span>
-        <ul>
-          <li><span class="t-icon">&times;</span>Owner answers every call, makes every decision</li>
-          <li><span class="t-icon">&times;</span>Revenue reports exist but COGS and overhead aren&rsquo;t separated</li>
-          <li><span class="t-icon">&times;</span>Pricing based on competitors, not actual margins</li>
-          <li><span class="t-icon">&times;</span>Customer data in spreadsheets or people&rsquo;s heads</li>
-          <li><span class="t-icon">&times;</span>No written processes — everything is tribal knowledge</li>
-          <li><span class="t-icon">&times;</span>Revenue depends entirely on the owner&rsquo;s relationships</li>
-          <li><span class="t-icon">&times;</span>Owner can&rsquo;t step away without the business suffering</li>
-        </ul>
-        <div class="t-footer">Worth 3&ndash;4&times; EBITDA &mdash; and hard to grow or sell</div>
+    <div class="story-grid">
+
+      <div class="story-card">
+        <span class="story-tag">Scenario A &mdash; The Agency Lead</span>
+        <h3 style="font-size:1.1rem;">&ldquo;The Secure Scale&rdquo;</h3>
+        <div class="story-persona">
+          <div class="story-persona-icon">&#9878;</div>
+          <div>
+            <div class="story-persona-name">Sarah &mdash; Automation Consultant</div>
+            <div class="story-persona-role">Serves mid-sized law firms with AI agents</div>
+          </div>
+        </div>
+        <p class="story-conflict">Sarah&rsquo;s AI agent automates 80% of contract discovery. Her clients want it &mdash; but their IT departments block her because sensitive client data would touch OpenAI&rsquo;s public servers. She&rsquo;s stuck at $2K one-off projects.</p>
+        <div class="story-result">
+          <strong>The Result</strong>
+          Sarah launches on Platform Prepared, selects a &ldquo;Private Legal Agent&rdquo; from the marketplace, and tells the law firm their data never leaves a private clean room. The IT block is lifted. Sarah goes from $2K consultant to <strong>$5K/month Sovereign SaaS provider</strong>.
+        </div>
       </div>
-      <div class="t-col t-col--after">
-        <span class="t-label">After</span>
-        <ul>
-          <li><span class="t-icon">&#10003;</span>Management layer runs daily operations independently</li>
-          <li><span class="t-icon">&#10003;</span>Clean P&amp;L — gross profit, overhead, and net profit clearly visible</li>
-          <li><span class="t-icon">&#10003;</span>Pricing built from true overhead and target margin</li>
-          <li><span class="t-icon">&#10003;</span>CRM with full customer history, job dashboards, daily use</li>
-          <li><span class="t-icon">&#10003;</span>SOPs for every workflow &mdash; any team member can execute</li>
-          <li><span class="t-icon">&#10003;</span>40%+ recurring revenue, diversified customer base</li>
-          <li><span class="t-icon">&#10003;</span>Owner takes a 3-week vacation. Business runs fine.</li>
-        </ul>
-        <div class="t-footer">Worth 6&ndash;8&times; EBITDA &mdash; and built to grow, hold, or sell</div>
+
+      <div class="story-card">
+        <span class="story-tag">Scenario B &mdash; The Creator Lead</span>
+        <h3 style="font-size:1.1rem;">&ldquo;Vibe-to-Value&rdquo;</h3>
+        <div class="story-persona">
+          <div class="story-persona-icon">&#128187;</div>
+          <div>
+            <div class="story-persona-name">Marcus &mdash; Vibe Coder</div>
+            <div class="story-persona-role">Built a viral AI researcher tool on a weekend</div>
+          </div>
+        </div>
+        <p class="story-conflict">Marcus has 50,000 people interested on X but no login system, no way to charge for usage, and he&rsquo;s scared of a $10K Anthropic API bill he can&rsquo;t pay. His tool is viral. His business doesn&rsquo;t exist.</p>
+        <div class="story-result">
+          <strong>The Result</strong>
+          Marcus plugs into Platform Prepared. We provide the body &mdash; Stripe billing, user accounts, API limits. He lists it on the marketplace. He wakes up to <strong>500 subscribers and 12 agencies reselling his tool</strong> to their own clients. He just writes code.
+        </div>
       </div>
+
+      <div class="story-card">
+        <span class="story-tag">Scenario C &mdash; The Enterprise Lead</span>
+        <h3 style="font-size:1.1rem;">&ldquo;The SaaS Defense&rdquo;</h3>
+        <div class="story-persona">
+          <div class="story-persona-icon">&#127970;</div>
+          <div>
+            <div class="story-persona-name">A CRM Company CTO</div>
+            <div class="story-persona-role">Watching AI-native competitors take market share</div>
+          </div>
+        </div>
+        <p class="story-conflict">They need AI features to survive, but they won&rsquo;t hand 10 years of proprietary customer data to a foundation model company that might launch a CRM feature next month. Build vs. buy is a 2-year decision they don&rsquo;t have time for.</p>
+        <div class="story-result">
+          <strong>The Result</strong>
+          They deploy a &ldquo;Private AI Hub&rdquo; on their subdomain using Platform Prepared, stocked with security-audited marketplace automations. They launch <strong>&ldquo;AI-Powered CRM&rdquo; in two weeks</strong>. Their data stays encrypted. Their valuation stabilizes.
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ===== SERVICES ===== -->
-<section class="sec" id="services">
+<!-- ===== MARKETPLACE ===== -->
+<section class="sec" id="marketplace">
   <div class="wrap">
     <div class="services-intro">
-      <span class="eyebrow">What We Build Together</span>
-      <h2>We are not consultants. We are operators.</h2>
+      <span class="eyebrow">The Marketplace Ecosystem</span>
+      <h2>The supply chain for the AI agency economy.</h2>
       <div class="rule rule--center"></div>
-      <p>Consultants deliver reports. We deliver working systems, trained teams, and documented processes &mdash; and we stay until they hold. Four workstreams deployed in the sequence that moves your multiple the fastest.</p>
+      <p>Platform Prepared operates as a two-sided marketplace that solves the content gap for AI entrepreneurs. Builders list modular AI automations. Agencies license them to stock their storefronts. Everyone wins.</p>
     </div>
-    <div class="svc-grid">
-      <article class="svc">
-        <div class="svc-n">01</div>
-        <h3>Team &amp; Leadership</h3>
-        <span class="svc-outcome">You step back. The operation doesn&rsquo;t miss a beat.</span>
-        <p>We build the management layer, define roles and accountability, and install the comp plans that make the structure hold without you in the room. Buyers stop seeing a job. They see a business.</p>
-        <div class="svc-tags"><span class="svc-tag">Org design</span><span class="svc-tag">Role clarity</span><span class="svc-tag">Key-man risk</span><span class="svc-tag">Comp plans</span></div>
-      </article>
-      <article class="svc">
-        <div class="svc-n">02</div>
-        <h3>GTM, Sales &amp; Revenue Engine</h3>
-        <span class="svc-outcome">Revenue stops depending on you picking up the phone.</span>
-        <p>We build the go-to-market strategy, sales management structure, and pipeline system that generates business without you. Pricing rebuilt from your actual overhead. Comp plans that incentivize selling. Referral engines that create a predictable pipeline.</p>
-        <div class="svc-tags"><span class="svc-tag">GTM strategy</span><span class="svc-tag">Sales management</span><span class="svc-tag">Pricing strategy</span><span class="svc-tag">Pipeline tracking</span></div>
-      </article>
-      <article class="svc">
-        <div class="svc-n">03</div>
-        <h3>Digital Infrastructure &amp; CRM</h3>
-        <span class="svc-outcome">Any owner — current or future — has full visibility from day one.</span>
-        <p>We research the right technology for your trade and implement it with your team, not just for them. CRM, field service software, reporting stack. Data migrated, workflows configured, people trained until it&rsquo;s second nature.</p>
-        <div class="svc-tags"><span class="svc-tag">Jobber</span><span class="svc-tag">ServiceTitan</span><span class="svc-tag">Housecall Pro</span><span class="svc-tag">HubSpot</span><span class="svc-tag">Data migration</span></div>
-      </article>
-      <article class="svc">
-        <div class="svc-n">04</div>
-        <h3>Process Documentation &amp; SOPs</h3>
-        <span class="svc-outcome">What lives in people&rsquo;s heads gets onto paper &mdash; permanently.</span>
-        <p>We sit with your team, map every core workflow, and write the SOPs anyone can execute. Estimating, scheduling, dispatch, invoicing, collections. A new hire ramps in two weeks instead of three months. That&rsquo;s a transferable asset.</p>
-        <div class="svc-tags"><span class="svc-tag">Process mapping</span><span class="svc-tag">SOP manuals</span><span class="svc-tag">Training systems</span><span class="svc-tag">Onboarding guides</span></div>
-      </article>
-      <article class="svc svc--ai">
-        <div class="svc-n">05</div>
-        <h3>AI Tools &amp; Automation</h3>
-        <span class="svc-outcome">Your team does more with the same people &mdash; without burning them out.</span>
-        <p>We identify and implement the AI tools that create the most leverage across your specific operation &mdash; from customer communication and scheduling to job costing, follow-up, and reporting. No chatbot pilots. No vendor demos. Tools that are live, trained, and used by your team within 30 days.</p>
-        <div class="svc-tags"><span class="svc-tag">Workflow automation</span><span class="svc-tag">Customer communication</span><span class="svc-tag">AI reporting</span><span class="svc-tag">Scheduling &amp; dispatch</span><span class="svc-tag">Job costing</span></div>
-      </article>
-    </div>
-
-    <!-- See Our Work CTA -->
-    <div class="svc-work-cta">
-      <div class="svc-work-cta-text">
-        <h3>Want to see exactly what this looks like inside a real business?</h3>
-        <p>We&rsquo;ve built implementation plans, AI quick-win playbooks, and 90-day operational roadmaps for service businesses across HVAC, plumbing, landscaping, and more. Ask us for examples and we&rsquo;ll send you access directly.</p>
+    <div class="mkt-split">
+      <div class="mkt-side mkt-side--supply">
+        <span class="mkt-side-label">Supply Side</span>
+        <h3>AI Builders &amp; Vibe Coders</h3>
+        <p>You built something useful. The marketplace is your commercialization layer &mdash; providing the billing, API security, and user management to transform a raw script into a sellable &ldquo;Productized AI&rdquo; asset.</p>
+        <ul class="mkt-list">
+          <li>List your tool and set your licensing price</li>
+          <li>Earn revenue every time an agency deploys your automation to their clients</li>
+          <li>API cost protection &mdash; set hard limits so you never get a surprise bill</li>
+          <li>Security and compliance handled at the platform level</li>
+          <li>Reach 100+ agencies without a single sales call</li>
+        </ul>
       </div>
-      <a href="mailto:nate@platformprepared.com?subject=I'd like to see examples of your work&body=Hi Nathan, I'd like to see examples of what Platform Prepared has built. Here's a bit about my situation: " class="btn btn-outline-dark">Request Access to Our Work &rarr;</a>
+      <div class="mkt-side mkt-side--demand">
+        <span class="mkt-side-label">Demand Side</span>
+        <h3>AI Agencies &amp; Consultants</h3>
+        <p>Platform Prepared is your operating system. Bring your own custom workflows, or instantly stock your storefront with assets produced by the creator community &mdash; a plug-and-play agency model from day one.</p>
+        <ul class="mkt-list">
+          <li>Browse security-audited automations by industry vertical</li>
+          <li>License and deploy to your storefront in minutes</li>
+          <li>White-label everything &mdash; your brand, your margin</li>
+          <li>Charge clients usage-based or flat-rate &mdash; your choice</li>
+          <li>Client data stays isolated in your private clean room</li>
+        </ul>
+      </div>
     </div>
-
-    <div class="svc-promise">
+    <div class="svc-promise" style="margin-top:40px;">
       <div>
-        <blockquote>&ldquo;Every engagement is month-to-month. We earn the next month by delivering results in this one.&rdquo;</blockquote>
-        <p>No long-term contracts. No 80-page reports. We stay embedded until the systems hold, the team runs without you, and the multiple reflects what you actually built.</p>
+        <blockquote>&ldquo;We provide a core library of high-utility automations so every agency has immediate value from day one &mdash; before they&rsquo;ve listed a single custom tool.&rdquo;</blockquote>
+        <p>First-party baseline automations ship with every account. Agencies and domain experts are never starting from zero.</p>
       </div>
-      <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book the Diagnostic &rarr;</a>
+      <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Explore the Marketplace &rarr;</a>
     </div>
   </div>
 </section>
 
-<!-- ===== COST COMPARISON ===== -->
-<section class="sec" id="the-alternative" style="background:var(--gray-50); border-top:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200);">
+<!-- ===== PRICING ===== -->
+<section class="sec" id="pricing" style="background:var(--gray-50); border-top:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200);">
   <div class="wrap">
     <div class="alt-intro">
-      <span class="eyebrow">How We Work</span>
-      <h2>You need an operator, not a consultant.<br>Here&rsquo;s what that looks like.</h2>
+      <span class="eyebrow">Founding Member Pricing</span>
+      <h2>Three revenue streams.<br>One platform subscription.</h2>
       <div class="rule rule--center"></div>
-      <p>Every engagement starts with a free diagnostic. From there, we match the scope to what you actually need &mdash; from a targeted 30-day sprint to a full embedded buildout.</p>
+      <p>Platform Prepared monetizes through a layered model &mdash; your subscription gives you the infrastructure, and the platform earns alongside you on marketplace transactions and API usage. Founding members lock in the lowest rates, permanently.</p>
     </div>
-
-    <!-- Pricing tiers -->
     <div class="pricing-grid">
       <div class="pricing-card">
-        <div class="pricing-tag">Start Here</div>
-        <h3 class="pricing-name">Diagnostic Call</h3>
-        <div class="pricing-cost">Free</div>
-        <p class="pricing-desc">30 minutes. We score your business across the 8 value drivers, identify the top gaps suppressing your multiple, and tell you exactly what to build first.</p>
+        <div class="pricing-tag">Free Forever</div>
+        <h3 class="pricing-name">Builder Preview</h3>
+        <div class="pricing-cost">$0</div>
+        <p class="pricing-desc">For vibe coders and builders who want to list their first tool on the marketplace and see how the platform works before committing.</p>
         <ul class="pricing-items">
-          <li>Business Value Score reviewed together</li>
-          <li>Top 3 value gaps identified</li>
-          <li>Clear recommended next step</li>
-          <li>No obligation</li>
+          <li>List 1 tool on the marketplace</li>
+          <li>API gateway access (metered)</li>
+          <li>Basic usage dashboard</li>
+          <li>Community access</li>
         </ul>
-        <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark" style="margin-top:auto;">Book Free Call &rarr;</a>
+        <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark" style="margin-top:auto;">Start Free &rarr;</a>
       </div>
       <div class="pricing-card pricing-card--featured">
-        <div class="pricing-tag pricing-tag--green">Most Common</div>
-        <h3 class="pricing-name">Embedded Implementation</h3>
-        <div class="pricing-cost">$6,000&ndash;$10,000<span class="pricing-per">/month</span></div>
-        <p class="pricing-desc">We embed alongside your team and build. Systems, processes, sales engine, financials, AI tools &mdash; the full operational infrastructure, delivered and running.</p>
+        <div class="pricing-tag pricing-tag--green">Founding Member</div>
+        <h3 class="pricing-name">Agency Operator</h3>
+        <div class="pricing-cost" style="font-size:1.5rem;">Early Access Pricing</div>
+        <p class="pricing-desc">The full platform for running a professional AI agency &mdash; white-labeled portals, billing engine, marketplace access, and private clean rooms.</p>
         <ul class="pricing-items">
-          <li>Dedicated time inside your business each week</li>
-          <li>All 5 workstreams covered in priority sequence</li>
-          <li>Month-to-month &mdash; no long-term contracts</li>
-          <li>Results delivered, not just recommended</li>
-          <li>Embedded until the systems hold</li>
+          <li>Unlimited white-labeled client portals</li>
+          <li>Usage-based billing &amp; metered invoicing</li>
+          <li>Full marketplace access &mdash; license any tool</li>
+          <li>Private clean room &mdash; sovereign data</li>
+          <li>Founding member rate &mdash; locked for life</li>
+          <li>Direct access to the founding team</li>
         </ul>
-        <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:auto;">Start With a Call &rarr;</a>
+        <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:auto;">Claim Your Spot &rarr;</a>
       </div>
       <div class="pricing-card">
-        <div class="pricing-tag">Fast Results</div>
-        <h3 class="pricing-name">Quick-Win Sprint</h3>
-        <div class="pricing-cost">$5,000&ndash;$8,000<span class="pricing-per">flat</span></div>
-        <p class="pricing-desc">A focused 30-day project targeting one high-leverage gap &mdash; a CRM implementation, AI tool rollout, financial cleanup, or sales system buildout. Defined scope, defined deliverables.</p>
+        <div class="pricing-tag">Enterprise</div>
+        <h3 class="pricing-name">Private AI Hub</h3>
+        <div class="pricing-cost" style="font-size:1.4rem;">Custom</div>
+        <p class="pricing-desc">For companies deploying AI internally or launching an AI-powered product line without handing proprietary data to a public model provider.</p>
         <ul class="pricing-items">
-          <li>One focused workstream</li>
-          <li>30-day delivery window</li>
-          <li>Defined deliverables upfront</li>
-          <li>Ideal for post-acquisition first move</li>
+          <li>Dedicated private deployment</li>
+          <li>Security-audited marketplace assets</li>
+          <li>Custom subdomain &amp; branding</li>
+          <li>SLA &amp; compliance documentation</li>
         </ul>
-        <a href="mailto:nate@platformprepared.com?subject=Quick-Win Sprint Inquiry" class="btn btn-outline-dark" style="margin-top:auto;">Ask About a Sprint &rarr;</a>
+        <a href="mailto:nate@gardpartners.com?subject=Platform Prepared Enterprise Inquiry" class="btn btn-outline-dark" style="margin-top:auto;">Talk to Us &rarr;</a>
       </div>
     </div>
-
-    <!-- vs. Full-time hire comparison -->
-    <div class="alt-compare-header">
-      <h3>How this compares to hiring full-time</h3>
-    </div>
-    <div class="alt-grid">
-      <div class="alt-col alt-col--a">
-        <span class="alt-col-label">Full-Time Director of Operations</span>
-        <div class="alt-cost">$150K&ndash;$250K</div>
-        <span class="alt-cost-sub">annual salary &mdash; plus benefits, 401K, search costs, and 3&ndash;6 months to hire</span>
-        <ul class="alt-items">
-          <li><span class="alt-icon">&times;</span>3&ndash;6 month search before they start</li>
-          <li><span class="alt-icon">&times;</span>They advise. Your team still has to implement.</li>
-          <li><span class="alt-icon">&times;</span>If they leave, you start over from scratch</li>
-          <li><span class="alt-icon">&times;</span>Fixed salary cost regardless of results</li>
-          <li><span class="alt-icon">&times;</span>No incentive to move fast or prove monthly value</li>
-          <li><span class="alt-icon">&times;</span>Generalist hire &mdash; steep learning curve on your business type</li>
-        </ul>
-      </div>
-      <div class="alt-col alt-col--b">
-        <span class="alt-badge">Platform Prepared</span>
-        <span class="alt-col-label">Embedded Fractional Operator</span>
-        <div class="alt-cost">$6,000&ndash;$10,000</div>
-        <span class="alt-cost-sub">per month &mdash; month-to-month, no contracts, no overhead</span>
-        <ul class="alt-items">
-          <li><span class="alt-icon">&#10003;</span>Embedded alongside your team in 1&ndash;2 weeks</li>
-          <li><span class="alt-icon">&#10003;</span>Strategy <em>and</em> execution &mdash; we build it, not just recommend it</li>
-          <li><span class="alt-icon">&#10003;</span>Month-to-month &mdash; we earn the next month by delivering this one</li>
-          <li><span class="alt-icon">&#10003;</span>200+ service businesses analyzed &mdash; we know what moves the multiple</li>
-          <li><span class="alt-icon">&#10003;</span>No search cost, no onboarding lag, no key-person risk</li>
-          <li><span class="alt-icon">&#10003;</span>AI tools included &mdash; you get more output with your existing team</li>
-        </ul>
-      </div>
-    </div>
-    <p class="alt-note">&ldquo;The right operator at the right scale &mdash; execution included, results tied to your timeline.&rdquo;</p>
+    <p class="alt-note">&ldquo;Founding members get the platform at its lowest price, permanently &mdash; plus a direct line to the team building it.&rdquo;</p>
   </div>
 </section>
 
-<!-- ===== PROCESS ===== -->
+<!-- ===== HOW IT WORKS ===== -->
 <section class="sec process" id="how-it-works">
   <div class="wrap">
     <div class="process-intro">
-      <span class="eyebrow eyebrow--light">How Every Engagement Works</span>
-      <h2 style="color:white;">Five stages. Clear progress. No surprises.</h2>
+      <span class="eyebrow eyebrow--light">How It Works</span>
+      <h2 style="color:white;">From sign-up to first paying client &mdash; in a weekend.</h2>
       <div class="rule rule--center rule--light"></div>
-      <p>Built around your business and what moves the multiple most, fastest.</p>
+      <p>No dev team required. No 6-month build. Platform Prepared is operational infrastructure you actually deploy &mdash; not a pitch deck you customize.</p>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-dot">1</div>
         <div>
-          <h4>Free Diagnostic</h4>
-          <p>30-minute call. We score your business across five dimensions and show you exactly what&rsquo;s suppressing your multiple.</p>
+          <h4>Create Your Agency Account</h4>
+          <p>Sign up at app.platformprepared.com. Your agency dashboard is live immediately &mdash; no onboarding call required.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-dot">2</div>
         <div>
-          <h4>Platform Roadmap</h4>
-          <p>A written, prioritized plan — what gets built, in what order, and why — based on value impact and your specific situation.</p>
+          <h4>Brand Your Portal</h4>
+          <p>Upload your logo, set your domain, choose your color scheme. Your clients will never see a Platform Prepared logo &mdash; only yours.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-dot">3</div>
         <div>
-          <h4>Build Together</h4>
-          <p>We embed alongside your team. Systems deployed, processes documented, people trained. Visible progress every week.</p>
+          <h4>Stock Your Storefront</h4>
+          <p>Browse the marketplace and license AI automations relevant to your niche. Or connect your own custom workflows &mdash; the platform wraps billing and access control around whatever you bring.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-dot">4</div>
         <div>
-          <h4>Mature &amp; Hold</h4>
-          <p>Monthly accountability, weekly check-ins, KPI dashboards. We make sure it holds until the owner can genuinely step back.</p>
+          <h4>Invite Your First Client</h4>
+          <p>Send a branded invite link. Your client logs into your portal, sees your tools, and gets billed automatically based on their usage. You see every transaction in your dashboard.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-dot">5</div>
         <div>
-          <h4>Platform Ready</h4>
-          <p>Your business runs without you. Professionally documented, financially clean, and worth significantly more than when we started.</p>
+          <h4>Scale Without Rebuilding</h4>
+          <p>Add clients, add tools, add team members. The infrastructure scales with you. No new engineering. No new vendors. One platform grows with your agency.</p>
         </div>
       </div>
     </div>
@@ -967,25 +1055,25 @@
     <div class="principles">
       <div class="principle">
         <div class="principle-n">01</div>
-        <h4>We embed. We don&rsquo;t advise.</h4>
-        <p>Consultants hand you a report and leave. We sit with your team, build the systems ourselves, and stay until they hold. Every week you see the work, not a status update.</p>
+        <h4>Sovereign by default.</h4>
+        <p>Your clients&rsquo; data never touches a public model server. Every agency operates in an isolated environment &mdash; private, encrypted, and owned by you. That&rsquo;s the pitch that lifts IT blocks.</p>
       </div>
       <div class="principle">
         <div class="principle-n">02</div>
-        <h4>Month-to-month means we&rsquo;re aligned with your results.</h4>
-        <p>No long-term contracts. No retainer you&rsquo;re locked into. We earn the next month by delivering measurable progress in this one. Our incentive and yours are identical.</p>
+        <h4>Built for operators, not engineers.</h4>
+        <p>Platform Prepared was designed so that a domain expert with no coding background can launch a professional AI storefront. The marketplace does the heavy lifting. You bring the clients and the expertise.</p>
       </div>
       <div class="principle">
         <div class="principle-n">03</div>
-        <h4>We know what buyers and lenders actually look at.</h4>
-        <p>We&rsquo;ve evaluated 200+ essential services businesses from the buy side &mdash; screened to LOI and exclusivity. We don&rsquo;t guess what moves your multiple. We&rsquo;ve seen it across hundreds of deals.</p>
+        <h4>The marketplace is the moat.</h4>
+        <p>Every tool listed by a vibe coder becomes available to every agency. Every agency that grows brings more demand for builders. The ecosystem compounds &mdash; and everyone in it benefits from network effects.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CALCULATOR ===== -->
-<section class="sec calc-wrap" id="calculator">
+<!-- ===== CALCULATOR (retired) ===== -->
+<section class="sec calc-wrap" id="calculator" style="display:none;">
   <div class="wrap">
     <div class="calc-intro">
       <span class="eyebrow">Business Value Score</span>
@@ -1150,27 +1238,47 @@
   </div>
 </section>
 
-<!-- ===== BROKERS ===== -->
-<section class="sec" id="brokers" style="background:var(--gray-50); border-top:1px solid var(--gray-200);">
+<!-- ===== FOR BUILDERS / PARTNERS ===== -->
+<section class="sec" id="builders" style="background:var(--gray-50); border-top:1px solid var(--gray-200);">
   <div class="wrap">
-    <div class="brokers-grid">
+    <div class="partner-box">
       <div>
-        <span class="eyebrow">For Business Brokers</span>
-        <h2>We prepare them.<br>You sell them.</h2>
-        <div class="rule"></div>
-        <p>We are not a broker. We don&rsquo;t list businesses, don&rsquo;t represent sellers, and don&rsquo;t compete with you in any way. We prepare businesses so that when they reach you, they&rsquo;re ready &mdash; and your listing commands the premium it deserves.</p>
-        <p>When an owner comes to you but the business isn&rsquo;t ready &mdash; messy books, owner-dependent, no systems &mdash; send them to us. We&rsquo;ll work alongside them over 6&ndash;18 months and return them to you as a premium listing. Your deal closes faster. Your success fee is larger.</p>
-        <p class="fine">Platform Prepared is an operations advisory firm. We do not list, broker, or sell businesses.</p>
+        <span class="eyebrow eyebrow--light">For AI Builders &amp; Vibe Coders</span>
+        <h2>Your script is a product.<br>We&rsquo;ll prove it.</h2>
+        <div class="rule" style="background:var(--accent);"></div>
+        <p>You built something that works. Platform Prepared turns it into a sellable, scalable SaaS asset &mdash; without you having to build a single line of billing, auth, or API management infrastructure.</p>
+        <p>List your tool on the marketplace. Set your price. Earn every time an agency deploys it to their clients. We handle the rest.</p>
+        <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:8px;">Apply to List on the Marketplace &rarr;</a>
       </div>
-      <div class="brokers-box">
-        <span class="brokers-box-label">How the Referral Works</span>
-        <ul class="broker-steps">
-          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>You identify an owner whose business isn&rsquo;t ready.</strong> Messy books, owner-dependent operation, no systems.</p></li>
-          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>You refer them to us for a free diagnostic.</strong> We score the business and show them what&rsquo;s suppressing their multiple.</p></li>
-          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>We embed and build alongside the owner.</strong> Systems installed, financials organized, processes documented.</p></li>
-          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>When ready, we bring them back to you</strong> as a premium, diligence-ready listing.</p></li>
-          <li class="broker-step"><span class="broker-arrow">→</span><p><strong>Bigger success fee. Cleaner diligence. Smoother close.</strong></p></li>
-        </ul>
+      <div class="partner-steps">
+        <div class="partner-step">
+          <div class="partner-step-dot">1</div>
+          <div class="partner-step-text">
+            <h4>Submit your tool</h4>
+            <p>Share what it does, who it&rsquo;s for, and the API it runs on. We review within 48 hours.</p>
+          </div>
+        </div>
+        <div class="partner-step">
+          <div class="partner-step-dot">2</div>
+          <div class="partner-step-text">
+            <h4>We wrap the infrastructure</h4>
+            <p>Billing, user accounts, API rate limits, and security review &mdash; all handled at the platform level.</p>
+          </div>
+        </div>
+        <div class="partner-step">
+          <div class="partner-step-dot">3</div>
+          <div class="partner-step-text">
+            <h4>Your tool goes live in the marketplace</h4>
+            <p>100+ agencies can license and deploy it to their clients. You earn a royalty on every deployment.</p>
+          </div>
+        </div>
+        <div class="partner-step">
+          <div class="partner-step-dot">4</div>
+          <div class="partner-step-text">
+            <h4>You focus on building</h4>
+            <p>We handle billing disputes, access management, and client support for marketplace-listed tools.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1182,27 +1290,26 @@
     <div class="about-grid">
       <div class="about-photo-wrap">
         <div class="about-photo">
-          <img src="nathan.jpg?v=4" alt="Nathan Garlock, Founder of Platform Prepared">
+          <img src="nathan.jpg?v=4" alt="Nathan Garlock, Co-Founder of Platform Prepared">
         </div>
         <span class="about-name">Nathan Garlock</span>
-        <span class="about-title-sm">Founder, Platform Prepared<br>Columbia Business School MBA</span>
+        <span class="about-title-sm">Co-Founder, Platform Prepared<br>Columbia Business School MBA</span>
       </div>
       <div class="about-text">
         <span class="eyebrow">About</span>
-        <h2>I know where the value is hiding.</h2>
+        <h2>Two operators. One platform built for the AI economy.</h2>
         <div class="rule"></div>
-        <p>I&rsquo;ve analyzed more than 200 small service businesses for operational and financial gaps &mdash; the kind that suppress value, frustrate owners, and kill deals. I know exactly what a high-performing operation looks like, what stands between most businesses and that standard, and how to close the gap systematically.</p>
-        <p>I don&rsquo;t hand you a report and wish you luck. I embed in your business &mdash; sitting with your team, building the systems, writing the processes, implementing the AI tools that make it all stick &mdash; and stay until it genuinely runs without any single person. Including me.</p>
-        <p>I founded Platform Prepared because the gap between what a service business is worth and what it could be worth is almost always an operations problem &mdash; not a market problem. Based in University Place, WA. Serving essential services companies across the Pacific Northwest.</p>
+        <p>Platform Prepared was co-founded by <strong>Nathan Garlock</strong> and <strong>Joseph Banks</strong> &mdash; two operators who saw the same gap from different angles. Nathan spent years analyzing 200+ businesses for operational and financial infrastructure gaps, then building the systems that fixed them. Joseph brings the technical architecture and AI systems experience to turn that operational knowledge into a scalable platform.</p>
+        <p>We built Platform Prepared because the barrier to running a professional AI agency isn&rsquo;t the AI &mdash; it&rsquo;s the infrastructure. Billing, portals, API management, data privacy. Every serious agency is rebuilding the same foundation from scratch. We built it once, correctly, so you never have to.</p>
+        <p>Based in the Pacific Northwest. Building for the global AI agency economy.</p>
       </div>
       <div class="creds">
-        <span class="creds-label">Background &amp; Credentials</span>
-        <div class="cred"><div class="cred-tag">Value Creation</div><div class="cred-val">200+ small service businesses analyzed for operational gaps, value drivers, and growth leverage points</div></div>
+        <span class="creds-label">Nathan Garlock &mdash; Background</span>
+        <div class="cred"><div class="cred-tag">Analysis</div><div class="cred-val">200+ businesses analyzed for operational gaps, value drivers, and infrastructure requirements</div></div>
         <div class="cred"><div class="cred-tag">Education</div><div class="cred-val">Columbia Business School, MBA</div></div>
-        <div class="cred"><div class="cred-tag">Operations</div><div class="cred-val">Director of Operations at a PE-backed venture &mdash; built all systems, processes, and reporting from zero with a 17-person team</div></div>
-        <div class="cred"><div class="cred-tag">Revenue Leadership</div><div class="cred-val">Interim CRO &mdash; rebuilt comp plans, implemented full sales and marketing tech stack, $630M in C-suite pipeline generated</div></div>
-        <div class="cred"><div class="cred-tag">Team Building</div><div class="cred-val">Built high-performing teams from inception. Launched $1M+ ARR products from scratch.</div></div>
-        <div class="cred"><div class="cred-tag">Sales</div><div class="cred-val">#1 in organization — $630M in C-suite pipeline generated</div></div>
+        <div class="cred"><div class="cred-tag">Operations</div><div class="cred-val">Director of Operations, PE-backed venture &mdash; built all systems, processes, and reporting from zero with a 17-person team</div></div>
+        <div class="cred"><div class="cred-tag">Revenue</div><div class="cred-val">Interim CRO &mdash; $630M in C-suite pipeline generated. #1 in organization.</div></div>
+        <div class="cred"><div class="cred-tag">Product</div><div class="cred-val">Launched $1M+ ARR products from scratch. Built high-performing teams from inception.</div></div>
       </div>
     </div>
   </div>
@@ -1211,14 +1318,14 @@
 <!-- ===== CTA ===== -->
 <section class="cta-sec" id="contact">
   <div class="cta-inner">
-    <span class="eyebrow">Start Here</span>
-    <h2>Find out exactly what your business is worth &mdash; and what&rsquo;s holding it back.</h2>
-    <p class="cta-sub">Free 30-minute Value Creation Diagnostic.</p>
-    <p>We score your business across five dimensions, identify the gaps suppressing its value, and show you what to build first and why. You walk away with a clear picture of where you stand &mdash; whether you&rsquo;re 90 days post-close or 3 years into ownership.</p>
-    <a href="https://calendly.com/nate-gardpartners" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-lg">Book Your Free Diagnostic Call &rarr;</a>
+    <span class="eyebrow">Get Early Access</span>
+    <h2>The operating system for your AI agency is ready.</h2>
+    <p class="cta-sub">Founding member spots are limited to the first 100 agencies.</p>
+    <p>White-labeled portals. Usage-based billing. A marketplace of ready-to-deploy AI tools. Private clean rooms that lift IT blocks. Everything you need to run a sovereign, professional AI agency &mdash; live in a weekend, not six months.</p>
+    <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-lg">Claim Your Founding Member Spot &rarr;</a>
     <div class="cta-contact">
-      <p><a href="tel:2533637177">(253) 363-7177</a> &nbsp;&bull;&nbsp; <a href="mailto:nate@gardpartners.com">nate@gardpartners.com</a></p>
-      <p style="margin-top:5px;">University Place, WA &nbsp;&bull;&nbsp; Pacific Northwest</p>
+      <p><a href="mailto:nate@gardpartners.com">nate@gardpartners.com</a> &nbsp;&bull;&nbsp; <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer">app.platformprepared.com</a></p>
+      <p style="margin-top:5px;">University Place, WA &nbsp;&bull;&nbsp; Building for the global AI agency economy</p>
     </div>
   </div>
 </section>
@@ -1228,15 +1335,16 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand">Platform <em>Prepared</em></div>
-      <div class="footer-tag">&ldquo;From owner-dependent to professionally run.&rdquo;</div>
+      <div class="footer-tag">&ldquo;The operating system for the AI agency economy.&rdquo;</div>
     </div>
     <div class="footer-links">
-      <a href="#who-we-serve">Who We Help</a>
-      <a href="#services">What We Build</a>
-      <a href="#calculator">Score My Business</a>
-      <a href="#brokers">For Brokers</a>
+      <a href="#platform">The Platform</a>
+      <a href="#who-we-serve">Who It&rsquo;s For</a>
+      <a href="#use-cases">Use Cases</a>
+      <a href="#marketplace">Marketplace</a>
       <a href="#about">About</a>
       <a href="mailto:nate@gardpartners.com">Contact</a>
+      <a href="https://app.platformprepared.com" target="_blank" rel="noopener noreferrer">Login</a>
     </div>
     <div class="footer-copy">
       &copy; 2026 Platform Prepared &nbsp;&bull;&nbsp; University Place, WA &nbsp;&bull;&nbsp;
@@ -1253,6 +1361,9 @@
     var m = document.getElementById('mobileMenu'), b = document.querySelector('.nav-hamburger');
     if (m && m.classList.contains('open') && !m.contains(e.target) && !b.contains(e.target)) m.classList.remove('open');
   });
+</script>
+<!-- legacy calculator script removed -->
+<script>/* placeholder */
 
   /* CALCULATOR */
   var QUESTIONS = [
