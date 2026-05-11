@@ -10,14 +10,6 @@
     ],
     "rewrites": [
       {
-        "source": "/footbridge",
-        "destination": "/footbridge.html"
-      },
-      {
-        "source": "/hvac-fix-finder",
-        "destination": "/hvac-fix-finder.html"
-      },
-      {
         "source": "**",
         "destination": "/index.html"
       }
