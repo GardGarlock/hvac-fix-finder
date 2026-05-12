@@ -1,15 +1,15 @@
 # Platform Prepared
 
-Static marketing site for Platform Prepared's electrical revenue recovery offer. The site is a single self-contained HTML page hosted from the repo root with Firebase Hosting.
+Static marketing site for Platform Prepared's phone revenue recovery offer for electrical contractors. The site is a single self-contained HTML page hosted from the repo root with Firebase Hosting.
 
 ## What This Site Covers
 
-The homepage presents Platform Prepared's Electrical Revenue Recovery System for electrical contractors:
+The homepage presents Platform Prepared's Phone Revenue Recovery System for electrical contractors:
 
-- Missed call text-back and follow-up.
-- Review automation.
-- Estimate follow-up and lead reactivation.
-- CRM pipeline setup and monthly reporting.
+- Electrical customer text handling.
+- Stale electrical lead callbacks.
+- Incoming call pickup, intake, routing, and summaries.
+- Script setup, routing rules, and basic monthly reporting.
 
 The content source of truth is `PLANS.md`. Styling follows the navy, forest, mint, and white visual system described in `CONTRIBUTING.md`.
 
@@ -64,5 +64,5 @@ python3 -m json.tool firebase.json
 - Confirm the current offer copy is present with:
 
 ```bash
-rg "Electrical Revenue Recovery|missed-call|review automation" index.html
+rg "Phone Revenue Recovery|Electrical Contractors|Text Handling|Stale Lead Callbacks|Incoming Call Handling" index.html
 ```
